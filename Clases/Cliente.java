@@ -53,7 +53,8 @@ public class Cliente{
         this.correoElectronico = correoElectronico;
     }
 
-        public boolean existeMascota(String nombreMascota){
+
+    public boolean existeMascota(String nombreMascota){
         for(int i = 0; i < listaMascotas.size(); i++){
             Mascota mascota = (Mascota)listaMascotas.get(i);
             if (mascota.getNombreMascota().toUpperCase().equals(nombreMascota.toUpperCase())) return true;
@@ -78,7 +79,5 @@ public class Cliente{
             System.out.println("Se ha registrado a " + mascota.getNombreMascota() + " correctamente");
         }
         else{System.out.println("El registro ha fallado debido a que " + mascota.getNombreMascota() + " ya se encontraba en su registro de mascotas");}
-
-        lector.close();
     }
 }
