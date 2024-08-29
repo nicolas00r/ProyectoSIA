@@ -61,17 +61,4 @@ public class Mascota{
             System.out.println("------------------------");
         }
     }
-
-    public void mostrarListaServicios(){
-        System.out.println("Lista de servicios realizados a " + nombreMascota);
-        for(int i = 0; i < listaServicios.size(); i++){
-            Servicio servicio = listaServicios.get(i);
-            System.out.println("------------------------");
-            System.out.println("Servicio número " + (i + 1));
-            System.out.println("Tipo de servicio: " + servicio.getTipo());
-            System.out.println("Fecha del procedimiento: " + servicio.getFecha());
-            System.out.println("Descripcion: " + servicio.getDescripcion());
-            System.out.println("------------------------");
-        }
-    }
 } 
