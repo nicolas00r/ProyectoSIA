@@ -45,6 +45,7 @@ public class PetServiceManagament{
                 case 4:
                     // Lógica de mostrar cliente
                     System.out.println("Opción en desarrollo");
+                    mostrarClientes();
                     break;
 
                 case 5:
@@ -106,6 +107,17 @@ public class PetServiceManagament{
         } else{
             System.out.println("El registro de " + nuevoCliente.getNombre() + "ha fallado debido a que ya esta registrado ese nombre en el sitema");
         }
+    }
 
+    private static void mostrarClientes(){
+        for(int i = 0; i < listaClientes.size(); i++){
+            Cliente cliente = (Cliente)listaClientes.get(i);
+            System.out.println("Información cliente:");
+            System.out.println("Nombre: " + cliente.getNombre());
+            System.out.println("Dirección: " + cliente.getDireccion());
+            System.out.println("Número de telefono: " + cliente.getNumeroTelefono());
+            System.out.println("Correo electronico: " + cliente.getCorreoElectronico());
+            System.out.println("");
+        }
     }
 }
