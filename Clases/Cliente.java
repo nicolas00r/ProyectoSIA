@@ -18,6 +18,7 @@ public class Cliente{
         this.direccion = direccion;
         this.numeroTelefono = numeroTelefono;
         this.correoElectronico = correoElectronico;
+        this.listaMascotas = new ArrayList<>();
     }
 
     public String getNombre(){
