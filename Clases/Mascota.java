@@ -12,7 +12,7 @@ public class Mascota{
     private ArrayList<Servicio> listaServicios;
 
     //CONSTRUCTOR
-    public Mascota(String nombreMascota, String especie, int edad){
+    public Mascota(String nombreMascota, String nombreDueño, String especie, int edad){
         this.id = ++contadorId;
         this.listaServicios = new ArrayList<>();
         setNombreMascota(nombreMascota);
@@ -39,23 +39,25 @@ public class Mascota{
     public void agregarServicio(Servicio servicio){listaServicios.add(servicio);}
 
     public void mostrarDatosMascota(){
-        System.out.println("Datos de la mascota");
+        System.out.println("------------------------");
+        System.out.println("Datos de la mascota:");
         System.out.println("Nombre de la mascota: " + nombreMascota);
         System.out.println("Nombre del dueño: " + nombreDueño);
-        System.out.println("Id de la mascota: " + id);
+        System.out.println("ID de la mascota: " + id);
         System.out.println("Especie: " + especie);
         System.out.println("Edad: " + edad);
+        System.out.println("------------------------");
     }
 
     public void mostrarListaServicios(){
-        System.out.println("Lista de servicios realizados a " + nombreMascota);
+        System.out.println("Lista de servicios realizados a " + nombreMascota + ":");
         for(int i = 0; i < listaServicios.size(); i++){
             Servicio servicio = listaServicios.get(i);
             System.out.println("------------------------");
             System.out.println("Servicio número " + (i + 1));
             System.out.println("Tipo de servicio: " + servicio.getTipo());
             System.out.println("Fecha del procedimiento: " + servicio.getFecha());
-            System.out.println("Descripcion: " + servicio.getDescripcion());
+            System.out.println("Descripción: " + servicio.getDescripcion());
             System.out.println("------------------------");
         }
     }
