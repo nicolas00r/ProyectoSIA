@@ -85,7 +85,7 @@ public class GestionCitas{
         System.out.println("Cita agregada exitosamente.");
     }
 
-    public void eliminarCita() throws IIOException{
+    public void eliminarCita() throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese el ID de la cita a eliminar");
         String idCita = lector.readLine();
