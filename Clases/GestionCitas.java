@@ -62,7 +62,7 @@ public class GestionCitas{
 
         System.out.println("Ingrese el nombre de la mascota: ");
         String nombreMascota = lector.readLine();
-        Mascota mascota = mascotas.get(nombreMascota);
+        Mascota mascota = cliente.getMascota(nombreMascota);
         if(mascota == null){
             System.out.println("Mascota no encontrada.");
             return;
@@ -100,7 +100,7 @@ public class GestionCitas{
     public void modificarCita() throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese el ID de la cita a modificar: ");
-        Sring idCita = lector.readLine();
+        String idCita = lector.readLine();
         Cita cita = citas.get(idCita);
 
         if(cita != null){

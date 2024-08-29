@@ -62,6 +62,14 @@ public class Cliente{
         return false;
     }
 
+    public Mascota getMascota(String nombreMascota){
+        for(int i = 0; i < listaMascotas.size(); i++){
+            Mascota mascota = (Mascota)listaMascotas.get(i);
+            if (mascota.getNombreMascota().toUpperCase().equals(nombreMascota.toUpperCase())) return mascota;
+        }
+        return null;
+    }
+
     public void registrarMascota()throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
