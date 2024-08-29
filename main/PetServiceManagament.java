@@ -50,7 +50,15 @@ public class PetServiceManagament{
 
                 case 5:
                     // Lógica de ver detalle de mascotas
-                    System.out.println("Opción en desarrollo");
+                    System.out.println("Ingrese su correo electrónico:");
+                    Cliente cliente = buscarCliente(lector.readLine());
+                    if(cliente != null){
+                    System.out.println("Mostrando detalle de mascotas");
+                    cliente.mostrarMascotas();
+                    }
+                    else{
+                        System.out.println("El usuario no se encuentra registrado en el sistema, por favor registrese a través de la opción número 1");
+                    }
                     break;
 
                 case 6:
@@ -85,6 +93,14 @@ public class PetServiceManagament{
             if (cliente.getNombre().toUpperCase().equals(nombreCliente.toUpperCase())) return true;
         }
         return false;
+    }
+
+    public static Cliente buscarCliente(String correoElectronico){
+        for(int i = 0; i < listaClientes.size(); i++){
+            Cliente cliente = (Cliente)listaClientes.get(i);
+            if (cliente.getCorreoElectronico().toUpperCase().equals(correoElectronico.toUpperCase())) return cliente;
+        }
+        return null;
     }
 
     public static void registrarCliente()throws IOException{

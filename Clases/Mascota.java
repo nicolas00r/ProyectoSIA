@@ -42,7 +42,6 @@ public class Mascota{
         System.out.println("------------------------");
         System.out.println("Datos de la mascota:");
         System.out.println("Nombre de la mascota: " + nombreMascota);
-        System.out.println("Nombre del dueño: " + nombreDueño);
         System.out.println("ID de la mascota: " + id);
         System.out.println("Especie: " + especie);
         System.out.println("Edad: " + edad);
