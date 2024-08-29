@@ -2,14 +2,16 @@ package Clases;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.Map;
-import javax.imageio.IIOException;
 
 public class GestionCitas{
-    private Map<String , cita> citas;
+    private HashMap<String, Cita> citas;
+    private HashMap<String, Cliente> clientes;
+    private HashMap<String, Mascota> mascotas;
 
     public GestionCitas(){
         citas = new HashMap<>();
+        clientes = new HashMap<>();
+        mascotas = new HashMap<>();
     }
 
     public void mostrarMenu() throws IOException{
@@ -100,7 +102,7 @@ public class GestionCitas{
     public void modificarCita() throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese el ID de la cita a modificar: ");
-        Sring idCita = lector.readLine();
+        String idCita = lector.readLine();
         Cita cita = citas.get(idCita);
 
         if(cita != null){
