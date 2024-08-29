@@ -9,7 +9,7 @@ public class Mascota{
     private int edad;
     private int id;
     private static int contadorId = 0;
-    private ArrayList<Servicio> listaServicios;
+    private ArrayList listaServicios;
 
     //CONSTRUCTOR
     public Mascota(String nombreMascota, String nombreDueño, String especie, int edad){
@@ -52,7 +52,7 @@ public class Mascota{
     public void mostrarListaServicios(){
         System.out.println("Lista de servicios realizados a " + nombreMascota + ":");
         for(int i = 0; i < listaServicios.size(); i++){
-            Servicio servicio = listaServicios.get(i);
+            Servicio servicio = (Servicio)listaServicios.get(i);
             System.out.println("------------------------");
             System.out.println("Servicio número " + (i + 1));
             System.out.println("Tipo de servicio: " + servicio.getTipo());

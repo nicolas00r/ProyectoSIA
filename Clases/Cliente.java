@@ -10,7 +10,7 @@ public class Cliente{
     private String direccion;
     private String numeroTelefono;
     private String correoElectronico;
-    private ArrayList<Mascota> listaMascotas;
+    private ArrayList listaMascotas;
 
 
     public Cliente(String nombre, String direccion, String numeroTelefono, String correoElectronico){
@@ -55,7 +55,7 @@ public class Cliente{
 
         public boolean existeMascota(String nombreMascota){
         for(int i = 0; i < listaMascotas.size(); i++){
-            Mascota mascota = listaMascotas.get(i);
+            Mascota mascota = (Mascota)listaMascotas.get(i);
             if (mascota.getNombreMascota().toUpperCase().equals(nombreMascota.toUpperCase())) return true;
         }
         return false;
