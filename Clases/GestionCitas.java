@@ -64,7 +64,7 @@ public class GestionCitas{
 
         System.out.println("Ingrese el nombre de la mascota: ");
         String nombreMascota = lector.readLine();
-        Mascota mascota = mascotas.get(nombreMascota);
+        Mascota mascota = cliente.getMascota(nombreMascota);
         if(mascota == null){
             System.out.println("Mascota no encontrada.");
             return;
