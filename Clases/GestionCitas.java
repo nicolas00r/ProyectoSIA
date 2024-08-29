@@ -62,12 +62,23 @@ public class GestionCitas{
             return;
         }
 
-        System.out.println("Ingrese el nombre de la mascota: ");
-        String nombreMascota = lector.readLine();
-        Mascota mascota = cliente.getMascota(nombreMascota);
-        if(mascota == null){
-            System.out.println("Mascota no encontrada.");
-            return;
+        System.out.println("Ingrese el ID de su mascota: ");
+        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
+        String cadenaAux = lector.readLine();
+        if(cadenaAux.equals("no")){
+            System.out.println("Ingrese el nombre de su mascota");
+            Mascota mascota = cliente.getMascota(lector.readLine());
+            if(mascota == null){
+                System.out.println("Mascota no encontrada.");
+                return;
+            }
+        }
+        else{
+            Mascota mascota = cliente.getMascota(Integer.parseInt(cadenaAux));
+            if(mascota == null){
+                System.out.println("Mascota no encontrada.");
+                return;
+            }
         }
 
         System.out.println("Ingrese el tipo de servicio: ");

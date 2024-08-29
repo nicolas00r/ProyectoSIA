@@ -70,6 +70,14 @@ public class Cliente{
         return null;
     }
 
+    public Mascota getMascota(int idMascota){
+        for(int i = 0; i < listaMascotas.size(); i++){
+            Mascota mascota = (Mascota)listaMascotas.get(i);
+            if (mascota.getId() == idMascota) return mascota;
+        }
+        return null;
+    }
+
     public void registrarMascota()throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
