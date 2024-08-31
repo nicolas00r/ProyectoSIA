@@ -65,22 +65,25 @@ public class GestionCitas{
         System.out.println("Ingrese el ID de su mascota: ");
         System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
         String cadenaAux = lector.readLine();
+
+        Mascota mascota;
+
         if(cadenaAux.equals("no")){
             System.out.println("Ingrese el nombre de su mascota");
-            Mascota mascota = cliente.getMascota(lector.readLine());
+            mascota = cliente.getMascota(lector.readLine());
             if(mascota == null){
                 System.out.println("Mascota no encontrada.");
                 return;
             }
         }
         else{
-            Mascota mascota = cliente.getMascota(Integer.parseInt(cadenaAux));
+            mascota = cliente.getMascota(Integer.parseInt(cadenaAux)); 
             if(mascota == null){
                 System.out.println("Mascota no encontrada.");
                 return;
             }
         }
-
+        
         System.out.println("Ingrese el tipo de servicio: ");
         String tipoServicio = lector.readLine();
         System.out.println("Ingrese la fecha del servicio: ");
@@ -89,9 +92,9 @@ public class GestionCitas{
         String descripcionServicio = lector.readLine();
         System.out.println("Ingrese la fecha y hora de la cita: ");
         String fechaHora = lector.readLine();
-
+        
         Servicio servicio = new Servicio(tipoServicio, fechaServicio, descripcionServicio);
-        Cita cita = new Cita(cliente, mascota , servicio , fechaHora);
+        Cita cita = new Cita(cliente, mascota, servicio , fechaHora);
         citas.put(idCita, cita);
 
 
