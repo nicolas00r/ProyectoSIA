@@ -7,14 +7,16 @@ import java.util.ArrayList;
 
 public class Cliente{
     private String nombre;
+    private String rut;
     private String direccion;
     private String numeroTelefono;
     private String correoElectronico;
     private ArrayList listaMascotas;
 
 
-    public Cliente(String nombre, String direccion, String numeroTelefono, String correoElectronico){
+    public Cliente(String nombre, String rut, String direccion, String numeroTelefono, String correoElectronico){
         this.nombre = nombre;
+        this.rut = rut;
         this.direccion = direccion;
         this.numeroTelefono = numeroTelefono;
         this.correoElectronico = correoElectronico;
@@ -27,6 +29,14 @@ public class Cliente{
 
     public void setNombre(String nombre){
         this.nombre = nombre;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 
     public String getDireccion(){

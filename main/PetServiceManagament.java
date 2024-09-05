@@ -8,10 +8,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PetServiceManagament{
 
     private static ArrayList listaClientes = new ArrayList<>();
+    private static HashMap clientesXRut = new HashMap<>();
 
     public static void main(String[] args) throws IOException{
         runSystem();
@@ -28,13 +30,12 @@ public class PetServiceManagament{
             switch (opcion) {
                 case 1:
                     // Lógica de registrar cliente
-                    System.out.println("Opción en desarrollo");
                     registrarCliente();
                     break;
 
                 case 2:
                     // Lógica de agregar mascota
-                    System.out.println("Opción en desarrollo");
+                    agregarMascota();
                     break;
 
                 case 3:
@@ -44,21 +45,12 @@ public class PetServiceManagament{
 
                 case 4:
                     // Lógica de mostrar cliente
-                    System.out.println("Opción en desarrollo");
                     mostrarClientes();
                     break;
 
                 case 5:
                     // Lógica de ver detalle de mascotas
-                    System.out.println("Ingrese su correo electrónico:");
-                    Cliente cliente = buscarCliente(lector.readLine());
-                    if(cliente != null){
-                    System.out.println("Mostrando detalle de mascotas");
-                    cliente.mostrarMascotas();
-                    }
-                    else{
-                        System.out.println("El usuario no se encuentra registrado en el sistema, por favor registrese a través de la opción número 1");
-                    }
+                    detallesMascotas();
                     break;
 
                 case 6:
@@ -86,15 +78,6 @@ public class PetServiceManagament{
         System.out.println("6. Salir");
     }
 
-    
-    private static boolean existeCliente(String nombreCliente){
-        for(int i = 0; i < listaClientes.size(); i++){
-            Cliente cliente = (Cliente)listaClientes.get(i);
-            if (cliente.getNombre().toUpperCase().equals(nombreCliente.toUpperCase())) return true;
-        }
-        return false;
-    }
-
     public static Cliente buscarCliente(String correoElectronico){
         for(int i = 0; i < listaClientes.size(); i++){
             Cliente cliente = (Cliente)listaClientes.get(i);
@@ -109,6 +92,8 @@ public class PetServiceManagament{
         System.out.println("Bienvenido al registro de clientes");
         System.out.println("Ingrese su nombre");
         String nombreCliente = lector.readLine();
+        System.out.println("Ingrese su rut");
+        String rutCliente = lector.readLine();
         System.out.println("Ingrese su dirección");
         String direccionCliente = lector.readLine();
         System.out.println("Ingrese su numero de telefono");
@@ -116,24 +101,56 @@ public class PetServiceManagament{
         System.out.println("Ingrese su correo electronico");
         String correoElectronicoCliente = lector.readLine();
 
-        Cliente nuevoCliente = new Cliente(nombreCliente, direccionCliente, numeroTelefonoCliente, correoElectronicoCliente);
-        if(!existeCliente(nuevoCliente.getNombre())){
+        Cliente nuevoCliente = new Cliente(nombreCliente, rutCliente, direccionCliente, numeroTelefonoCliente, correoElectronicoCliente);
+        if(!clientesXRut.containsKey(nuevoCliente.getRut())){
             listaClientes.add(nuevoCliente);
+            clientesXRut.put(nuevoCliente.getRut(), nuevoCliente);
             System.out.println("El cliente " + nuevoCliente.getNombre() + " ha sido registrado correctamente...");
         } else{
             System.out.println("El registro de " + nuevoCliente.getNombre() + "ha fallado debido a que ya esta registrado ese nombre en el sitema");
         }
     }
 
-    private static void mostrarClientes(){
+    public static void mostrarClientes(){
         for(int i = 0; i < listaClientes.size(); i++){
             Cliente cliente = (Cliente)listaClientes.get(i);
             System.out.println("Información cliente:");
             System.out.println("Nombre: " + cliente.getNombre());
+            System.err.println("Rut: " + cliente.getRut());
             System.out.println("Dirección: " + cliente.getDireccion());
             System.out.println("Número de telefono: " + cliente.getNumeroTelefono());
             System.out.println("Correo electronico: " + cliente.getCorreoElectronico());
             System.out.println("");
+        }
+    }
+
+    public static void agregarMascota()throws IOException{
+        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Ingrese su rut");
+        String rutCliente = lector.readLine();
+
+        if(clientesXRut.containsKey(rutCliente)){
+            Cliente cliente = (Cliente)clientesXRut.get(rutCliente);
+            cliente.registrarMascota();
+        } else{
+            System.out.println("No existe un cliente registrado con ese RUT");
+            System.out.println("Registrese e intentelo nuevamente");
+        }
+    }
+
+    public static void detallesMascotas()throws IOException{
+        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Ingrese su RUT:");
+        String rutCLiente = lector.readLine();
+
+        if(clientesXRut.containsKey(rutCLiente)){
+            Cliente cliente = (Cliente)clientesXRut.get(rutCLiente);
+            System.out.println("Mostrando detalle de mascotas");
+            cliente.mostrarMascotas();
+        }
+        else{
+            System.out.println("El usuario no se encuentra registrado en el sistema, por favor registrese a través de la opción número 1");
         }
     }
 }
