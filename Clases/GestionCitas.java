@@ -1,8 +1,6 @@
 package Clases;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GestionCitas{
 
@@ -47,7 +45,7 @@ public class GestionCitas{
         } while (opcion != 5);
     }
 
-    public void agregarCita(Cliente cliente) throws IOException{
+    public Mascota identificarMascota(Cliente cliente)throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Ingrese el ID de su mascota: ");
@@ -61,16 +59,23 @@ public class GestionCitas{
             mascota = cliente.getMascota(lector.readLine());
             if(mascota == null){
                 System.out.println("Mascota no encontrada.");
-                return;
+                return null;
             }
         }
         else{
             mascota = cliente.getMascota(Integer.parseInt(cadenaAux)); 
             if(mascota == null){
                 System.out.println("Mascota no encontrada.");
-                return;
+                return null;
             }
         }
+        return mascota;
+    }
+
+    public void agregarCita(Cliente cliente) throws IOException{
+        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+        Mascota mascota = identificarMascota(cliente);
+        if(mascota == null) return;
         
         System.out.println("Ingrese el tipo de servicio: ");
         String tipoServicio = lector.readLine();
@@ -93,28 +98,8 @@ public class GestionCitas{
 
     public void eliminarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el ID de su mascota: ");
-        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
-        String cadenaAux = lector.readLine();
-
-        Mascota mascota;
-
-        if(cadenaAux.equals("no")){
-            System.out.println("Ingrese el nombre de su mascota");
-            mascota = cliente.getMascota(lector.readLine());
-            if(mascota == null){
-                System.out.println("Mascota no encontrada.");
-                return;
-            }
-        }
-        else{
-            mascota = cliente.getMascota(Integer.parseInt(cadenaAux)); 
-            if(mascota == null){
-                System.out.println("Mascota no encontrada.");
-                return;
-            }
-        }
+        Mascota mascota = identificarMascota(cliente);
+        if(mascota == null) return;
 
         if(mascota.citasEstaVacio()){
             System.out.println("Esta mascota no tiene citas reservadas");
@@ -134,28 +119,8 @@ public class GestionCitas{
 
     public void modificarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el ID de su mascota: ");
-        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
-        String cadenaAux = lector.readLine();
-
-        Mascota mascota;
-
-        if(cadenaAux.equals("no")){
-            System.out.println("Ingrese el nombre de su mascota");
-            mascota = cliente.getMascota(lector.readLine());
-            if(mascota == null){
-                System.out.println("Mascota no encontrada.");
-                return;
-            }
-        }
-        else{
-            mascota = cliente.getMascota(Integer.parseInt(cadenaAux)); 
-            if(mascota == null){
-                System.out.println("Mascota no encontrada.");
-                return;
-            }
-        }
+        Mascota mascota = identificarMascota(cliente);
+        if(mascota == null) return;
 
         if(mascota.citasEstaVacio()){
             System.out.println("Esta mascota no tiene citas reservadas");
@@ -181,28 +146,8 @@ public class GestionCitas{
 
     public void confirmarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el ID de su mascota: ");
-        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
-        String cadenaAux = lector.readLine();
-
-        Mascota mascota;
-
-        if(cadenaAux.equals("no")){
-            System.out.println("Ingrese el nombre de su mascota");
-            mascota = cliente.getMascota(lector.readLine());
-            if(mascota == null){
-                System.out.println("Mascota no encontrada.");
-                return;
-            }
-        }
-        else{
-            mascota = cliente.getMascota(Integer.parseInt(cadenaAux)); 
-            if(mascota == null){
-                System.out.println("Mascota no encontrada.");
-                return;
-            }
-        }
+        Mascota mascota = identificarMascota(cliente);
+        if(mascota == null) return;
 
         if(mascota.citasEstaVacio()){
             System.out.println("Esta mascota no tiene citas reservadas");

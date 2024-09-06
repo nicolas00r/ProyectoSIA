@@ -11,7 +11,7 @@ public class Cliente{
     private String direccion;
     private String numeroTelefono;
     private String correoElectronico;
-    private ArrayList listaMascotas;
+    private ArrayList<Mascota> listaMascotas;
 
 
     public Cliente(String nombre, String rut, String direccion, String numeroTelefono, String correoElectronico){
@@ -66,7 +66,7 @@ public class Cliente{
 
     public boolean existeMascota(String nombreMascota){
         for(int i = 0; i < listaMascotas.size(); i++){
-            Mascota mascota = (Mascota)listaMascotas.get(i);
+            Mascota mascota = listaMascotas.get(i);
             if (mascota.getNombreMascota().toUpperCase().equals(nombreMascota.toUpperCase())) return true;
         }
         return false;
@@ -74,7 +74,7 @@ public class Cliente{
 
     public Mascota getMascota(String nombreMascota){
         for(int i = 0; i < listaMascotas.size(); i++){
-            Mascota mascota = (Mascota)listaMascotas.get(i);
+            Mascota mascota = listaMascotas.get(i);
             if (mascota.getNombreMascota().toUpperCase().equals(nombreMascota.toUpperCase())) return mascota;
         }
         return null;
@@ -82,7 +82,7 @@ public class Cliente{
 
     public Mascota getMascota(int idMascota){
         for(int i = 0; i < listaMascotas.size(); i++){
-            Mascota mascota = (Mascota)listaMascotas.get(i);
+            Mascota mascota = listaMascotas.get(i);
             if (mascota.getId() == idMascota) return mascota;
         }
         return null;
@@ -111,7 +111,7 @@ public class Cliente{
         if(listaMascotas.size() == 0){System.out.println("No existen mascotas registradas para el usuario");}
         else
             for(int i = 0; i <listaMascotas.size(); i++){
-                Mascota mascota = (Mascota)listaMascotas.get(i);
+                Mascota mascota = listaMascotas.get(i);
                 mascota.mostrarDatosMascota();
             }
     }

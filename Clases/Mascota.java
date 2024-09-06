@@ -11,10 +11,10 @@ public class Mascota{
     private int id;
     private static int contadorId = 0;
  
-    private static HashMap mapaCitas;
-    private static ArrayList listaCitas;
+    private static HashMap<Integer,Cita> mapaCitas;
+    private static ArrayList<Cita> listaCitas;
 
-    private ArrayList listaServicios;
+    private ArrayList<Servicio> listaServicios;
 
     //CONSTRUCTOR
     public Mascota(String nombreMascota, String nombreDueño, String especie, int edad){
@@ -56,7 +56,7 @@ public class Mascota{
         Cita cita;
 
         for(int i = 0; i < listaCitas.size(); i++){
-            cita = (Cita)listaCitas.get(i);
+            cita = listaCitas.get(i);
             cita.mostrarCita();
         }
     }
@@ -67,14 +67,14 @@ public class Mascota{
             return false;
         }
 
-        Cita cita = (Cita)mapaCitas.get(idCita);
+        Cita cita = mapaCitas.get(idCita);
         listaCitas.remove(cita);
         mapaCitas.remove(idCita);
         return true;
     }
 
     public Cita obtenerCita(int idCita){
-        return (Cita)mapaCitas.get(idCita);
+        return mapaCitas.get(idCita);
     }
 
     public void agregarServicio(Servicio servicio){listaServicios.add(servicio);}
@@ -92,7 +92,7 @@ public class Mascota{
     public void mostrarListaServicios(){
         System.out.println("Lista de servicios realizados a " + nombreMascota + ":");
         for(int i = 0; i < listaServicios.size(); i++){
-            Servicio servicio = (Servicio)listaServicios.get(i);
+            Servicio servicio = listaServicios.get(i);
             System.out.println("------------------------");
             System.out.println("Servicio número " + (i + 1));
             System.out.println("Tipo de servicio: " + servicio.getTipo());

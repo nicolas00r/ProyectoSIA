@@ -10,8 +10,8 @@ import java.util.HashMap;
 
 public class PetServiceManagament{
 
-    private static ArrayList listaClientes = new ArrayList<>();
-    private static HashMap clientesXRut = new HashMap<>();
+    private static ArrayList<Cliente> listaClientes = new ArrayList<>();
+    private static HashMap<String,Cliente> clientesXRut = new HashMap<>();
     private static GestionCitas gestorCitas = new GestionCitas();
 
     public static void main(String[] args) throws IOException{
@@ -59,8 +59,6 @@ public class PetServiceManagament{
             limpiarPantalla();
 
         } while(opcion != 6);
-
-
     }
 
     public static void presioneEnter(){
@@ -72,7 +70,6 @@ public class PetServiceManagament{
             System.out.println("Error al leer la entrada del usuario.");
             e.printStackTrace();
         }
-
     }
 
     public static void limpiarPantalla() {
@@ -121,7 +118,7 @@ public class PetServiceManagament{
     public static void mostrarClientes(){
         limpiarPantalla();
         for(int i = 0; i < listaClientes.size(); i++){
-            Cliente cliente = (Cliente)listaClientes.get(i);
+            Cliente cliente = listaClientes.get(i);
             System.out.println("Información cliente:");
             System.out.println("Nombre: " + cliente.getNombre());
             System.err.println("Rut: " + cliente.getRut());
@@ -140,7 +137,7 @@ public class PetServiceManagament{
         String rutCliente = lector.readLine();
 
         if(clientesXRut.containsKey(rutCliente)){
-            Cliente cliente = (Cliente)clientesXRut.get(rutCliente);
+            Cliente cliente = clientesXRut.get(rutCliente);
             cliente.registrarMascota();
         } else{
             System.out.println("No existe un cliente registrado con ese RUT");
@@ -159,7 +156,7 @@ public class PetServiceManagament{
             return;
 
         }
-        Cliente cliente = (Cliente)clientesXRut.get(rutCLiente);
+        Cliente cliente = clientesXRut.get(rutCLiente);
         System.out.println("Mostrando detalle de mascotas");
         cliente.mostrarMascotas();
 
@@ -174,7 +171,7 @@ public class PetServiceManagament{
         if(!clientesXRut.containsKey(rutCLiente)){
             System.out.println("El usuario no se encuentra registrado en el sistema, por favor registrese a través de la opción número 1");
         }
-        Cliente cliente = (Cliente)clientesXRut.get(rutCLiente);
+        Cliente cliente = clientesXRut.get(rutCLiente);
 
         gestorCitas.mostrarMenu(cliente);
     }
