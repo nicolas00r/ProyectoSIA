@@ -3,13 +3,15 @@ package Clases;
 import java.io.*;
 
 public class GestionCitas{
-
+    // Variables de instancia
     private static int creadorIdCita;
 
+    // Constructor
     public GestionCitas(){
         creadorIdCita = 1;
     }
 
+    // Métodos
     public void mostrarMenu(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         int opcion;
@@ -49,12 +51,12 @@ public class GestionCitas{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Ingrese el ID de su mascota: ");
-        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
+        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "No");
         String cadenaAux = lector.readLine();
 
         Mascota mascota;
 
-        if(cadenaAux.equals("no")){
+        if(cadenaAux.toUpperCase().equals("NO")){
             System.out.println("Ingrese el nombre de su mascota");
             mascota = cliente.getMascota(lector.readLine());
             if(mascota == null){

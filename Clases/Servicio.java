@@ -1,16 +1,19 @@
 package Clases;
 
 public class Servicio{
+    // Variables de instancia
     private String tipo;
     private String fecha;
     private String descripcion;
 
+    // Constructor
     public Servicio(String tipo, String fecha, String descripcion){
         this.tipo = tipo;
         this.fecha = fecha;
         this.descripcion = descripcion;
     }
 
+    // Setters y Getters
     public String getTipo(){
         return tipo;
     }
@@ -35,6 +38,7 @@ public class Servicio{
         this.descripcion = descripcion;
     }
 
+    // Métodos
     public void mostrarServicio(){
         System.out.println("Tipo servicio: " + tipo);
         System.out.println("Descripcion :" + descripcion);

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Cliente{
+    // Variables de instancia
     private String nombre;
     private String rut;
     private String direccion;
@@ -13,7 +14,7 @@ public class Cliente{
     private String correoElectronico;
     private ArrayList<Mascota> listaMascotas;
 
-
+    // Constructor
     public Cliente(String nombre, String rut, String direccion, String numeroTelefono, String correoElectronico){
         this.nombre = nombre;
         this.rut = rut;
@@ -23,6 +24,7 @@ public class Cliente{
         this.listaMascotas = new ArrayList<>();
     }
 
+    // Setters y Getters
     public String getNombre(){
         return nombre;
     }
@@ -63,7 +65,7 @@ public class Cliente{
         this.correoElectronico = correoElectronico;
     }
 
-
+    // Métodos
     public boolean existeMascota(String nombreMascota){
         for(int i = 0; i < listaMascotas.size(); i++){
             Mascota mascota = listaMascotas.get(i);

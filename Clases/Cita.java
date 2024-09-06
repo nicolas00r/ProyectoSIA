@@ -2,10 +2,12 @@ package Clases;
 
 //Variables
 public class Cita{
+    // Variables de instancia
     private Cliente cliente;
     private Mascota mascota;
     private Servicio servicio;
     private String fechaHora;
+
     // Constructor 
     public Cita(Cliente cliente, Mascota mascota, Servicio servicio, String fechaHora){
         this.cliente = cliente;
@@ -13,7 +15,8 @@ public class Cita{
         this.servicio = servicio;
         this.fechaHora = fechaHora;
     }
-    // Metodos
+    
+    // Setters y Getters
     public Cliente getCliente(){
         return cliente;
     }
@@ -46,6 +49,7 @@ public class Cita{
         this.fechaHora = fechaHora;
     }
 
+    // Métodos
     public void mostrarCita(){
         servicio.mostrarServicio();
         System.out.println("Fecha: " + fechaHora);

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Mascota{
-    //VARIABLES
+    // Variables de instancia
     private String nombreMascota;
     private String nombreDueño;
     private String especie;
@@ -16,7 +16,7 @@ public class Mascota{
 
     private ArrayList<Servicio> listaServicios;
 
-    //CONSTRUCTOR
+    // Constructor
     public Mascota(String nombreMascota, String nombreDueño, String especie, int edad){
         id = ++contadorId;
         listaServicios = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Mascota{
         setEdad(edad);
     }
 
-    //METODOS
+    // Setters y Getters
     public void setNombreMascota(String nombreMascota){this.nombreMascota = nombreMascota;}
     public String getNombreMascota(){return nombreMascota;}
 
@@ -43,6 +43,7 @@ public class Mascota{
     public void setEdad(int edad){this.edad = edad;}
     public int getEdad(){return edad;}
 
+    // Métodos
     public void agregarCita(Cita cita, int idCita){
         mapaCitas.put(idCita, cita);
         listaCitas.add(cita);
