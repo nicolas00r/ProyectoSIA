@@ -1,20 +1,18 @@
 package Clases;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GestionCitas{
-    private HashMap<String, Cita> citas;
-    private HashMap<String, Cliente> clientes;
-    private HashMap<String, Mascota> mascotas;
+
+    private static int creadorIdCita;
 
     public GestionCitas(){
-        citas = new HashMap<>();
-        clientes = new HashMap<>();
-        mascotas = new HashMap<>();
+        creadorIdCita = 1;
     }
 
-    public void mostrarMenu() throws IOException{
+    public void mostrarMenu(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         int opcion;
 
@@ -29,38 +27,27 @@ public class GestionCitas{
 
             switch(opcion){
                 case 1:
-                    agregarCita();
+                    agregarCita(cliente);
                     break;
                 case 2:
-                    eliminarCita();
+                    eliminarCita(cliente);
                     break;
                 case 3:
-                    modificarCita();
+                    modificarCita(cliente);
                     break;
                 case 4:
-                    confirmarCita();
+                    confirmarCita(cliente);
                 case 5:
                     System.out.println("Saliendo del menú...");
                     break;
                 default:
-                    System.out.println("Opcion no válida. Intente nuefvamente.");
+                    System.out.println("Opcion no válida. Intente nuevamente.");
             }
         } while (opcion != 5);
     }
 
-    public void agregarCita() throws IOException{
+    public void agregarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el ID de la cita");
-        String idCita = lector.readLine();
-
-        System.out.println("Ingrese el nombre del cliente: ");
-        String nombreCliente = lector.readLine();
-        Cliente cliente = clientes.get(nombreCliente);
-        if(cliente == null){
-            System.out.println("Cliente no encontrado.");
-            return;
-        }
 
         System.out.println("Ingrese el ID de su mascota: ");
         System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
@@ -92,50 +79,142 @@ public class GestionCitas{
         String descripcionServicio = lector.readLine();
         System.out.println("Ingrese la fecha y hora de la cita: ");
         String fechaHora = lector.readLine();
+        System.out.println("El ID de su cita es: " + creadorIdCita);
         
         Servicio servicio = new Servicio(tipoServicio, fechaServicio, descripcionServicio);
         Cita cita = new Cita(cliente, mascota, servicio , fechaHora);
-        citas.put(idCita, cita);
 
-
+        mascota.agregarCita(cita, creadorIdCita);
+        
         System.out.println("Cita agregada exitosamente.");
+        creadorIdCita++;
     }
 
-    public void eliminarCita() throws IOException{
+    public void eliminarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Ingrese el ID de su mascota: ");
+        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
+        String cadenaAux = lector.readLine();
+
+        Mascota mascota;
+
+        if(cadenaAux.equals("no")){
+            System.out.println("Ingrese el nombre de su mascota");
+            mascota = cliente.getMascota(lector.readLine());
+            if(mascota == null){
+                System.out.println("Mascota no encontrada.");
+                return;
+            }
+        }
+        else{
+            mascota = cliente.getMascota(Integer.parseInt(cadenaAux)); 
+            if(mascota == null){
+                System.out.println("Mascota no encontrada.");
+                return;
+            }
+        }
+
+        if(mascota.citasEstaVacio()){
+            System.out.println("Esta mascota no tiene citas reservadas");
+            return;
+        }
+
+        mascota.mostrarListaCitas();
+
         System.out.println("Ingrese el ID de la cita a eliminar");
         String idCita = lector.readLine();
 
-        if (citas.remove(idCita) != null){
-            System.out.println("Cita eliminada exitosamente");
-        }else{
-            System.out.println("Cita no encontrada.");
-        }
+        if(mascota.eliminarCita(idCita))
+            System.out.println("Cita eliminada correctamente");
+
+
     }
 
-    public void modificarCita() throws IOException{
+    public void modificarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Ingrese el ID de la cita a modificar: ");
+
+        System.out.println("Ingrese el ID de su mascota: ");
+        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
+        String cadenaAux = lector.readLine();
+
+        Mascota mascota;
+
+        if(cadenaAux.equals("no")){
+            System.out.println("Ingrese el nombre de su mascota");
+            mascota = cliente.getMascota(lector.readLine());
+            if(mascota == null){
+                System.out.println("Mascota no encontrada.");
+                return;
+            }
+        }
+        else{
+            mascota = cliente.getMascota(Integer.parseInt(cadenaAux)); 
+            if(mascota == null){
+                System.out.println("Mascota no encontrada.");
+                return;
+            }
+        }
+
+        if(mascota.citasEstaVacio()){
+            System.out.println("Esta mascota no tiene citas reservadas");
+            return;
+        }
+
+        mascota.mostrarListaCitas();
+
+        System.out.println("Ingrese el ID de la cita a eliminar");
         String idCita = lector.readLine();
-        Cita cita = citas.get(idCita);
+
+        Cita cita = mascota.obtenerCita(idCita);
 
         if(cita != null){
             System.out.println("Ingrese una nueva fecha y hora de la cita: ");
             String nuevaFechaHora = lector.readLine();
             cita.setFechaHora(nuevaFechaHora);
-            citas.put(idCita, cita);
             System.out.println("Cita modificada exitosamente.");
         }else{
             System.out.println("Cita no encontrada.");
         }
     }
 
-    public void confirmarCita() throws IOException{
+    public void confirmarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Ingrese el ID de su mascota: ");
+        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "no");
+        String cadenaAux = lector.readLine();
+
+        Mascota mascota;
+
+        if(cadenaAux.equals("no")){
+            System.out.println("Ingrese el nombre de su mascota");
+            mascota = cliente.getMascota(lector.readLine());
+            if(mascota == null){
+                System.out.println("Mascota no encontrada.");
+                return;
+            }
+        }
+        else{
+            mascota = cliente.getMascota(Integer.parseInt(cadenaAux)); 
+            if(mascota == null){
+                System.out.println("Mascota no encontrada.");
+                return;
+            }
+        }
+
+        if(mascota.citasEstaVacio()){
+            System.out.println("Esta mascota no tiene citas reservadas");
+            return;
+        }
+
+        mascota.mostrarListaCitas();
+
         System.out.println("Ingrese el ID de la cita a confirmar: ");
         String idCita = lector.readLine();
 
-        Cita cita = citas.get(idCita);
+        Cita cita = mascota.obtenerCita(idCita);
+        
         if(cita != null){
             System.out.println("Detalles de la cita");
             System.out.println("Cliente: " + cita.getCliente().getNombre());
@@ -149,6 +228,7 @@ public class GestionCitas{
             String respuesta = lector.readLine().trim().toLowerCase();
 
             if(respuesta.equals("si")){
+                mascota.agregarServicio(cita.getServicio());
                 System.out.println("Cita confirmada exitosamente.");
             }else if(respuesta.equals("no")){
                 System.out.println("Cita no confirmada");

@@ -1,5 +1,6 @@
 package Clases;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Mascota{
     //VARIABLES
@@ -9,12 +10,18 @@ public class Mascota{
     private int edad;
     private int id;
     private static int contadorId = 0;
+ 
+    private static HashMap mapaCitas;
+    private static ArrayList listaCitas;
+
     private ArrayList listaServicios;
 
     //CONSTRUCTOR
     public Mascota(String nombreMascota, String nombreDueño, String especie, int edad){
-        this.id = ++contadorId;
-        this.listaServicios = new ArrayList<>();
+        id = ++contadorId;
+        listaServicios = new ArrayList<>();
+        mapaCitas = new HashMap<>();
+        listaCitas = new ArrayList<>();
         setNombreMascota(nombreMascota);
         setNombreDueño(nombreDueño);
         setEspecie(especie);
@@ -35,6 +42,40 @@ public class Mascota{
 
     public void setEdad(int edad){this.edad = edad;}
     public int getEdad(){return edad;}
+
+    public void agregarCita(Cita cita, int idCita){
+        mapaCitas.put(cita, idCita);
+        listaCitas.add(cita);
+    }
+
+    public boolean citasEstaVacio(){
+        return listaCitas.isEmpty();
+    }
+
+    public void mostrarListaCitas(){
+        Cita cita;
+
+        for(int i = 0; i < listaCitas.size(); i++){
+            cita = (Cita)listaCitas.get(i);
+            cita.mostrarCita();
+        }
+    }
+
+    public boolean eliminarCita(String idCita){
+        if(!mapaCitas.containsKey(idCita)){
+            System.out.println("Cita no existe");
+            return false;
+        }
+
+        Cita cita = (Cita)mapaCitas.get(idCita);
+        listaCitas.remove(cita);
+        mapaCitas.remove(idCita);
+        return true;
+    }
+
+    public Cita obtenerCita(String idCita){
+        return (Cita)mapaCitas.get(idCita);
+    }
 
     public void agregarServicio(Servicio servicio){listaServicios.add(servicio);}
 

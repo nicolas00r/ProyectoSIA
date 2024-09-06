@@ -45,4 +45,9 @@ public class Cita{
     public void setFechaHora(String fechaHora){
         this.fechaHora = fechaHora;
     }
+
+    public void mostrarCita(){
+        servicio.mostrarServicio();
+        System.out.println("Fecha: " + fechaHora);
+    }
 }
