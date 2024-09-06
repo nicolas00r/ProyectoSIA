@@ -18,6 +18,7 @@ public class PetServiceManagement{
         listaClientes = new ArrayList<>();
         clientesXRut = new HashMap<>();
         gestorCitas = new GestionCitas();
+        llenadoDatos(); // FUNCIÓN TEMPORAL PARA RELLENAR DATOS
     }
 
     // Métodos
@@ -89,14 +90,20 @@ public class PetServiceManagement{
 
         }
         Cliente cliente = clientesXRut.get(rutCLiente);
+
+        if(cliente.listaEstaVacia()){
+            System.out.println("El cliente no posee mascotas registradas a su nombre");
+            return;
+        }
+
         System.out.println("Mostrando detalle de mascotas");
         cliente.mostrarMascotas();
 
         System.out.println("¿Desea ver el historial de servicios de una de las mascotas? Si/No");
         String respuesta = lector.readLine();
         if(respuesta.toUpperCase().equals("SI")){
-            System.out.println("Ingrese el ID de la mascota");
             Mascota mascota = Helper.identificarMascota(cliente);
+
             mascota.mostrarHistorialServicios();
         } else return;
 
@@ -114,6 +121,20 @@ public class PetServiceManagement{
         }
         Cliente cliente = clientesXRut.get(rutCLiente);
 
-        gestorCitas.mostrarMenu(cliente);
+        gestorCitas.menu(cliente);
+    }
+
+    private void llenadoDatos(){
+        Cliente cliente1 = new Cliente("Pedro", "16.111.111-1", "PUCV, Valparaiso", "912345678", "correo@test.cl");
+        listaClientes.add(cliente1);
+        clientesXRut.put(cliente1.getRut(), cliente1);
+
+        Cliente cliente2 = new Cliente("Juan", "17.111.111-1", "PUCV, Curauma", "987654321", "test@test.cl");
+        listaClientes.add(cliente2);
+        clientesXRut.put(cliente2.getRut(), cliente2);
+
+        Cliente cliente3 = new Cliente("Alberto", "18.111.111-1", "PUCV, Viña", "987651234", "test@correo.cl");
+        listaClientes.add(cliente3);
+        clientesXRut.put(cliente3.getRut(), cliente3);
     }
 }

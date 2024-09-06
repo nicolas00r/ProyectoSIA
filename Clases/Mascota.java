@@ -30,36 +30,27 @@ public class Mascota{
 
     // Setters y Getters
     public void setNombreMascota(String nombreMascota){this.nombreMascota = nombreMascota;}
+
     public String getNombreMascota(){return nombreMascota;}
 
     public void setNombreDueño(String nombreDueño){this.nombreDueño = nombreDueño;}
+
     public String getNombreDueño(){return nombreDueño;}
 
     public void setEspecie(String especie){this.especie = especie;}
+
     public String getEspecie(){return especie;}
 
     public int getId(){return id;}
 
     public void setEdad(int edad){this.edad = edad;}
+
     public int getEdad(){return edad;}
 
     // Métodos
     public void agregarCita(Cita cita, int idCita){
         mapaCitas.put(idCita, cita);
         listaCitas.add(cita);
-    }
-
-    public boolean citasEstaVacio(){
-        return listaCitas.isEmpty();
-    }
-
-    public void mostrarListaCitas(){
-        Cita cita;
-
-        for(int i = 0; i < listaCitas.size(); i++){
-            cita = listaCitas.get(i);
-            cita.mostrarCita();
-        }
     }
 
     public boolean eliminarCita(int idCita){
@@ -74,11 +65,18 @@ public class Mascota{
         return true;
     }
 
-    public Cita obtenerCita(int idCita){
-        return mapaCitas.get(idCita);
+    public Cita obtenerCita(int idCita){ return mapaCitas.get(idCita);}
+
+    public boolean citasEstaVacio(){ return listaCitas.isEmpty();}
+
+    public void mostrarListaCitas(){
+        for(int i = 0; i < listaCitas.size(); i++){
+            Cita cita = listaCitas.get(i);
+            cita.mostrarCita();
+        }
     }
 
-    public void agregarServicio(Servicio servicio){listaServicios.add(servicio);}
+    public void agregarServicio(Servicio servicio){ listaServicios.add(servicio);}
 
     public void mostrarDatosMascota(){
         System.out.println("------------------------");
@@ -91,6 +89,11 @@ public class Mascota{
     }
 
     public void mostrarHistorialServicios(){
+        if(listaServicios.size() == 0){
+            System.out.println("No existen servicios registrados en esta mascota");
+            return;
+        }
+
         System.out.println("Lista de servicios realizados a " + nombreMascota + ":");
         for(int i = 0; i < listaServicios.size(); i++){
             Servicio servicio = listaServicios.get(i);

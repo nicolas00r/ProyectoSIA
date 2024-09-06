@@ -50,7 +50,7 @@ public class Helper {
         System.out.flush();
     }
 
-    public static void mostrarMenu(){
+    public static void mostrarMenuPrincipal(){
         System.out.println("Bienvenido al menú");
         System.out.println("¿Qué opción deseas realizar?");
         System.out.println("1. Registrar un cliente");
@@ -59,5 +59,15 @@ public class Helper {
         System.out.println("4. Mostrar clientes");
         System.out.println("5. Ver detalles de mascotas");
         System.out.println("6. Salir");
+    }
+
+    public static void mostrarMenuCitas(){
+        System.out.println("=== Menú de Gestión de Citas ===");
+        System.out.println("1. Agregar una cita");
+        System.out.println("2. Eliminar una cita");
+        System.out.println("3. Modificar una cita");
+        System.out.println("4. Confirmar una cita");
+        System.out.println("5. Salir del menú");
+        System.out.print("Seleccione una opción: ");
     }
 }

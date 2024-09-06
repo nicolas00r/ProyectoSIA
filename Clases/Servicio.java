@@ -14,29 +14,17 @@ public class Servicio{
     }
 
     // Setters y Getters
-    public String getTipo(){
-        return tipo;
-    }
+    public String getTipo(){ return tipo;}
 
-    public void setTipo(String tipo){
-        this.tipo = tipo;
-    }
+    public void setTipo(String tipo){ this.tipo = tipo;}
 
-    public String getFecha(){
-        return fecha;
-    }
+    public String getFecha(){ return fecha;}
 
-    public void setFecha(String fecha){
-        this.fecha = fecha;
-    }
+    public void setFecha(String fecha){ this.fecha = fecha;}
 
-    public String getDescripcion(){
-        return descripcion;
-    }
+    public String getDescripcion(){ return descripcion;}
 
-    public void setDescripcion(String descripcion){
-        this.descripcion = descripcion;
-    }
+    public void setDescripcion(String descripcion){this.descripcion = descripcion;}
 
     // Métodos
     public void mostrarServicio(){

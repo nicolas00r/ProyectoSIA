@@ -12,18 +12,12 @@ public class GestionCitas{
     }
 
     // Métodos
-    public void mostrarMenu(Cliente cliente) throws IOException{
+    public void menu(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         int opcion;
 
         do {
-            System.out.println("=== Menú de Gestión de Citas ===");
-            System.out.println("1. Agregar una cita");
-            System.out.println("2. Eliminar una cita");
-            System.out.println("3. Modificar una cita");
-            System.out.println("4. Confirmar una cita");
-            System.out.println("5. Salir del menú");
-            System.out.print("Seleccione una opción: ");
+            Helper.mostrarMenuCitas();
             opcion = Integer.parseInt(lector.readLine());
 
             switch(opcion){
@@ -54,20 +48,20 @@ public class GestionCitas{
         
         System.out.println("Ingrese el tipo de servicio: ");
         String tipoServicio = lector.readLine();
-        System.out.println("Ingrese la fecha del servicio: ");
-        String fechaServicio = lector.readLine();
         System.out.println("Ingrese la descripcion del servicio: ");
         String descripcionServicio = lector.readLine();
-        System.out.println("Ingrese la fecha y hora de la cita: ");
-        String fechaHora = lector.readLine();
-        System.out.println("El ID de su cita es: " + creadorIdCita);
+        System.out.println("Ingrese la fecha de la cita: ");
+        String fecha = lector.readLine();
+        System.out.println("Ingrese la hora de la cita: ");
+        String hora = lector.readLine();
         
-        Servicio servicio = new Servicio(tipoServicio, fechaServicio, descripcionServicio);
-        Cita cita = new Cita(cliente, mascota, servicio , fechaHora, creadorIdCita);
+        Servicio servicio = new Servicio(tipoServicio, fecha, descripcionServicio);
+        Cita cita = new Cita(cliente, mascota, servicio , fecha, hora, creadorIdCita);
 
         mascota.agregarCita(cita, creadorIdCita);
         
         System.out.println("Cita agregada exitosamente.");
+        System.out.println("El ID de su cita es: " + creadorIdCita);
         creadorIdCita++;
     }
 
@@ -110,9 +104,12 @@ public class GestionCitas{
         Cita cita = mascota.obtenerCita(idCita);
 
         if(cita != null){
-            System.out.println("Ingrese una nueva fecha y hora de la cita: ");
-            String nuevaFechaHora = lector.readLine();
-            cita.setFechaHora(nuevaFechaHora);
+            System.out.println("Ingrese una nueva fecha para la cita: ");
+            String nuevaFecha = lector.readLine();
+            System.out.println("Ingrese la nueva hora de la cita: ");
+            String nuevaHora = lector.readLine();
+            cita.setFecha(nuevaFecha);
+            cita.setHora(nuevaHora);
             System.out.println("Cita modificada exitosamente.");
         }else{
             System.out.println("Cita no encontrada.");
@@ -141,9 +138,9 @@ public class GestionCitas{
             System.out.println("Cliente: " + cita.getCliente().getNombre());
             System.out.println("Mascota: " + cita.getMascota().getNombreMascota());
             System.out.println("Servicio: " + cita.getServicio().getTipo());
-            System.out.println("Fecha del servicio: " + cita.getServicio().getFecha());
             System.out.println("Descripcion: " + cita.getServicio().getDescripcion());
-            System.out.println("Fecha y hora de la cita: " + cita.getFechaHora());
+            System.out.println("Fecha de la cita: " + cita.getFecha());
+            System.out.println("Hora de la cita: " + cita.getHora());
 
             System.out.println("¿Desea confirmar esta cita? (si/no): ");
             String respuesta = lector.readLine().trim().toLowerCase();

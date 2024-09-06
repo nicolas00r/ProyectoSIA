@@ -1,9 +1,6 @@
 package main;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
+import java.io.*;
 import Clases.Helper;
 import Clases.PetServiceManagement;
 
@@ -14,7 +11,7 @@ public class Main {
         int opcion;
     
         do{
-            Helper.mostrarMenu();
+            Helper.mostrarMenuPrincipal();
             opcion = Integer.parseInt(lector.readLine());
     
             switch (opcion) {
