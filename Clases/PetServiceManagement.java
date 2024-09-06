@@ -21,36 +21,8 @@ public class PetServiceManagement{
     }
 
     // Métodos
-    public void presioneEnter(){
-        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Presione Enter para continuar...");
-        try {
-            lector.readLine();  // Espera a que el usuario presione Enter.
-        } catch (IOException e) {
-            System.out.println("Error al leer la entrada del usuario.");
-            e.printStackTrace();
-        }
-    }
-
-    public void limpiarPantalla() {
-        // ANSI escape code para limpiar la consola
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
-    }
-
-    public void mostrarMenu(){
-        System.out.println("Bienvenido al menú");
-        System.out.println("¿Qué opción deseas realizar?");
-        System.out.println("1. Registrar un cliente");
-        System.out.println("2. Agregar una mascota");
-        System.out.println("3. Gestionar una cita");
-        System.out.println("4. Mostrar clientes");
-        System.out.println("5. Ver detalles de mascotas");
-        System.out.println("6. Salir");
-    }
-
     public void registrarCliente()throws IOException{
-        limpiarPantalla();
+        Helper.limpiarPantalla();
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Bienvenido al registro de clientes");
@@ -76,7 +48,7 @@ public class PetServiceManagement{
     }
 
     public void mostrarClientes(){
-        limpiarPantalla();
+        Helper.limpiarPantalla();
         for(int i = 0; i < listaClientes.size(); i++){
             Cliente cliente = listaClientes.get(i);
             System.out.println("Información cliente:");
@@ -90,7 +62,7 @@ public class PetServiceManagement{
     }
 
     public void agregarMascota()throws IOException{
-        limpiarPantalla();
+        Helper.limpiarPantalla();
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Ingrese su rut");
@@ -106,7 +78,7 @@ public class PetServiceManagement{
     }
 
     public void detallesMascotas()throws IOException{
-        limpiarPantalla();
+        Helper.limpiarPantalla();
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese su RUT:");
         String rutCLiente = lector.readLine();
@@ -120,10 +92,18 @@ public class PetServiceManagement{
         System.out.println("Mostrando detalle de mascotas");
         cliente.mostrarMascotas();
 
+        System.out.println("¿Desea ver el historial de servicios de una de las mascotas? Si/No");
+        String respuesta = lector.readLine();
+        if(respuesta.toUpperCase().equals("SI")){
+            System.out.println("Ingrese el ID de la mascota");
+            Mascota mascota = Helper.identificarMascota(cliente);
+            mascota.mostrarHistorialServicios();
+        } else return;
+
     }
 
     public void gestionarCitas() throws IOException{
-        limpiarPantalla();
+        Helper.limpiarPantalla();
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         System.out.println(("Ingrese su RUT:"));
         String rutCLiente = lector.readLine();

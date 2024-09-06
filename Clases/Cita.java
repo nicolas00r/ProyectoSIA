@@ -7,13 +7,15 @@ public class Cita{
     private Mascota mascota;
     private Servicio servicio;
     private String fechaHora;
+    private int idCita;
 
     // Constructor 
-    public Cita(Cliente cliente, Mascota mascota, Servicio servicio, String fechaHora){
+    public Cita(Cliente cliente, Mascota mascota, Servicio servicio, String fechaHora, int idCita){
         this.cliente = cliente;
         this.mascota = mascota;
         this.servicio = servicio;
         this.fechaHora = fechaHora;
+        this.idCita = idCita;
     }
     
     // Setters y Getters
@@ -49,9 +51,18 @@ public class Cita{
         this.fechaHora = fechaHora;
     }
 
+    public int getIdCita() {
+        return idCita;
+    }
+
+    public void setIdCita(int idCita) {
+        this.idCita = idCita;
+    }
+
     // Métodos
     public void mostrarCita(){
         servicio.mostrarServicio();
         System.out.println("Fecha: " + fechaHora);
+        System.out.println("Id de la cita: " + idCita);
     }
 }

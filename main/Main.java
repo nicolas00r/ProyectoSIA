@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import Clases.Helper;
 import Clases.PetServiceManagement;
 
 public class Main {
@@ -13,7 +14,7 @@ public class Main {
         int opcion;
     
         do{
-            gestor.mostrarMenu();
+            Helper.mostrarMenu();
             opcion = Integer.parseInt(lector.readLine());
     
             switch (opcion) {
@@ -45,8 +46,8 @@ public class Main {
                     System.out.println("Opción no valida, intente nuevamente");
                     break;
             }
-            gestor.presioneEnter();
-            gestor.limpiarPantalla();
+            Helper.presioneEnter();
+            Helper.limpiarPantalla();
     
         } while(opcion != 6);
     }

@@ -47,36 +47,9 @@ public class GestionCitas{
         } while (opcion != 5);
     }
 
-    public Mascota identificarMascota(Cliente cliente)throws IOException{
-        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese el ID de su mascota: ");
-        System.out.println("En caso de no recordar el ID de su mascota ingrese la palabra " + "No");
-        String cadenaAux = lector.readLine();
-
-        Mascota mascota;
-
-        if(cadenaAux.toUpperCase().equals("NO")){
-            System.out.println("Ingrese el nombre de su mascota");
-            mascota = cliente.getMascota(lector.readLine());
-            if(mascota == null){
-                System.out.println("Mascota no encontrada.");
-                return null;
-            }
-        }
-        else{
-            mascota = cliente.getMascota(Integer.parseInt(cadenaAux)); 
-            if(mascota == null){
-                System.out.println("Mascota no encontrada.");
-                return null;
-            }
-        }
-        return mascota;
-    }
-
     public void agregarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        Mascota mascota = identificarMascota(cliente);
+        Mascota mascota = Helper.identificarMascota(cliente);
         if(mascota == null) return;
         
         System.out.println("Ingrese el tipo de servicio: ");
@@ -90,7 +63,7 @@ public class GestionCitas{
         System.out.println("El ID de su cita es: " + creadorIdCita);
         
         Servicio servicio = new Servicio(tipoServicio, fechaServicio, descripcionServicio);
-        Cita cita = new Cita(cliente, mascota, servicio , fechaHora);
+        Cita cita = new Cita(cliente, mascota, servicio , fechaHora, creadorIdCita);
 
         mascota.agregarCita(cita, creadorIdCita);
         
@@ -100,7 +73,7 @@ public class GestionCitas{
 
     public void eliminarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        Mascota mascota = identificarMascota(cliente);
+        Mascota mascota = Helper.identificarMascota(cliente);
         if(mascota == null) return;
 
         if(mascota.citasEstaVacio()){
@@ -121,7 +94,7 @@ public class GestionCitas{
 
     public void modificarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        Mascota mascota = identificarMascota(cliente);
+        Mascota mascota = Helper.identificarMascota(cliente);
         if(mascota == null) return;
 
         if(mascota.citasEstaVacio()){
@@ -148,7 +121,7 @@ public class GestionCitas{
 
     public void confirmarCita(Cliente cliente) throws IOException{
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        Mascota mascota = identificarMascota(cliente);
+        Mascota mascota = Helper.identificarMascota(cliente);
         if(mascota == null) return;
 
         if(mascota.citasEstaVacio()){

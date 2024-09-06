@@ -90,7 +90,7 @@ public class Mascota{
         System.out.println("------------------------");
     }
 
-    public void mostrarListaServicios(){
+    public void mostrarHistorialServicios(){
         System.out.println("Lista de servicios realizados a " + nombreMascota + ":");
         for(int i = 0; i < listaServicios.size(); i++){
             Servicio servicio = listaServicios.get(i);
