@@ -22,6 +22,7 @@ public class GestionCitas{
             System.out.println("2. Eliminar una cita");
             System.out.println("3. Modificar una cita");
             System.out.println("4. Confirmar una cita");
+            System.out.println("5. Salir del menú");
             System.out.print("Seleccione una opción: ");
             opcion = Integer.parseInt(lector.readLine());
 
@@ -123,7 +124,7 @@ public class GestionCitas{
         mascota.mostrarListaCitas();
 
         System.out.println("Ingrese el ID de la cita a eliminar");
-        String idCita = lector.readLine();
+        int idCita = Integer.parseInt(lector.readLine());
 
         if(mascota.eliminarCita(idCita))
             System.out.println("Cita eliminada correctamente");
@@ -163,8 +164,8 @@ public class GestionCitas{
 
         mascota.mostrarListaCitas();
 
-        System.out.println("Ingrese el ID de la cita a eliminar");
-        String idCita = lector.readLine();
+        System.out.println("Ingrese el ID de la cita a modificar");
+        int idCita = Integer.parseInt(lector.readLine());
 
         Cita cita = mascota.obtenerCita(idCita);
 
@@ -211,7 +212,7 @@ public class GestionCitas{
         mascota.mostrarListaCitas();
 
         System.out.println("Ingrese el ID de la cita a confirmar: ");
-        String idCita = lector.readLine();
+        int idCita = Integer.parseInt(lector.readLine());
 
         Cita cita = mascota.obtenerCita(idCita);
         

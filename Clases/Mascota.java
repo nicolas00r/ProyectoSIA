@@ -44,7 +44,7 @@ public class Mascota{
     public int getEdad(){return edad;}
 
     public void agregarCita(Cita cita, int idCita){
-        mapaCitas.put(cita, idCita);
+        mapaCitas.put(idCita, cita);
         listaCitas.add(cita);
     }
 
@@ -61,7 +61,7 @@ public class Mascota{
         }
     }
 
-    public boolean eliminarCita(String idCita){
+    public boolean eliminarCita(int idCita){
         if(!mapaCitas.containsKey(idCita)){
             System.out.println("Cita no existe");
             return false;
@@ -73,7 +73,7 @@ public class Mascota{
         return true;
     }
 
-    public Cita obtenerCita(String idCita){
+    public Cita obtenerCita(int idCita){
         return (Cita)mapaCitas.get(idCita);
     }
 
