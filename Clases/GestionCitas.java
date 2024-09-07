@@ -103,17 +103,18 @@ public class GestionCitas{
 
         Cita cita = mascota.obtenerCita(idCita);
 
-        if(cita != null){
-            System.out.println("Ingrese una nueva fecha para la cita: ");
-            String nuevaFecha = lector.readLine();
-            System.out.println("Ingrese la nueva hora de la cita: ");
-            String nuevaHora = lector.readLine();
-            cita.setFecha(nuevaFecha);
-            cita.setHora(nuevaHora);
-            System.out.println("Cita modificada exitosamente.");
-        }else{
+        if(cita == null){
             System.out.println("Cita no encontrada.");
+            return;
         }
+
+        System.out.println("Ingrese una nueva fecha para la cita: ");
+        String nuevaFecha = lector.readLine();
+        System.out.println("Ingrese la nueva hora de la cita: ");
+        String nuevaHora = lector.readLine();
+        cita.setFecha(nuevaFecha);
+        cita.setHora(nuevaHora);
+        System.out.println("Cita modificada exitosamente.");
     }
 
     public void confirmarCita(Cliente cliente) throws IOException{
@@ -133,28 +134,40 @@ public class GestionCitas{
 
         Cita cita = mascota.obtenerCita(idCita);
         
-        if(cita != null){
-            System.out.println("Detalles de la cita");
-            System.out.println("Cliente: " + cita.getCliente().getNombre());
-            System.out.println("Mascota: " + cita.getMascota().getNombreMascota());
-            System.out.println("Servicio: " + cita.getServicio().getTipo());
-            System.out.println("Descripcion: " + cita.getServicio().getDescripcion());
-            System.out.println("Fecha de la cita: " + cita.getFecha());
-            System.out.println("Hora de la cita: " + cita.getHora());
-
-            System.out.println("¿Desea confirmar esta cita? (si/no): ");
-            String respuesta = lector.readLine().trim().toLowerCase();
-
-            if(respuesta.equals("si")){
-                mascota.agregarServicio(cita.getServicio());
-                System.out.println("Cita confirmada exitosamente.");
-            }else if(respuesta.equals("no")){
-                System.out.println("Cita no confirmada");
-            }else{
-                System.out.println("Respuesta no valida.");
-            }
-        }else{
+        if (cita == null) {
             System.out.println("Cita no encontrada con el ID proporcionado");
+            System.out.println("Ingrese la fecha de la cita: ");
+            String fecha = lector.readLine();
+            System.out.println("Ingrese la hora de la cita: ");
+            String hora = lector.readLine();
+            
+            cita = mascota.obtenerCita(fecha, hora); 
+            
+            if (cita == null) {
+                System.out.println("Cita no encontrada con la fecha y hora proporcionadas.");
+                return;
+            }
+        }
+
+        System.out.println("Detalles de la cita");
+        System.out.println("Cliente: " + cita.getCliente().getNombre());
+        System.out.println("Mascota: " + cita.getMascota().getNombreMascota());
+        System.out.println("Servicio: " + cita.getServicio().getTipo());
+        System.out.println("Descripcion: " + cita.getServicio().getDescripcion());
+        System.out.println("Fecha de la cita: " + cita.getFecha());
+        System.out.println("Hora de la cita: " + cita.getHora());
+
+        System.out.println("¿Desea confirmar esta cita? (si/no): ");
+        String respuesta = lector.readLine().trim().toLowerCase();
+
+        if(respuesta.equals("si")){
+            mascota.agregarServicio(cita.getServicio());
+            mascota.eliminarCita(cita.getIdCita());
+            System.out.println("Cita confirmada exitosamente.");
+        }else if(respuesta.equals("no")){
+            System.out.println("Cita no confirmada");
+        }else{
+            System.out.println("Respuesta no valida.");
         }
     }
 }

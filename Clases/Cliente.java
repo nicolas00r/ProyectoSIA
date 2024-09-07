@@ -50,8 +50,7 @@ public class Cliente{
 
 
     // Métodos
-    public boolean listaEstaVacia(){ return listaMascotas.isEmpty();
-    }
+    public boolean listaEstaVacia(){ return listaMascotas.isEmpty();}
 
     public boolean existeMascota(String nombreMascota){ return mascotasXNombre.containsKey(nombreMascota.toUpperCase());}
 

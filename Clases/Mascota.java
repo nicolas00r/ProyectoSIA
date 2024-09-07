@@ -67,6 +67,16 @@ public class Mascota{
 
     public Cita obtenerCita(int idCita){ return mapaCitas.get(idCita);}
 
+    public Cita obtenerCita(String fecha, String hora) {
+        for (int i = 0; i < listaCitas.size(); i++) {
+            Cita cita = listaCitas.get(i);
+            if (cita.getFecha().equals(fecha) && cita.getHora().equals(hora)) {
+                return cita;
+            }
+        }
+        return null;
+    }
+
     public boolean citasEstaVacio(){ return listaCitas.isEmpty();}
 
     public void mostrarListaCitas(){
