@@ -79,6 +79,12 @@ public class Cliente{
         else{System.out.println("El registro ha fallado debido a que " + mascota.getNombreMascota() + " ya se encontraba en su registro de mascotas");}
     }
 
+    public void registrarMascota(Mascota mascota){
+        listaMascotas.add(mascota);
+        mascotasXNombre.put(mascota.getNombreMascota().toUpperCase(), mascota);
+        mascotasXId.put(mascota.getId(), mascota);
+    }
+
     public void mostrarMascotas(){
         if(listaMascotas.size() == 0){System.out.println("No existen mascotas registradas para el usuario");}
         else
