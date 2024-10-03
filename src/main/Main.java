@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package proyectosia;
+package main;
 import java.io.*;
 import java.util.List;
-import Clases.Helper;
-import Clases.PetServiceManagement;
-import Clases.Persistencia;
-import Clases.Cita;
+import controller.Helper;
+import controller.PetServiceManagement;
+import controller.Persistencia;
+import model.Cita;
 
 public class Main {
     public static void main(String[] args)throws IOException {

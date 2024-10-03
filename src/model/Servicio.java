@@ -1,4 +1,4 @@
-package Clases;
+package model;
 
 public class Servicio{
     // Variables de instancia

@@ -1,6 +1,7 @@
-package Clases;
+package model;
 
 //Variables
+
 public class Cita{
     // Variables de instancia
     private Cliente cliente;

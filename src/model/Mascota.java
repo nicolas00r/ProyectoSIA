@@ -1,4 +1,5 @@
-package Clases;
+package model;
+import model.Cita;
 import java.util.ArrayList;
 import java.util.HashMap;
 

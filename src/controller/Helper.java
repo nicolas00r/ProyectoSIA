@@ -1,5 +1,7 @@
-package Clases;
+package controller;
 
+import model.Mascota;
+import model.Cliente;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

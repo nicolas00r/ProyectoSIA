@@ -1,5 +1,9 @@
-package Clases;
+package controller;
 
+import model.Servicio;
+import model.Mascota;
+import model.Cliente;
+import model.Cita;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
