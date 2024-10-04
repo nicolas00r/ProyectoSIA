@@ -1,5 +1,6 @@
-package controller;
+package model;
 
+import model.GestionCitas;
 import model.Servicio;
 import model.Mascota;
 import model.Cliente;

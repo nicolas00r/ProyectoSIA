@@ -4,14 +4,18 @@
  */
 package main;
 import java.io.*;
-import java.util.List;
-import controller.Helper;
-import controller.PetServiceManagement;
-import controller.Persistencia;
-import model.Cita;
+/*import java.util.List;
+import model.Helper;
+import model.PetServiceManagement;
+import model.Persistencia;
+import model.Cita;*/
+import controller.ControladorMain;
 
 public class Main {
     public static void main(String[] args)throws IOException {
+        ControladorMain e = new ControladorMain();
+        e.iniciar();
+        /*
         List<Cita> citas = Persistencia.cargarCitasCSV();
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         PetServiceManagement gestor = new PetServiceManagement();
@@ -54,7 +58,7 @@ public class Main {
             Helper.presioneEnter();
             Helper.limpiarPantalla();
     
-        } while(opcion != 6);
+        } while(opcion != 6);*/
     }
 }
 
