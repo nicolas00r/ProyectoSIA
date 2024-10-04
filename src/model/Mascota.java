@@ -44,7 +44,17 @@ public class Mascota{
 
     public int getId(){return id;}
 
-    public void setEdad(int edad){this.edad = edad;}
+    public void setEdad(int edad) {
+    try {
+        if (edad < 0) {
+            throw new IllegalArgumentException("La edad de la mascota no puede ser negativa.");
+        }
+        this.edad = edad;
+    } catch (IllegalArgumentException excepcion) {
+        System.out.println(excepcion.getMessage()); // Mostrar mensaje de error
+    }
+}
+
 
     public int getEdad(){return edad;}
 
