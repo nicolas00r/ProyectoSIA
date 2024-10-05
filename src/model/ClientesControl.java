@@ -26,7 +26,8 @@ public class ClientesControl {
     }
     
     public boolean eliminarCliente(String rut){
-        Cliente c = clientesXRut.get(rut);
+        Cliente c;
+        c = clientesXRut.get(rut);
         clientesXRut.remove(c.getRut());
         return lista.remove(c);
     }

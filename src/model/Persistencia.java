@@ -99,7 +99,7 @@ public class Persistencia {
             String nombreMascota = datos[0];
             String nombreDueño = datos[1];
             String especie = datos[2];
-            int edad = Integer.parseInt(datos[3].trim());
+            String edad = datos[3].trim();
 
             Mascota mascota = new Mascota(nombreMascota, nombreDueño, especie, edad);
             mascotas.add(mascota);
