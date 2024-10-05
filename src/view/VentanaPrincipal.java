@@ -15,6 +15,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+        jLabel1.setText("Sistema de gestión de servicios veterinarios");
     }
 
     /**
@@ -26,6 +27,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         GestionClientesMenu = new javax.swing.JMenu();
         RegistrarClienteItem = new javax.swing.JMenuItem();
@@ -43,19 +45,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VistaDatosMenu = new javax.swing.JMenu();
         MostrarClientesItem = new javax.swing.JMenuItem();
         MostrarMascotasItem = new javax.swing.JMenuItem();
-        MostrarHistorialServiciosItem = new javax.swing.JMenuItem();
+        MostrarMascotasItem2 = new javax.swing.JMenuItem();
         FuncionalidadesMenu = new javax.swing.JMenu();
         TestItem = new javax.swing.JMenuItem();
         ExitMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setEnabled(false);
+
         GestionClientesMenu.setMnemonic('f');
         GestionClientesMenu.setText("Gestionar Clientes");
 
         RegistrarClienteItem.setMnemonic('o');
         RegistrarClienteItem.setText("Registrar Cliente");
-        RegistrarClienteItem.setActionCommand("Registrar Cliente");
         RegistrarClienteItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegistrarClienteItemActionPerformed(evt);
@@ -65,11 +68,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         ModificarClienteItem.setMnemonic('s');
         ModificarClienteItem.setText("Modificar Cliente");
+        ModificarClienteItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarClienteItemActionPerformed(evt);
+            }
+        });
         GestionClientesMenu.add(ModificarClienteItem);
 
         EliminarClienteItem.setMnemonic('a');
         EliminarClienteItem.setText("Eliminar Cliente");
         EliminarClienteItem.setToolTipText("");
+        EliminarClienteItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarClienteItemActionPerformed(evt);
+            }
+        });
         GestionClientesMenu.add(EliminarClienteItem);
 
         menuBar.add(GestionClientesMenu);
@@ -79,14 +92,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         RegistrarMascotaItem.setMnemonic('t');
         RegistrarMascotaItem.setText("Registrar Mascota");
+        RegistrarMascotaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarMascotaItemActionPerformed(evt);
+            }
+        });
         GestionMascotasMenu.add(RegistrarMascotaItem);
 
         ModificarMascotaItem.setMnemonic('y');
         ModificarMascotaItem.setText("Modificar Mascota");
+        ModificarMascotaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarMascotaItemActionPerformed(evt);
+            }
+        });
         GestionMascotasMenu.add(ModificarMascotaItem);
 
         EliminarMascotaItem.setMnemonic('p');
         EliminarMascotaItem.setText("Eliminar Mascota");
+        EliminarMascotaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarMascotaItemActionPerformed(evt);
+            }
+        });
         GestionMascotasMenu.add(EliminarMascotaItem);
 
         menuBar.add(GestionMascotasMenu);
@@ -96,18 +124,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         RealizarCitaItem.setMnemonic('c');
         RealizarCitaItem.setText("Realizar Cita");
+        RealizarCitaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RealizarCitaItemActionPerformed(evt);
+            }
+        });
         GestionCitasMenu.add(RealizarCitaItem);
 
         ModificarCitaItem.setMnemonic('a');
         ModificarCitaItem.setText("Modificar Cita");
+        ModificarCitaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarCitaItemActionPerformed(evt);
+            }
+        });
         GestionCitasMenu.add(ModificarCitaItem);
 
         EliminarCitaItem.setMnemonic('c');
         EliminarCitaItem.setText("Eliminar Cita");
+        EliminarCitaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarCitaItemActionPerformed(evt);
+            }
+        });
         GestionCitasMenu.add(EliminarCitaItem);
 
         ConfirmarCitaItem.setMnemonic('c');
         ConfirmarCitaItem.setText("Confirmar Cita");
+        ConfirmarCitaItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarCitaItemActionPerformed(evt);
+            }
+        });
         GestionCitasMenu.add(ConfirmarCitaItem);
 
         menuBar.add(GestionCitasMenu);
@@ -117,20 +165,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         MostrarClientesItem.setMnemonic('c');
         MostrarClientesItem.setText("Mostrar Clientes");
+        MostrarClientesItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MostrarClientesItemActionPerformed(evt);
+            }
+        });
         VistaDatosMenu.add(MostrarClientesItem);
 
         MostrarMascotasItem.setMnemonic('a');
         MostrarMascotasItem.setText("Mostrar Mascotas");
-        VistaDatosMenu.add(MostrarMascotasItem);
-
-        MostrarHistorialServiciosItem.setMnemonic('c');
-        MostrarHistorialServiciosItem.setText("Mostrar Historial de Servicios");
-        MostrarHistorialServiciosItem.addActionListener(new java.awt.event.ActionListener() {
+        MostrarMascotasItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MostrarHistorialServiciosItemActionPerformed(evt);
+                MostrarMascotasItemActionPerformed(evt);
             }
         });
-        VistaDatosMenu.add(MostrarHistorialServiciosItem);
+        VistaDatosMenu.add(MostrarMascotasItem);
+
+        MostrarMascotasItem2.setMnemonic('a');
+        MostrarMascotasItem2.setText("Mostrar Historial de Servicios");
+        MostrarMascotasItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MostrarMascotasItem2ActionPerformed(evt);
+            }
+        });
+        VistaDatosMenu.add(MostrarMascotasItem2);
 
         menuBar.add(VistaDatosMenu);
 
@@ -153,23 +211,80 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 561, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(108, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void RegistrarClienteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarClienteItemActionPerformed
-         // TODO add your handling code here:
+        VentanaRegistrarCliente v = new VentanaRegistrarCliente();
+        v.setAlwaysOnTop(true);
+        v.setVisible(true);
     }//GEN-LAST:event_RegistrarClienteItemActionPerformed
 
-    private void MostrarHistorialServiciosItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarHistorialServiciosItemActionPerformed
+    private void ModificarClienteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarClienteItemActionPerformed
+        VentanaModificarCliente v = new VentanaModificarCliente();
+        v.setVisible(true);
+    }//GEN-LAST:event_ModificarClienteItemActionPerformed
+
+    private void EliminarClienteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarClienteItemActionPerformed
+        VentanaEliminarCliente v = new VentanaEliminarCliente();
+        v.setVisible(true);
+    }//GEN-LAST:event_EliminarClienteItemActionPerformed
+
+    private void RegistrarMascotaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarMascotaItemActionPerformed
+        VentanaRegistrarMascota v = new VentanaRegistrarMascota();
+        v.setVisible(true);
+    }//GEN-LAST:event_RegistrarMascotaItemActionPerformed
+
+    private void ModificarMascotaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarMascotaItemActionPerformed
+        VentanaModificarMascota v = new VentanaModificarMascota();
+        v.setVisible(true);
+    }//GEN-LAST:event_ModificarMascotaItemActionPerformed
+
+    private void EliminarMascotaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarMascotaItemActionPerformed
+        VentanaEliminarMascota v = new VentanaEliminarMascota();
+        v.setVisible(true);
+    }//GEN-LAST:event_EliminarMascotaItemActionPerformed
+
+    private void RealizarCitaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RealizarCitaItemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MostrarHistorialServiciosItemActionPerformed
+    }//GEN-LAST:event_RealizarCitaItemActionPerformed
+
+    private void ModificarCitaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarCitaItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModificarCitaItemActionPerformed
+
+    private void EliminarCitaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCitaItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EliminarCitaItemActionPerformed
+
+    private void ConfirmarCitaItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCitaItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConfirmarCitaItemActionPerformed
+
+    private void MostrarClientesItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarClientesItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MostrarClientesItemActionPerformed
+
+    private void MostrarMascotasItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarMascotasItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MostrarMascotasItemActionPerformed
+
+    private void MostrarMascotasItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarMascotasItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MostrarMascotasItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,13 +335,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem ModificarClienteItem;
     private javax.swing.JMenuItem ModificarMascotaItem;
     private javax.swing.JMenuItem MostrarClientesItem;
-    private javax.swing.JMenuItem MostrarHistorialServiciosItem;
     private javax.swing.JMenuItem MostrarMascotasItem;
+    private javax.swing.JMenuItem MostrarMascotasItem2;
     private javax.swing.JMenuItem RealizarCitaItem;
     private javax.swing.JMenuItem RegistrarClienteItem;
     private javax.swing.JMenuItem RegistrarMascotaItem;
     private javax.swing.JMenuItem TestItem;
     private javax.swing.JMenu VistaDatosMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 

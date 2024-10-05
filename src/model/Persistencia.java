@@ -3,10 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
-import model.Servicio;
-import model.Mascota;
-import model.Cliente;
-import model.Cita;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;

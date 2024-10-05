@@ -1,5 +1,4 @@
 package model;
-import model.Cita;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -52,15 +51,19 @@ public class Mascota{
             throw new IllegalArgumentException("La edad de la mascota no puede ser negativa.");
         }
         this.edad = edad;
-    } catch (IllegalArgumentException excepcion) {
+    }catch (IllegalArgumentException excepcion) {
         System.out.println(excepcion.getMessage()); // Mostrar mensaje de error
+        }
     }
-}
-
 
     public int getEdad(){return edad;}
 
     // Métodos
+    @Override
+    public String toString(){
+        return nombreMascota+", "+especie+", "+edad+", "+nombreDueño+"\n";
+    }
+    
     public void agregarCita(Cita cita, int idCita){
         mapaCitas.put(idCita, cita);
         listaCitas.add(cita);

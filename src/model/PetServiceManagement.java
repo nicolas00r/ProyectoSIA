@@ -1,10 +1,5 @@
 package model;
 
-import model.GestionCitas;
-import model.Servicio;
-import model.Mascota;
-import model.Cliente;
-import model.Cita;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,14 +9,12 @@ import java.util.HashMap;
 public class PetServiceManagement{
 
     // Variables de instancia
-    private static ArrayList<Cliente> listaClientes;
-    private static HashMap<String,Cliente> clientesXRut;
+    private static ClientesControl clientes;
     private static GestionCitas gestorCitas;
 
     // Constructor
     public PetServiceManagement(){
-        listaClientes = new ArrayList<>();
-        clientesXRut = new HashMap<>();
+        clientes = new ClientesControl();
         gestorCitas = new GestionCitas();
         llenadoDatos(); // FUNCIÓN TEMPORAL PARA RELLENAR DATOS
     }
@@ -44,9 +37,8 @@ public class PetServiceManagement{
         String correoElectronicoCliente = lector.readLine();
 
         Cliente nuevoCliente = new Cliente(nombreCliente, rutCliente, direccionCliente, numeroTelefonoCliente, correoElectronicoCliente);
-        if(!clientesXRut.containsKey(nuevoCliente.getRut())){
-            listaClientes.add(nuevoCliente);
-            clientesXRut.put(nuevoCliente.getRut(), nuevoCliente);
+        if(!clientes.existeCliente(nuevoCliente.getRut())){
+            clientes.agregarCliente(nuevoCliente);
             System.out.println("El cliente " + nuevoCliente.getNombre() + " ha sido registrado correctamente...");
         } else{
             System.out.println("El registro de " + nuevoCliente.getNombre() + "ha fallado debido a que ya esta registrado ese nombre en el sitema");
@@ -55,7 +47,8 @@ public class PetServiceManagement{
 
     public void mostrarClientes(){
         Helper.limpiarPantalla();
-        for(int i = 0; i < listaClientes.size(); i++){
+        System.out.println(clientes.listarClientes());
+        /*for(int i = 0; i < listaClientes.size(); i++){
             Cliente cliente = listaClientes.get(i);
             System.out.println("Información cliente:");
             System.out.println("Nombre: " + cliente.getNombre());
@@ -64,7 +57,7 @@ public class PetServiceManagement{
             System.out.println("Número de telefono: " + cliente.getNumeroTelefono());
             System.out.println("Correo electronico: " + cliente.getCorreoElectronico());
             System.out.println("");
-        }
+        }*/
     }
 
     public void agregarMascota()throws IOException{
@@ -74,8 +67,8 @@ public class PetServiceManagement{
         System.out.println("Ingrese su rut");
         String rutCliente = lector.readLine();
 
-        if(clientesXRut.containsKey(rutCliente)){
-            Cliente cliente = clientesXRut.get(rutCliente);
+        if(clientes.existeCliente(rutCliente)){
+            Cliente cliente = clientes.obtenerCliente(rutCliente);
             cliente.registrarMascota();
         } else{
             System.out.println("No existe un cliente registrado con ese RUT");
@@ -89,12 +82,12 @@ public class PetServiceManagement{
         System.out.println("Ingrese su RUT:");
         String rutCLiente = lector.readLine();
 
-        if(!clientesXRut.containsKey(rutCLiente)){
+        if(!clientes.eliminarCliente(rutCLiente)){
             System.out.println("El usuario no se encuentra registrado en el sistema, por favor registrese a través de la opción número 1");
             return;
 
         }
-        Cliente cliente = clientesXRut.get(rutCLiente);
+        Cliente cliente = clientes.obtenerCliente(rutCLiente);
 
         if(cliente.listaEstaVacia()){
             System.out.println("El cliente no posee mascotas registradas a su nombre");
@@ -110,8 +103,7 @@ public class PetServiceManagement{
             Mascota mascota = Helper.identificarMascota(cliente);
 
             mascota.mostrarHistorialServicios();
-        } else return;
-
+        }
     }
 
     public void gestionarCitas() throws IOException{
@@ -120,20 +112,19 @@ public class PetServiceManagement{
         System.out.println(("Ingrese su RUT:"));
         String rutCLiente = lector.readLine();
 
-        if(!clientesXRut.containsKey(rutCLiente)){
+        if(!clientes.existeCliente(rutCLiente)){
             System.out.println("El usuario no se encuentra registrado en el sistema, por favor registrese a través de la opción número 1");
             return;
         }
-        Cliente cliente = clientesXRut.get(rutCLiente);
+        Cliente cliente = clientes.obtenerCliente(rutCLiente);
 
         gestorCitas.menu(cliente);
     }
-
+    
     private void llenadoDatos(){
 
         Cliente cliente1 = new Cliente("Laura", "12.345.678-9", "Av. Siempre Viva 123, Santiago", "912345678", "laura@example.com");
-        listaClientes.add(cliente1);
-        clientesXRut.put(cliente1.getRut(), cliente1);
+        clientes.agregarCliente(cliente1);
     
         Mascota C1mascota1 = new Mascota("Rocky", "Laura", "Perro", 5);
         Servicio C1mascota1Servicio1 = new Servicio("Vacunación", "2024-08-01", "Vacuna contra la rabia");
@@ -145,8 +136,8 @@ public class PetServiceManagement{
         cliente1.registrarMascota(C1mascota1);
     
         Cliente cliente2 = new Cliente("Carlos", "23.456.789-0", "Calle Falsa 456, Valparaíso", "923456789", "carlos@example.com");
-        listaClientes.add(cliente2);
-        clientesXRut.put(cliente2.getRut(), cliente2);
+        clientes.agregarCliente(cliente2);
+
     
         Mascota C2mascota1 = new Mascota("Bella", "Carlos", "Perro", 4);
         Servicio C2mascota1Servicio1 = new Servicio("Consulta general", "2024-08-10", "Chequeo de rutina");
@@ -164,8 +155,7 @@ public class PetServiceManagement{
         cliente2.registrarMascota(C2mascota2);
     
         Cliente cliente3 = new Cliente("Marta", "34.567.890-1", "Ruta 5, Concepción", "934567890", "marta@example.com");
-        listaClientes.add(cliente3);
-        clientesXRut.put(cliente3.getRut(), cliente3);
+        clientes.agregarCliente(cliente3);
     
         Mascota C3mascota1 = new Mascota("Coco", "Marta", "Perro", 6);
         Servicio C3mascota1Servicio1 = new Servicio("Esterilización", "2024-07-25", "Esterilización para prevenir futuras camadas");
@@ -177,8 +167,7 @@ public class PetServiceManagement{
         cliente3.registrarMascota(C3mascota1);
     
         Cliente cliente4 = new Cliente("Juan", "45.678.901-2", "Pje. Del Sol 789, Temuco", "945678901", "juan@example.com");
-        listaClientes.add(cliente4);
-        clientesXRut.put(cliente4.getRut(), cliente4);
+        clientes.agregarCliente(cliente4);
     
         Mascota C4mascota1 = new Mascota("Toby", "Juan", "Gato", 5);
         Servicio C4mascota1Servicio1 = new Servicio("Limpieza dental", "2024-08-20", "Limpieza profunda de dientes");
@@ -190,8 +179,7 @@ public class PetServiceManagement{
         cliente4.registrarMascota(C4mascota1);
     
         Cliente cliente5 = new Cliente("Ana", "56.789.012-3", "Av. Central 1010, La Serena", "956789012", "ana@example.com");
-        listaClientes.add(cliente5);
-        clientesXRut.put(cliente5.getRut(), cliente5);
+        clientes.agregarCliente(cliente5);
     
         Mascota C5mascota1 = new Mascota("Zeus", "Ana", "Perro", 7);
         Servicio C5mascota1Servicio1 = new Servicio("Consulta general", "2024-08-05", "Chequeo de salud general");

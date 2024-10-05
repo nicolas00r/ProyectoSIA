@@ -50,6 +50,9 @@ public class Cliente{
 
 
     // Métodos
+    @Override
+    public String toString(){ return nombre+", "+rut+", "+numeroTelefono+", "+direccion+", "+correoElectronico+"\n";}
+    
     public boolean listaEstaVacia(){ return listaMascotas.isEmpty();}
 
     public boolean existeMascota(String nombreMascota){ return mascotasXNombre.containsKey(nombreMascota.toUpperCase());}
@@ -142,4 +145,5 @@ public class Cliente{
                 mascota.mostrarDatosMascota();
             }
     }
+   
 }
