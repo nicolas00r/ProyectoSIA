@@ -4,20 +4,31 @@
  */
 package view;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author 12212
  */
 public class VentanaModificarCliente extends javax.swing.JFrame {
-
+    private String ss;
     /**
      * Creates new form NewJFrame
      */
-    public VentanaModificarCliente() {
+    public VentanaModificarCliente(String s) {
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        ss = s;
+        String [] arr = ss.split("\n");
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+       
+        for(int i = 0; i < arr.length; i++){
+            String[] cc = arr[i].split(", ");
+            model.addRow(cc);
+        }
     }
 
     /**
@@ -29,22 +40,103 @@ public class VentanaModificarCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        buttonModificarCliente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Rut", "Telefono", "Dirección", "Correo electrónico"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        buttonModificarCliente.setText("Modificar");
+
+        jLabel1.setText("Seleccione el cliente que desea modificar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(buttonModificarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonModificarCliente))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getButtonModificarCliente(){
+        return buttonModificarCliente;
+    }
+    
+    public int getSelectedRow() {
+        return jTable1.getSelectedRow(); 
+    }
+    
+    public String getClienteSeleccionado() {
+        int selectedRow = getSelectedRow();
+        if (selectedRow != -1) {
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            return (String) model.getValueAt(selectedRow, 1); 
+        }
+        return null;
+    }
+    
+    public void actualizarFila(String s){
+        int selectedRow = getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        if (selectedRow != -1){
+            for(int i = 0; i < 5; i++){
+                String[] cc = s.split(", ");
+
+                model.setValueAt(cc[i], selectedRow, i);
+            }
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -78,11 +170,15 @@ public class VentanaModificarCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaModificarCliente().setVisible(true);
+                new VentanaModificarCliente("-").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonModificarCliente;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

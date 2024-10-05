@@ -19,53 +19,21 @@ public class PetServiceManagement{
         llenadoDatos(); // FUNCIÓN TEMPORAL PARA RELLENAR DATOS
     }
 
-    // Métodos
-    public void registrarCliente()throws IOException{
-        Helper.limpiarPantalla();
-        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Bienvenido al registro de clientes");
-        System.out.println("Ingrese su nombre");
-        String nombreCliente = lector.readLine();
-        System.out.println("Ingrese su rut");
-        String rutCliente = lector.readLine();
-        System.out.println("Ingrese su dirección");
-        String direccionCliente = lector.readLine();
-        System.out.println("Ingrese su numero de telefono");
-        String numeroTelefonoCliente = lector.readLine();
-        System.out.println("Ingrese su correo electronico");
-        String correoElectronicoCliente = lector.readLine();
-
-        Cliente nuevoCliente = new Cliente(nombreCliente, rutCliente, direccionCliente, numeroTelefonoCliente, correoElectronicoCliente);
-        if(!clientes.existeCliente(nuevoCliente.getRut())){
-            clientes.agregarCliente(nuevoCliente);
-            System.out.println("El cliente " + nuevoCliente.getNombre() + " ha sido registrado correctamente...");
-        } else{
-            System.out.println("El registro de " + nuevoCliente.getNombre() + "ha fallado debido a que ya esta registrado ese nombre en el sitema");
-        }
-    }
-    
+    // Métodos    
     public void registrarCliente(Cliente c){
         clientes.agregarCliente(c);
     }
-
-    public String entregarListadoClientes(){
-        return clientes.listarClientes();
+    
+    public Cliente obtenerCliente(String rut){
+        return clientes.obtenerCliente(rut);
     }
     
-    public void mostrarClientes(){
-        Helper.limpiarPantalla();
-        System.out.println(clientes.listarClientes());
-        /*for(int i = 0; i < listaClientes.size(); i++){
-            Cliente cliente = listaClientes.get(i);
-            System.out.println("Información cliente:");
-            System.out.println("Nombre: " + cliente.getNombre());
-            System.err.println("Rut: " + cliente.getRut());
-            System.out.println("Dirección: " + cliente.getDireccion());
-            System.out.println("Número de telefono: " + cliente.getNumeroTelefono());
-            System.out.println("Correo electronico: " + cliente.getCorreoElectronico());
-            System.out.println("");
-        }*/
+    public void eliminarCliente(String rut){
+        clientes.eliminarCliente(rut);
+    }
+    
+    public String entregarListadoClientes(){
+        return clientes.listarClientes();
     }
 
     public void agregarMascota()throws IOException{
