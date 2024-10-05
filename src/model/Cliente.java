@@ -84,6 +84,55 @@ public class Cliente{
         mascotasXNombre.put(mascota.getNombreMascota().toUpperCase(), mascota);
         mascotasXId.put(mascota.getId(), mascota);
     }
+    
+    public void modificarMascota() throws IOException {
+    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+    
+    System.out.println("Bienvenido a la modificación de mascotas");
+    System.out.print("Ingrese el id de su mascota: ");
+    int idMascota = Integer.parseInt(lector.readLine());
+    
+    Mascota mascotaMod = getMascota(idMascota);
+    if (mascotaMod == null) {
+        System.out.println("No se encontró una mascota con ese ID.");
+        return; // Salir si no se encuentra la mascota
+    }
+    
+    System.out.println("Ingrese el nombre de su mascota: ");
+    mascotaMod.setNombreMascota(lector.readLine());
+    
+    System.out.println("Ingrese la edad de su mascota:");
+    mascotaMod.setEdad(Integer.parseInt(lector.readLine()));
+    
+    System.out.println("Ingrese la especie de su mascota");
+    mascotaMod.setEspecie(lector.readLine());
+    
+    System.out.println("Los datos de la mascota se han modificado con éxito");
+}
+    
+    public void eliminarMascota() throws IOException {
+    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+    
+    System.out.println("Bienvenido a la eliminación de mascotas");
+    System.out.print("Ingrese el nombre de su mascota: ");
+    String nombreMascota = lector.readLine();
+    
+    String nombreMascotaUpper = nombreMascota.toUpperCase();
+    if (!existeMascota(nombreMascotaUpper)) {
+        System.out.println("No se encontró una mascota con ese nombre.");
+        return;
+    }
+
+    Mascota mascotaAEliminar = getMascota(nombreMascotaUpper);
+    
+    listaMascotas.remove(mascotaAEliminar);
+    mascotasXNombre.remove(nombreMascotaUpper);
+    mascotasXId.remove(mascotaAEliminar.getId());
+
+    System.out.println("Se ha eliminado a " + mascotaAEliminar.getNombreMascota() + " del registro correctamente.");
+}
+
+
 
     public void mostrarMascotas(){
         if(listaMascotas.size() == 0){System.out.println("No existen mascotas registradas para el usuario");}
