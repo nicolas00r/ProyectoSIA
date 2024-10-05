@@ -73,6 +73,7 @@ public class ControladorMain implements ActionListener{
             c.setCorreoElectronico(registrarCliente.getTextCorreo().getText());
             
             sistema.registrarCliente(c);
+            JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
             registrarCliente.dispose();
             return;
         }
