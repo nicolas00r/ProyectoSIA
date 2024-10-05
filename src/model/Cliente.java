@@ -16,12 +16,18 @@ public class Cliente{
     private HashMap<Integer, Mascota> mascotasXId;
 
     // Constructor
-    public Cliente(String nombre, String rut, String direccion, String numeroTelefono, String correoElectronico){
+    public Cliente(String nombre, String rut, String numeroTelefono, String direccion, String correoElectronico){
         this.nombre = nombre;
         this.rut = rut;
-        this.direccion = direccion;
         this.numeroTelefono = numeroTelefono;
+        this.direccion = direccion;
         this.correoElectronico = correoElectronico;
+        listaMascotas = new ArrayList<>();
+        mascotasXNombre = new HashMap<>();
+        mascotasXId = new HashMap<>();
+    }
+    
+    public Cliente(){
         listaMascotas = new ArrayList<>();
         mascotasXNombre = new HashMap<>();
         mascotasXId = new HashMap<>();

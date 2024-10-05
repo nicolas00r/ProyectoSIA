@@ -5,7 +5,7 @@
 package controller;
 import java.awt.event.*;
 import javax.swing.JFrame;
-import model.ClientesControl;
+import model.*;
 import view.*;
 
 /**
@@ -13,7 +13,7 @@ import view.*;
  * @author 12212
  */
 public class ControladorMain implements ActionListener{
-    private ClientesControl clientes;
+    private PetServiceManagement sistema;
     private VentanaPrincipal main;
     private VentanaRegistrarCliente registrarCliente;
     private VentanaModificarCliente modificarCliente;
@@ -30,7 +30,7 @@ public class ControladorMain implements ActionListener{
     private VentanaMostrarHistorialServicios mostrarServicios;
     
     public void iniciar(){
-        clientes = new ClientesControl();
+        sistema = new PetServiceManagement();
         
         main = new VentanaPrincipal();
         
@@ -56,8 +56,22 @@ public class ControladorMain implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource() == main.getRegistrarCliente()){
             registrarCliente = new VentanaRegistrarCliente();
-       
+            registrarCliente.getButtonAgregar().addActionListener(this);
+            registrarCliente.setAlwaysOnTop(true);
             registrarCliente.setVisible(true);
+            return;
+        }
+        
+        if(registrarCliente != null && ae.getSource() == registrarCliente.getButtonAgregar()){
+            Cliente c = new Cliente();
+            c.setNombre(registrarCliente.getTextNombre().getText());
+            c.setRut(registrarCliente.getTextRut().getText());
+            c.setNumeroTelefono(registrarCliente.getTextTelefono().getText());
+            c.setDireccion(registrarCliente.getTextDireccion().getText());
+            c.setCorreoElectronico(registrarCliente.getTextCorreo().getText());
+            
+            sistema.registrarCliente(c);
+            registrarCliente.dispose();
             return;
         }
         
@@ -116,9 +130,10 @@ public class ControladorMain implements ActionListener{
         }
         
         if(ae.getSource() == main.getMostrarClientes()){
-            mostrarClientes = new VentanaMostrarClientes();
+            mostrarClientes = new VentanaMostrarClientes(sistema.entregarListadoClientes());
        
             mostrarClientes.setVisible(true);  
+            return;
         }
         
         if(ae.getSource() == main.getMostrarMascotas()){

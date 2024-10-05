@@ -28,6 +28,10 @@ public class MascotasControl {
         return lista.add(m);
     }
     
+    public boolean tieneMascotas(){
+        return lista.isEmpty();
+    }
+    
     public String listarMascotas(){
         String ret;
         ret = "";

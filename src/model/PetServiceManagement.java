@@ -44,7 +44,15 @@ public class PetServiceManagement{
             System.out.println("El registro de " + nuevoCliente.getNombre() + "ha fallado debido a que ya esta registrado ese nombre en el sitema");
         }
     }
+    
+    public void registrarCliente(Cliente c){
+        clientes.agregarCliente(c);
+    }
 
+    public String entregarListadoClientes(){
+        return clientes.listarClientes();
+    }
+    
     public void mostrarClientes(){
         Helper.limpiarPantalla();
         System.out.println(clientes.listarClientes());
