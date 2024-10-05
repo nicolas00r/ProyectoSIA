@@ -134,7 +134,7 @@ public class PetServiceManagement{
         Cliente cliente1 = new Cliente("Laura", "12.345.678-9", "Av. Siempre Viva 123, Santiago", "912345678", "laura@example.com");
         clientes.agregarCliente(cliente1);
     
-        Mascota C1mascota1 = new Mascota("Rocky", "Laura", "Perro", 5);
+        Mascota C1mascota1 = new Mascota("Rocky", "Laura", "Perro", "5");
         Servicio C1mascota1Servicio1 = new Servicio("Vacunación", "2024-08-01", "Vacuna contra la rabia");
         C1mascota1.agregarServicio(C1mascota1Servicio1);
         
@@ -147,11 +147,11 @@ public class PetServiceManagement{
         clientes.agregarCliente(cliente2);
 
     
-        Mascota C2mascota1 = new Mascota("Bella", "Carlos", "Perro", 4);
+        Mascota C2mascota1 = new Mascota("Bella", "Carlos", "Perro", "4");
         Servicio C2mascota1Servicio1 = new Servicio("Consulta general", "2024-08-10", "Chequeo de rutina");
         C2mascota1.agregarServicio(C2mascota1Servicio1);
         
-        Mascota C2mascota2 = new Mascota("Oliver", "Carlos", "Gato", 1);
+        Mascota C2mascota2 = new Mascota("Oliver", "Carlos", "Gato", "1");
         Servicio C2mascota2Servicio1 = new Servicio("Vacunación", "2024-09-01", "Vacuna contra el moquillo");
         C2mascota2.agregarServicio(C2mascota2Servicio1);
         
@@ -165,7 +165,7 @@ public class PetServiceManagement{
         Cliente cliente3 = new Cliente("Marta", "34.567.890-1", "Ruta 5, Concepción", "934567890", "marta@example.com");
         clientes.agregarCliente(cliente3);
     
-        Mascota C3mascota1 = new Mascota("Coco", "Marta", "Perro", 6);
+        Mascota C3mascota1 = new Mascota("Coco", "Marta", "Perro", "6");
         Servicio C3mascota1Servicio1 = new Servicio("Esterilización", "2024-07-25", "Esterilización para prevenir futuras camadas");
         C3mascota1.agregarServicio(C3mascota1Servicio1);
         
@@ -177,7 +177,7 @@ public class PetServiceManagement{
         Cliente cliente4 = new Cliente("Juan", "45.678.901-2", "Pje. Del Sol 789, Temuco", "945678901", "juan@example.com");
         clientes.agregarCliente(cliente4);
     
-        Mascota C4mascota1 = new Mascota("Toby", "Juan", "Gato", 5);
+        Mascota C4mascota1 = new Mascota("Toby", "Juan", "Gato", "5");
         Servicio C4mascota1Servicio1 = new Servicio("Limpieza dental", "2024-08-20", "Limpieza profunda de dientes");
         C4mascota1.agregarServicio(C4mascota1Servicio1);
         
@@ -189,11 +189,11 @@ public class PetServiceManagement{
         Cliente cliente5 = new Cliente("Ana", "56.789.012-3", "Av. Central 1010, La Serena", "956789012", "ana@example.com");
         clientes.agregarCliente(cliente5);
     
-        Mascota C5mascota1 = new Mascota("Zeus", "Ana", "Perro", 7);
+        Mascota C5mascota1 = new Mascota("Zeus", "Ana", "Perro", "7");
         Servicio C5mascota1Servicio1 = new Servicio("Consulta general", "2024-08-05", "Chequeo de salud general");
         C5mascota1.agregarServicio(C5mascota1Servicio1);
     
-        Mascota C5mascota2 = new Mascota("Daisy", "Ana", "Gato", 4);
+        Mascota C5mascota2 = new Mascota("Daisy", "Ana", "Gato", "4");
         Servicio C5mascota2Servicio1 = new Servicio("Vacunación", "2024-08-30", "Vacuna contra leucemia felina");
         C5mascota2.agregarServicio(C5mascota2Servicio1);
         

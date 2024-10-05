@@ -76,7 +76,7 @@ public class Cliente{
         System.out.println("Ingrese la especie de su mascota (Perro, gato, etc.): ");
         String especie = lector.readLine();
         System.out.println("Ingrese la edad de su mascota: ");
-        int edadMascota = Integer.parseInt(lector.readLine());
+        String edadMascota = lector.readLine();
 
         Mascota mascota = new Mascota(nombreMascota, nombre, especie, edadMascota);
         if(!existeMascota(mascota.getNombreMascota())){
@@ -111,7 +111,7 @@ public class Cliente{
     mascotaMod.setNombreMascota(lector.readLine());
     
     System.out.println("Ingrese la edad de su mascota:");
-    mascotaMod.setEdad(Integer.parseInt(lector.readLine()));
+    mascotaMod.setEdad(lector.readLine());
     
     System.out.println("Ingrese la especie de su mascota");
     mascotaMod.setEspecie(lector.readLine());
