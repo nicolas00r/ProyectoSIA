@@ -50,7 +50,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         MostrarHistorialServicios = new javax.swing.JMenuItem();
         Funcionalidades = new javax.swing.JMenu();
         Test = new javax.swing.JMenuItem();
-        Exit = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -209,10 +208,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Funcionalidades.add(Test);
 
         menuBar.add(Funcionalidades);
-
-        Exit.setMnemonic('h');
-        Exit.setText("Salir");
-        menuBar.add(Exit);
 
         setJMenuBar(menuBar);
 
@@ -384,7 +379,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem EliminarCita;
     private javax.swing.JMenuItem EliminarCliente;
     private javax.swing.JMenuItem EliminarMascota;
-    private javax.swing.JMenu Exit;
     private javax.swing.JMenu Funcionalidades;
     private javax.swing.JMenu GestionCitas;
     private javax.swing.JMenu GestionClientes;
