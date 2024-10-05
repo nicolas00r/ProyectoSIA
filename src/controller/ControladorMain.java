@@ -3,17 +3,135 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-import view.VentanaPrincipal;
+import java.awt.event.*;
+import javax.swing.JFrame;
+import model.ClientesControl;
+import view.*;
 
 /**
  *
  * @author 12212
  */
-public class ControladorMain {
+public class ControladorMain implements ActionListener{
+    private ClientesControl clientes;
     private VentanaPrincipal main;
+    private VentanaRegistrarCliente registrarCliente;
+    private VentanaModificarCliente modificarCliente;
+    private VentanaEliminarCliente eliminarCliente;
+    private VentanaRegistrarMascota registrarMascota;
+    private VentanaModificarMascota modificarMascota;
+    private VentanaEliminarMascota eliminarMascota;
+    private VentanaRealizarCita realizarCita;
+    private VentanaModificarCita modificarCita;
+    private VentanaEliminarCita eliminarCita;
+    private VentanaConfirmarCita confirmarCita;
+    private VentanaMostrarClientes mostrarClientes;
+    private VentanaMostrarMascotas mostrarMascotas;
+    private VentanaMostrarHistorialServicios mostrarServicios;
     
     public void iniciar(){
+        clientes = new ClientesControl();
+        
         main = new VentanaPrincipal();
+        
+        main.getRegistrarCliente().addActionListener(this);
+        main.getModificarCliente().addActionListener(this);
+        main.getEliminarCliente().addActionListener(this);
+        main.getRegistrarMascota().addActionListener(this);
+        main.getModificarMascota().addActionListener(this);
+        main.getEliminarMascota().addActionListener(this);
+        main.getRealizarCita().addActionListener(this);
+        main.getModificarCita().addActionListener(this);
+        main.getEliminarCita().addActionListener(this);
+        main.getConfirmarCita().addActionListener(this);
+        main.getMostrarClientes().addActionListener(this);
+        main.getMostrarMascotas().addActionListener(this);
+        main.getMostrarHistorialServicios().addActionListener(this);
+        
+        main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         main.setVisible(true);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent ae){
+        if(ae.getSource() == main.getRegistrarCliente()){
+            registrarCliente = new VentanaRegistrarCliente();
+       
+            registrarCliente.setVisible(true);
+            return;
+        }
+        
+        if(ae.getSource() == main.getModificarCliente()){
+            modificarCliente = new VentanaModificarCliente();
+       
+            modificarCliente.setVisible(true);   
+        }
+        
+        if(ae.getSource() == main.getEliminarCliente()){
+            eliminarCliente = new VentanaEliminarCliente();
+       
+            eliminarCliente.setVisible(true);            
+        }
+        
+        if(ae.getSource() == main.getRegistrarMascota()){
+            registrarMascota = new VentanaRegistrarMascota();
+       
+            registrarMascota.setVisible(true);              
+        }
+        
+        if(ae.getSource() == main.getModificarMascota()){
+            modificarMascota = new VentanaModificarMascota();
+       
+            modificarMascota.setVisible(true);              
+        }
+        
+        if(ae.getSource() == main.getEliminarMascota()){
+            eliminarMascota = new VentanaEliminarMascota();
+       
+            eliminarMascota.setVisible(true);  
+        }
+        
+        if(ae.getSource() == main.getRealizarCita()){
+            realizarCita = new VentanaRealizarCita();
+       
+            realizarCita.setVisible(true);  
+        }
+        
+        if(ae.getSource() == main.getModificarCita()){
+            modificarCita = new VentanaModificarCita();
+       
+            modificarCita.setVisible(true);  
+        }
+        
+        if(ae.getSource() == main.getEliminarCita()){
+            eliminarCita = new VentanaEliminarCita();
+       
+            eliminarCita.setVisible(true);  
+        }
+        
+        if(ae.getSource() == main.getConfirmarCita()){
+            confirmarCita = new VentanaConfirmarCita();
+       
+            confirmarCita.setVisible(true);  
+        }
+        
+        if(ae.getSource() == main.getMostrarClientes()){
+            mostrarClientes = new VentanaMostrarClientes();
+       
+            mostrarClientes.setVisible(true);  
+        }
+        
+        if(ae.getSource() == main.getMostrarMascotas()){
+            mostrarMascotas = new VentanaMostrarMascotas();
+       
+            mostrarMascotas.setVisible(true);  
+        }
+        
+        if(ae.getSource() == main.getMostrarHistorialServicios()){
+            mostrarServicios = new VentanaMostrarHistorialServicios();
+       
+            mostrarServicios.setVisible(true);  
+        }
+        
     }
 }
