@@ -2,6 +2,8 @@ package model;
 import model.Cita;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
+
 
 public class Mascota{
     // Variables de instancia
@@ -90,12 +92,19 @@ public class Mascota{
 
     public boolean citasEstaVacio(){ return listaCitas.isEmpty();}
 
-    public void mostrarListaCitas(){
-        for(int i = 0; i < listaCitas.size(); i++){
-            Cita cita = listaCitas.get(i);
+    public void mostrarListaCitas() {
+    try {
+        if (listaCitas.isEmpty()) {
+            throw new NoSuchElementException("No hay citas registradas.");
+        }
+        for (Cita cita : listaCitas) {
             cita.mostrarCita();
         }
+    } catch (NoSuchElementException e) {
+        System.out.println(e.getMessage());
     }
+}
+
 
     public void agregarServicio(Servicio servicio){ listaServicios.add(servicio);}
 
