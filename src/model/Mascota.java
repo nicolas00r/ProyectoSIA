@@ -44,6 +44,8 @@ public class Mascota{
     public String getEspecie(){return especie;}
 
     public int getId(){return id;}
+    
+    public ArrayList<Cita> getListaCitas(){ return listaCitas;}
 
     public void setEdad(int edad) {
     try {

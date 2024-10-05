@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 //Variables
 
 public class Cita{
@@ -10,6 +11,7 @@ public class Cita{
     private String fecha;
     private String hora;
     private int idCita;
+    private ArrayList<Servicio> listaServicios;
 
     // Constructor 
     public Cita(Cliente cliente, Mascota mascota, Servicio servicio, String fecha, String hora, int idCita){
@@ -45,6 +47,12 @@ public class Cita{
     public int getIdCita() { return idCita;}
 
     public void setIdCita(int idCita) { this.idCita = idCita;}
+    
+    public ArrayList<Servicio> getServicios(){
+        return listaServicios;
+    }
+    
+    
 
     // Métodos
     public void mostrarCita(){
