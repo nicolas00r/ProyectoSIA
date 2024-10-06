@@ -42,19 +42,13 @@ public class MascotasControl {
         return lista.isEmpty();
     }
     
-    public Mascota obtenerMascotaPorNombre(String nombre) throws MascotaNoEncontradaException {
+    public Mascota obtenerMascotaPorNombre(String nombre){
         Mascota mascota = mascotasXNombre.get(nombre);
-        if (mascota == null) {
-            throw new MascotaNoEncontradaException("La mascota con nombre " + nombre + " no se encuentra en el sistema.");
-        }
         return mascota;
     }
 
-    public Mascota obtenerMascotaPorId(int id) throws MascotaNoEncontradaException {
+    public Mascota obtenerMascotaPorId(int id){
         Mascota mascota = mascotasXId.get(id);
-        if (mascota == null) {
-            throw new MascotaNoEncontradaException("La mascota con ID " + id + " no se encuentra en el sistema.");
-        }
         return mascota;
     }
 }

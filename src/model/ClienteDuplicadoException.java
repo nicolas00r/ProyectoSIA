@@ -8,9 +8,6 @@ package model;
  *
  * @author benja
  */
-public class MascotaNoEncontradaException extends Exception{
+public class ClienteDuplicadoException {
     
-    public MascotaNoEncontradaException(String mensaje){
-        super(mensaje);
-    }
 }
