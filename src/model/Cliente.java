@@ -36,23 +36,33 @@ public class Cliente{
     // Setters y Getters
     public String getNombre(){ return nombre;}
 
-    public void setNombre(String nombre){ this.nombre = nombre;}
+    public void setNombre(String nombre){ 
+        Verificar.verificarCadena(nombre);
+        this.nombre = nombre;}
 
     public String getRut() { return rut;}
 
-    public void setRut(String rut) { this.rut = rut;}
+    public void setRut(String rut) {
+        Verificar.verificarCadenaVacia(rut);
+        this.rut = rut;}
 
     public String getDireccion(){ return direccion;}
 
-    public void setDireccion(String direccion){ this.direccion = direccion;}
+    public void setDireccion(String direccion){ 
+        Verificar.verificarCadenaVacia(direccion);
+        this.direccion = direccion;}
 
     public String getNumeroTelefono(){ return numeroTelefono;}
 
-    public void setNumeroTelefono(String numeroTelefono){ this.numeroTelefono = numeroTelefono;}
+    public void setNumeroTelefono(String numeroTelefono){ 
+        Verificar.verificarNumero(numeroTelefono);
+        this.numeroTelefono = numeroTelefono;}
 
     public String getCorreoElectronico(){ return correoElectronico;}
 
-    public void setCorreoElectronico(String correoElectronico){ this.correoElectronico = correoElectronico;}
+    public void setCorreoElectronico(String correoElectronico){ 
+        Verificar.verificarCadenaVacia(correoElectronico);
+        this.correoElectronico = correoElectronico;}
 
 
     // Métodos

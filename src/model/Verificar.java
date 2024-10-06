@@ -41,5 +41,18 @@ public class Verificar {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    
+    public static void verificarCadenaVacia(String nombre){
+        try {
+   
+            if (nombre == null || nombre.trim().isEmpty()){
+                throw new IllegalArgumentException("Este campo no puede estar vacío.");
+            }
+
+        } catch (IllegalArgumentException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }
+
 

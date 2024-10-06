@@ -31,7 +31,9 @@ public class Mascota{
     }
 
     // Setters y Getters
-    public void setNombreMascota(String nombreMascota){this.nombreMascota = nombreMascota;}
+    public void setNombreMascota(String nombreMascota){
+        Verificar.verificarCadena(nombreMascota);
+        this.nombreMascota = nombreMascota;}
 
     public String getNombreMascota(){return nombreMascota;}
 
@@ -39,7 +41,9 @@ public class Mascota{
 
     public String getNombreDueño(){return nombreDueño;}
 
-    public void setEspecie(String especie){this.especie = especie;}
+    public void setEspecie(String especie){
+        Verificar.verificarCadena(especie);
+        this.especie = especie;}
 
     public String getEspecie(){return especie;}
 
