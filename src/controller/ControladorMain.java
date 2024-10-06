@@ -62,6 +62,14 @@ public class ControladorMain implements ActionListener{
         
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         main.setVisible(true);
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+        try {
+        sistema.guardarDatos();  // sistema debe ser una instancia de PetServiceManagement
+        } catch (Exception e) {
+            e.printStackTrace();  // Captura cualquier error durante el guardado
+        }
+        }));
     }
         
     

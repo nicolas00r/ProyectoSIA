@@ -6,15 +6,8 @@ import java.util.List;
 
 public class Persistencia {
 
-    private static final String RUTA_CLIENTES = "src/datos/clientes.csv";
-    private static final String RUTA_MASCOTAS = "src/datos/mascotas.csv";
-    private static final String RUTA_SERVICIOS = "src/datos/servicios.csv";
-    private static final String RUTA_CLIENTES2 = "src/datos/clientes2.csv";
-    private static final String RUTA_MASCOTAS2 = "src/datos/mascotas2.csv";
-    private static final String RUTA_SERVICIOS2 = "src/datos/servicios2.csv";
-
     public void cargarCsvClientes(List<Cliente> listaClientes) throws IOException {
-        BufferedReader lectorCsv = new BufferedReader(new InputStreamReader(new FileInputStream(RUTA_CLIENTES), StandardCharsets.UTF_8));
+        BufferedReader lectorCsv = new BufferedReader(new InputStreamReader(new FileInputStream("src/datos/clientes.csv"), "UTF-8"));
         String linea;
 
         while ((linea = lectorCsv.readLine()) != null) {
@@ -33,7 +26,7 @@ public class Persistencia {
 
    
     public void cargarCsvMascotas(List<Mascota> listaMascotas) throws IOException {
-        BufferedReader lectorCsv = new BufferedReader(new InputStreamReader(new FileInputStream(RUTA_MASCOTAS), StandardCharsets.UTF_8));
+        BufferedReader lectorCsv = new BufferedReader(new InputStreamReader(new FileInputStream("src/datos/mascotas.csv"), "UTF-8"));
         String linea;
 
         while ((linea = lectorCsv.readLine()) != null) {
@@ -51,7 +44,7 @@ public class Persistencia {
 
     
     public void cargarCsvServicios(List<Servicio> listaServicios) throws IOException {
-        BufferedReader lectorCsv = new BufferedReader(new InputStreamReader(new FileInputStream(RUTA_SERVICIOS), StandardCharsets.UTF_8));
+        BufferedReader lectorCsv = new BufferedReader(new InputStreamReader(new FileInputStream("src/datos/servicios.csv"), "UTF-8"));
         String linea;
 
         while ((linea = lectorCsv.readLine()) != null) {
@@ -68,26 +61,33 @@ public class Persistencia {
 
     
     public void guardarCsvClientes(List<Cliente> listaClientes) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(RUTA_CLIENTES, true), "UTF_8"));
+        File file = new File("src/datos/clientes2.csv");
+        FileOutputStream fos = new FileOutputStream(file, false);
+        OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+        BufferedWriter bw = new BufferedWriter(osw);
         PrintWriter pw = new PrintWriter(bw);
-
+        
         for (Cliente cliente : listaClientes) {
             String linea = cliente.getNombre() + "," +
-                           cliente.getRut() + "," +
-                           cliente.getDireccion() + "," +
-                           cliente.getNumeroTelefono() + "," +
-                           cliente.getCorreoElectronico();
+                            cliente.getRut() + "," +
+                            cliente.getDireccion() + "," +
+                            cliente.getNumeroTelefono() + "," +
+                            cliente.getCorreoElectronico();
             pw.println(linea);
         }
-        pw.flush();
         pw.close();
         bw.close();
+        osw.close();
+        fos.close();
     }
 
   
      
     public void guardarCsvMascotas(List<Mascota> listaMascotas) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(RUTA_MASCOTAS, true), "UTF_8"));
+        File file = new File("src/datos/mascotas2.csv");
+        FileOutputStream fos = new FileOutputStream(file, false);
+        OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+        BufferedWriter bw = new BufferedWriter(osw);
         PrintWriter pw = new PrintWriter(bw);
 
         for (Mascota mascota : listaMascotas) {
@@ -98,14 +98,18 @@ public class Persistencia {
                            mascota.getId();
             pw.println(linea);
         }
-        pw.flush(); 
         pw.close();
         bw.close();
+        osw.close();
+        fos.close();
     }
 
     
     public void guardarCsvServicios(List<Servicio> listaServicios) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(RUTA_SERVICIOS, true), "UTF_8"));
+        File file = new File("src/datos/servicios2.csv");
+        FileOutputStream fos = new FileOutputStream(file, false);
+        OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+        BufferedWriter bw = new BufferedWriter(osw);
         PrintWriter pw = new PrintWriter(bw);
 
         for (Servicio servicio : listaServicios) {
@@ -114,8 +118,9 @@ public class Persistencia {
                            servicio.getDescripcion();
             pw.println(linea);
         }
-        pw.flush();
         pw.close();
         bw.close();
+        osw.close();
+        fos.close();
     }
 }
