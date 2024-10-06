@@ -11,6 +11,10 @@ public class MascotaDeRiesgo extends Mascota{
         setCuidadosEspeciales(cuidadosEspeciales);
     }
     
+    public MascotaDeRiesgo(){
+        super();
+    }
+    
    public void setCondicion(String condicion){this.condicion = condicion;}
    
    public String getCondicion(){return condicion;}

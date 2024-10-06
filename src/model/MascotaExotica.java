@@ -19,6 +19,10 @@ public class MascotaExotica extends Mascota{
         setNivelPeligrosidad(nivelPeligrosidad);
     }
     
+    public MascotaExotica(){
+        super();
+    }
+    
     public void setHabitat(String habitat){
         Verificar.verificarCadena(habitat);
         this.habitat = habitat;

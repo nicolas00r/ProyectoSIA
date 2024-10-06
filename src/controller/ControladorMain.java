@@ -36,6 +36,7 @@ public class ControladorMain implements ActionListener{
     private VentanaMostrarMascotas mostrarMascotas;
     private VentanaMostrarHistorialServicios mostrarServicios;
     private SubVentanaModificarCliente subModificarCliente;
+    private SubVentanaRegistrarMascota subRegistrarMascota;
     
     private Persistencia persistencia;
     private List<Cliente> listaClientes;
@@ -194,9 +195,60 @@ public class ControladorMain implements ActionListener{
         
         if(ae.getSource() == main.getRegistrarMascota()){
             registrarMascota = new VentanaRegistrarMascota(sistema.entregarListadoClientes());
-       
+            registrarMascota.getButtonSeleccionarCliente().addActionListener(this);       
             registrarMascota.setVisible(true);      
             return;
+        }
+        
+        if(registrarMascota != null && ae.getSource() == registrarMascota.getButtonSeleccionarCliente()){
+            String clienteSeleccionado = registrarMascota.getTextRut().getText();
+            
+            Cliente c = sistema.obtenerCliente(clienteSeleccionado);
+            String nombreDueño = c.getNombre();
+            String rutDueño = c.getRut();
+            
+            if (clienteSeleccionado != null) {
+                registrarMascota.dispose();
+                subRegistrarMascota = new SubVentanaRegistrarMascota(nombreDueño, rutDueño);
+                subRegistrarMascota.getButtonRegistrar().addActionListener(this);
+                subRegistrarMascota.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un cliente para válido.");
+            }
+            return;
+        }
+        
+        if(subRegistrarMascota != null && ae.getSource() == subRegistrarMascota.getButtonRegistrar()){ 
+            Cliente c = sistema.obtenerCliente(subRegistrarMascota.getRutDueño());
+            if(subRegistrarMascota.getCheckRiesgo().isSelected()){
+                MascotaDeRiesgo m = new MascotaDeRiesgo();
+                m.setNombreDueño(subRegistrarMascota.getNombreDueño());
+                m.setNombreMascota(subRegistrarMascota.getTextNombre().getText());
+                m.setEspecie(subRegistrarMascota.getTextEspecie().getText());
+                m.setEdad(subRegistrarMascota.getTextEdad().getText());
+                m.setCondicion(subRegistrarMascota.getTextCondicion().getText());
+                sistema.agregarMascota(c, m);
+            } else if(subRegistrarMascota.getCheckExotica().isSelected()){
+                MascotaExotica m = new MascotaExotica();
+                m.setNombreDueño(subRegistrarMascota.getNombreDueño());
+                m.setNombreMascota(subRegistrarMascota.getTextNombre().getText());
+                m.setEspecie(subRegistrarMascota.getTextEspecie().getText());
+                m.setEdad(subRegistrarMascota.getTextEdad().getText());
+                m.setHabitat(subRegistrarMascota.getTextHabitat().getText());
+                m.setNivelPeligrosidad(subRegistrarMascota.getTextPeligrosidad().getText());
+                sistema.agregarMascota(c, m);
+            } else{
+                Mascota m = new Mascota();
+                m.setNombreDueño(subRegistrarMascota.getNombreDueño());
+                m.setNombreMascota(subRegistrarMascota.getTextNombre().getText());
+                m.setEspecie(subRegistrarMascota.getTextEspecie().getText());
+                m.setEdad(subRegistrarMascota.getTextEdad().getText());
+                sistema.agregarMascota(c, m);
+            }
+            JOptionPane.showMessageDialog(null, "Mascota registrada correctamente.");
+            subRegistrarMascota.dispose();
+            return;
+            
         }
         
         if(ae.getSource() == main.getModificarMascota()){

@@ -29,6 +29,13 @@ public class Mascota{
         setEspecie(especie);
         setEdad(edad);
     }
+    
+    public Mascota(){
+        id = ++contadorId;
+        listaServicios = new ArrayList<>();
+        mapaCitas = new HashMap<>();
+        listaCitas = new ArrayList<>();
+    }
 
     // Setters y Getters
     public void setNombreMascota(String nombreMascota){this.nombreMascota = nombreMascota;}

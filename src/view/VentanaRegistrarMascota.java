@@ -27,7 +27,7 @@ public class VentanaRegistrarMascota extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
        
         for(int i = 0; i < arr.length; i++){
-            String[] cc = arr[i].split(", ");
+            String[] cc = arr[i].split("¿¿¿");
             model.addRow(cc);
         }
     }
@@ -43,9 +43,9 @@ public class VentanaRegistrarMascota extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        buttonModificarCliente = new javax.swing.JButton();
+        buttonSeleccionarCliente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        textRutModificar = new javax.swing.JTextField();
+        textRut = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,9 +74,9 @@ public class VentanaRegistrarMascota extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        buttonModificarCliente.setText("Modificar");
+        buttonSeleccionarCliente.setText("Continuar");
 
-        jLabel1.setText("Ingrese el rut del cliente a modificar, o seleccionelo en la tabla");
+        jLabel1.setText("Ingrese el rut del cliente a cargo de la mascota");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,7 +84,7 @@ public class VentanaRegistrarMascota extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonModificarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonSeleccionarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -94,7 +94,7 @@ public class VentanaRegistrarMascota extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textRutModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textRut, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,48 +103,22 @@ public class VentanaRegistrarMascota extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textRutModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonModificarCliente))
+                .addComponent(buttonSeleccionarCliente))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public JButton getButtonModificarCliente(){
-        return buttonModificarCliente;
+    public JButton getButtonSeleccionarCliente(){
+        return buttonSeleccionarCliente;
     }
     
-    public int getSelectedRow() {
-        return jTable1.getSelectedRow(); 
-    }
-    
-    public JTextField getTextRutModificar(){
-        return textRutModificar;
-    }
-    
-    public String getClienteSeleccionado() {
-        int selectedRow = getSelectedRow();
-        if (selectedRow != -1) {
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            return (String) model.getValueAt(selectedRow, 1); 
-        }
-        return null;
-    }
-    
-    public void actualizarFila(String s){
-        int selectedRow = getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
-        if (selectedRow != -1){
-            for(int i = 0; i < 5; i++){
-                String[] cc = s.split(", ");
-
-                model.setValueAt(cc[i], selectedRow, i);
-            }
-        }
+    public JTextField getTextRut(){
+        return textRut;
     }
     
     /**
@@ -198,10 +172,10 @@ public class VentanaRegistrarMascota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonModificarCliente;
+    private javax.swing.JButton buttonSeleccionarCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField textRutModificar;
+    private javax.swing.JTextField textRut;
     // End of variables declaration//GEN-END:variables
 }
