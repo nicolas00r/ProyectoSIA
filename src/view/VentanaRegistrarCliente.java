@@ -52,7 +52,7 @@ public class VentanaRegistrarCliente extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre");
 
-        jLabel3.setText("Rut");
+        jLabel3.setText("Rut (Sin puntos y con guion)");
 
         jLabel4.setText("Telefono");
 

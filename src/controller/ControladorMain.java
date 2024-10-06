@@ -102,7 +102,6 @@ public class ControladorMain implements ActionListener{
     try {
         Cliente c = new Cliente();
         
-        // Verificamos que los campos no estén vacíos
         String nombre = registrarCliente.getTextNombre().getText();
         String rut = registrarCliente.getTextRut().getText();
         String telefono = registrarCliente.getTextTelefono().getText();
@@ -113,7 +112,6 @@ public class ControladorMain implements ActionListener{
             throw new IllegalArgumentException("Todos los campos son obligatorios.");
         }
         
-        // Validar el formato del RUT o del número de teléfono según tus requisitos
         if (!rut.matches("[0-9]+-[0-9Kk]")) {
             throw new IllegalArgumentException("Formato de RUT inválido.");
         }
