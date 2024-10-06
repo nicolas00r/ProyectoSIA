@@ -27,7 +27,7 @@ public class VentanaModificarCliente extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
        
         for(int i = 0; i < arr.length; i++){
-            String[] cc = arr[i].split(", ");
+            String[] cc = arr[i].split("¿¿¿");
             model.addRow(cc);
         }
     }

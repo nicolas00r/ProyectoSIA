@@ -25,7 +25,7 @@ public class VentanaMostrarClientes extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
        
         for(int i = 0; i < arr.length; i++){
-            String[] cc = arr[i].split(",");
+            String[] cc = arr[i].split("¿¿¿");
             model.addRow(cc);
         }
        
@@ -72,6 +72,8 @@ public class VentanaMostrarClientes extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
         }
 

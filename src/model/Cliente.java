@@ -18,7 +18,7 @@ public class Cliente{
     private HashMap<Integer, Mascota> mascotasXId;
 
     // Constructor
-    public Cliente(String nombre, String rut, String numeroTelefono, String direccion, String correoElectronico){
+    public Cliente(String nombre, String rut, String direccion, String numeroTelefono, String correoElectronico){
         this.nombre = nombre;
         this.rut = rut;
         this.numeroTelefono = numeroTelefono;
@@ -60,7 +60,7 @@ public class Cliente{
 
     // Métodos
     @Override
-    public String toString(){ return nombre+", "+rut+", "+numeroTelefono+", "+direccion+", "+correoElectronico+"\n";}
+    public String toString(){ return nombre+"¿¿¿"+rut+"¿¿¿"+numeroTelefono+"¿¿¿"+direccion+"¿¿¿"+correoElectronico+"\n";}
     
     public void registrarMascota(Mascota m){
         mascotas.agregarMascota(m);
