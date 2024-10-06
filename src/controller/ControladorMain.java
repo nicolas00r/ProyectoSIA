@@ -64,19 +64,46 @@ public class ControladorMain implements ActionListener{
             return;
         }
         
-        if(registrarCliente != null && ae.getSource() == registrarCliente.getButtonAgregar()){
-            Cliente c = new Cliente();
-            c.setNombre(registrarCliente.getTextNombre().getText());
-            c.setRut(registrarCliente.getTextRut().getText());
-            c.setNumeroTelefono(registrarCliente.getTextTelefono().getText());
-            c.setDireccion(registrarCliente.getTextDireccion().getText());
-            c.setCorreoElectronico(registrarCliente.getTextCorreo().getText());
-            
-            sistema.registrarCliente(c);
-            JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
-            registrarCliente.dispose();
-            return;
+        if (registrarCliente != null && ae.getSource() == registrarCliente.getButtonAgregar()) {
+    try {
+        Cliente c = new Cliente();
+        
+        // Verificamos que los campos no estén vacíos
+        String nombre = registrarCliente.getTextNombre().getText();
+        String rut = registrarCliente.getTextRut().getText();
+        String telefono = registrarCliente.getTextTelefono().getText();
+        String direccion = registrarCliente.getTextDireccion().getText();
+        String correo = registrarCliente.getTextCorreo().getText();
+        
+        if (nombre.isEmpty() || rut.isEmpty() || telefono.isEmpty() || direccion.isEmpty() || correo.isEmpty()) {
+            throw new IllegalArgumentException("Todos los campos son obligatorios.");
         }
+        
+        // Validar el formato del RUT o del número de teléfono según tus requisitos
+        if (!rut.matches("[0-9]+-[0-9Kk]")) {
+            throw new IllegalArgumentException("Formato de RUT inválido.");
+        }
+
+        // Asignamos los valores si todo está en orden
+        c.setNombre(nombre);
+        c.setRut(rut);
+        c.setNumeroTelefono(telefono);
+        c.setDireccion(direccion);
+        c.setCorreoElectronico(correo);
+
+        // Registrar al cliente en el sistema
+        sistema.registrarCliente(c);
+        JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
+        registrarCliente.dispose();
+
+    } catch (IllegalArgumentException e) {
+        // Manejo de errores específicos
+        JOptionPane.showMessageDialog(null, "Error al registrar cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) {
+        // Cualquier otro error inesperado
+        JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
         
         if(ae.getSource() == main.getModificarCliente()){
             modificarCliente = new VentanaModificarCliente(sistema.entregarListadoClientes());
