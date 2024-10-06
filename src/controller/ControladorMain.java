@@ -38,26 +38,11 @@ public class ControladorMain implements ActionListener{
     private SubVentanaModificarCliente subModificarCliente;
     private SubVentanaRegistrarMascota subRegistrarMascota;
     
-    private Persistencia persistencia;
-    private List<Cliente> listaClientes;
-    private List<Mascota> listaMascotas;
-    private List<Servicio> listaServicios;
+    
     
     public void iniciar(){
         sistema = new PetServiceManagement();
-        persistencia = new Persistencia();
-        listaClientes = new ArrayList<>();
-        listaMascotas = new ArrayList<>();
-        listaServicios = new ArrayList<>();
-        
-        try {         
-            persistencia.cargarCsvClientes(listaClientes);
-            persistencia.cargarCsvMascotas(listaMascotas);
-            persistencia.cargarCsvServicios(listaServicios);
-            System.out.println("Datos cargados correctamente.");
-        }catch (IOException e) {
-            System.out.println("Error al cargar los datos: " + e.getMessage());
-        }
+       
         
         main = new VentanaPrincipal();
         
@@ -77,17 +62,8 @@ public class ControladorMain implements ActionListener{
         
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         main.setVisible(true);
-        Runtime.getRuntime().addShutdownHook(new Thread(()->{
-        try{
-            persistencia.guardarCsvClientes(listaClientes);
-            persistencia.guardarCsvMascotas(listaMascotas);
-            persistencia.guardarCsvServicios(listaServicios);
-            System.out.println("Datos cargados correctamente");
-        }catch(IOException e){
-            System.out.println("Error al cargar los datos: "+ e.getMessage());
-        }
-    }));
     }
+        
     
     @Override
     public void actionPerformed(ActionEvent ae){
