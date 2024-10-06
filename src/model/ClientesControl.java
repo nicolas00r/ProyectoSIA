@@ -28,9 +28,6 @@ public class ClientesControl {
     public boolean eliminarCliente(String rut){
         Cliente c;
         c = clientesXRut.get(rut);
-        /*if(c == null){
-            throw new ClienteNoEncontradoException("El cliente con RUT " + rut + " no se encuentra en el sistema.");
-        }*/
         clientesXRut.remove(c.getRut());
         return lista.remove(c);
     }
@@ -41,10 +38,11 @@ public class ClientesControl {
     
     public Cliente obtenerCliente(String rut){
         Cliente c = clientesXRut.get(rut);
-        /*if(c == null){
-            throw new ClienteNoEncontradoException("El cliente con RUT " + rut + "no se encuentra en el sistema.");
-        }*/
         return c;
+    }
+    
+    public Cliente obtenerCliente(int i){
+        return lista.get(i);
     }
     
     public String listarClientes(){
@@ -55,5 +53,9 @@ public class ClientesControl {
             ret += lista.get(i).toString();
         }
         return ret;
+    }
+    
+    public int totalClientes(){
+        return lista.size();
     }
 }

@@ -40,8 +40,16 @@ public class PetServiceManagement{
         c.registrarMascota(m);
     }
     
-    public String entregarListadoMascotas(Cliente c){
-        return c.listarMascotas();
+    public String entregarListadoMascotasTotal(){
+        String ret;
+        ret = "";
+        
+        for(int i = 0; i < clientes.totalClientes(); i++){
+            Cliente c = clientes.obtenerCliente(i);
+            ret += c.listarMascotas();
+        }
+        
+        return ret;
     }
 
     public void detallesMascotas()throws IOException, ClienteNoEncontradoException{

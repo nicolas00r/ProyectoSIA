@@ -86,7 +86,8 @@ public class ControladorMain implements ActionListener{
         }
         
         if(modificarCliente != null && ae.getSource() == modificarCliente.getButtonModificarCliente()){
-            String clienteSeleccionado = modificarCliente.getClienteSeleccionado();
+            String clienteSeleccionado = modificarCliente.getTextRutModificar().getText();
+            
             Cliente c = sistema.obtenerCliente(clienteSeleccionado);
             
             if (clienteSeleccionado != null) {
@@ -101,12 +102,13 @@ public class ControladorMain implements ActionListener{
         
         if(subModificarCliente != null && ae.getSource() == subModificarCliente.getButtonConfirmar()){
             Cliente c = sistema.obtenerCliente(subModificarCliente.getClienteOriginal());
+            String rutOriginal = c.getRut();
             c.setNombre(subModificarCliente.getTextNombre().getText());
             c.setRut(subModificarCliente.getTextRut().getText());
             c.setNumeroTelefono(subModificarCliente.getTextTelefono().getText());
             c.setDireccion(subModificarCliente.getTextDireccion().getText());
             c.setCorreoElectronico(subModificarCliente.getTextCorreo().getText());
-            modificarCliente.actualizarFila(c.toString());
+            modificarCliente.actualizarFila(c.toString(), rutOriginal);
             JOptionPane.showMessageDialog(null, "Cliente modificado correctamente.");
             subModificarCliente.dispose();
         }
@@ -132,14 +134,14 @@ public class ControladorMain implements ActionListener{
         }
         
         if(ae.getSource() == main.getRegistrarMascota()){
-            registrarMascota = new VentanaRegistrarMascota();
+            registrarMascota = new VentanaRegistrarMascota(sistema.entregarListadoClientes());
        
             registrarMascota.setVisible(true);      
             return;
         }
         
         if(ae.getSource() == main.getModificarMascota()){
-            modificarMascota = new VentanaModificarMascota();
+            modificarMascota = new VentanaModificarMascota(sistema.entregarListadoClientes());
        
             modificarMascota.setVisible(true);    
             return;
@@ -188,7 +190,7 @@ public class ControladorMain implements ActionListener{
         }
         
         if(ae.getSource() == main.getMostrarMascotas()){
-            mostrarMascotas = new VentanaMostrarMascotas();
+            mostrarMascotas = new VentanaMostrarMascotas(sistema.entregarListadoMascotasTotal());
        
             mostrarMascotas.setVisible(true);  
             return;
