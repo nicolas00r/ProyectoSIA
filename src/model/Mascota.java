@@ -48,7 +48,7 @@ public class Mascota{
     public ArrayList<Cita> getListaCitas(){ return listaCitas;}
 
     public void setEdad(String edad) {
-        Verificar.verificarEdad(edad);
+        Verificar.verificarNumero(edad);
         this.edad = Integer.parseInt(edad);
     }
 
