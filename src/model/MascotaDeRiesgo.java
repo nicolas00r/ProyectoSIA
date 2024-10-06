@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author joaqu
- */
 public class MascotaDeRiesgo extends Mascota{
     
     private String condicion;
