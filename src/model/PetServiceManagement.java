@@ -36,23 +36,15 @@ public class PetServiceManagement{
         return clientes.listarClientes();
     }
 
-    public void agregarMascota()throws IOException{
-        Helper.limpiarPantalla();
-        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("Ingrese su rut");
-        String rutCliente = lector.readLine();
-
-        if(clientes.existeCliente(rutCliente)){
-            Cliente cliente = clientes.obtenerCliente(rutCliente);
-            cliente.registrarMascota();
-        } else{
-            System.out.println("No existe un cliente registrado con ese RUT");
-            System.out.println("Registrese e intentelo nuevamente");
-        }
+    public void agregarMascota(Cliente c, Mascota m){
+        c.registrarMascota(m);
+    }
+    
+    public String entregarListadoMascotas(Cliente c){
+        return c.listarMascotas();
     }
 
-    public void detallesMascotas()throws IOException{
+    public void detallesMascotas()throws IOException, ClienteNoEncontradoException{
         Helper.limpiarPantalla();
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Ingrese su RUT:");
@@ -82,7 +74,7 @@ public class PetServiceManagement{
         }
     }
 
-    public void gestionarCitas() throws IOException{
+    public void gestionarCitas() throws IOException, ClienteNoEncontradoException{
         Helper.limpiarPantalla();
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
         System.out.println(("Ingrese su RUT:"));

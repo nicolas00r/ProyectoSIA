@@ -22,6 +22,11 @@ public class MascotaDeRiesgo extends Mascota{
     
     public String getCuidadosEspeciales(){return cuidadosEspeciales;}
     
+    @Override
+    public String toString(){
+        return nombreMascota+", "+especie+", "+condicion+", "+edad+", "+nombreDueño+", "+id+"\n";
+    }
+    
     public void mostrarDatosMascota(){
         System.out.println("------------------------");
         System.out.println("Datos de la mascota:");

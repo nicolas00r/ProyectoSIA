@@ -25,12 +25,12 @@ public class ClientesControl {
         return lista.add(c);
     }
     
-    public boolean eliminarCliente(String rut)throws ClienteNoEncontradoException{
+    public boolean eliminarCliente(String rut){
         Cliente c;
         c = clientesXRut.get(rut);
-        if(c == null){
+        /*if(c == null){
             throw new ClienteNoEncontradoException("El cliente con RUT " + rut + " no se encuentra en el sistema.");
-        }
+        }*/
         clientesXRut.remove(c.getRut());
         return lista.remove(c);
     }
@@ -39,11 +39,11 @@ public class ClientesControl {
         return clientesXRut.containsKey(rut);
     }
     
-    public Cliente obtenerCliente(String rut) throws ClienteNoEncontradoException{
+    public Cliente obtenerCliente(String rut){
         Cliente c = clientesXRut.get(rut);
-        if(c == null){
+        /*if(c == null){
             throw new ClienteNoEncontradoException("El cliente con RUT " + rut + "no se encuentra en el sistema.");
-        }
+        }*/
         return c;
     }
     

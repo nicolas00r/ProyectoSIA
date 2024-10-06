@@ -33,6 +33,11 @@ public class MascotaExotica extends Mascota{
     
     public String getNivelPeligrosidad(){return nivelPeligrosidad;}
     
+    @Override
+    public String toString(){
+        return nombreMascota+", "+especie+", "+habitat+", "+nivelPeligrosidad+", "+edad+", "+nombreDueño+", "+id+"\n";
+    }
+    
     public void mostrarDatosMascota(){
         System.out.println("------------------------");
         System.out.println("Datos de la mascota:");

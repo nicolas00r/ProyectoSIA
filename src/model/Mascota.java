@@ -6,17 +6,17 @@ import java.util.NoSuchElementException;
 
 public class Mascota{
     // Variables de instancia
-    private String nombreMascota;
-    private String nombreDueño;
-    private String especie;
-    private int edad;
-    private int id;
-    private static int contadorId = 0;
+    protected String nombreMascota;
+    protected String nombreDueño;
+    protected String especie;
+    protected int edad;
+    protected int id;
+    protected static int contadorId = 0;
  
-    private static HashMap<Integer,Cita> mapaCitas;
-    private static ArrayList<Cita> listaCitas;
+    protected static HashMap<Integer,Cita> mapaCitas;
+    protected static ArrayList<Cita> listaCitas;
 
-    private ArrayList<Servicio> listaServicios;
+    protected ArrayList<Servicio> listaServicios;
 
     // Constructor
     public Mascota(String nombreMascota, String nombreDueño, String especie, String edad){
@@ -57,7 +57,7 @@ public class Mascota{
     // Métodos
     @Override
     public String toString(){
-        return nombreMascota+", "+especie+", "+edad+", "+nombreDueño+"\n";
+        return nombreMascota+", "+especie+", "+edad+", "+nombreDueño+", "+id+"\n";
     }
     
     public void agregarCita(Cita cita, int idCita){

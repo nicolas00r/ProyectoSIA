@@ -22,6 +22,16 @@ public class MascotasControl {
         mascotasXId = new HashMap();
     }
     
+    public String listarMascotas(){
+        String ret;
+        ret = "";
+        
+        for(int i = 0; i < lista.size(); i++){
+            ret += lista.get(i).toString();
+        }
+        return ret;
+    }
+    
     public boolean agregarMascota(Mascota m){
         mascotasXNombre.put(m.getNombreMascota(), m);
         mascotasXId.put(m.getId(), m);
@@ -46,15 +56,5 @@ public class MascotasControl {
             throw new MascotaNoEncontradaException("La mascota con ID " + id + " no se encuentra en el sistema.");
         }
         return mascota;
-    }
-    
-    public String listarMascotas(){
-        String ret;
-        ret = "";
-        
-        for(int i = 0; i < lista.size(); i++){
-            ret += lista.get(i).toString();
-        }
-        return ret;
     }
 }
