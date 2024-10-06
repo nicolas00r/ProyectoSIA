@@ -8,6 +8,8 @@ package model;
  *
  * @author benja
  */
-public class ClienteDuplicadoException {
-    
+public class ClienteDuplicadoException extends Exception{
+   public ClienteDuplicadoException(String mensaje){
+        super(mensaje);
+    }
 }
