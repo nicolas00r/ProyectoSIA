@@ -6,16 +6,16 @@ package model;
 
 public class Verificar {
 
-    public static void verificarEdad(String edadInput){
+    public static void verificarNumero(String numeroInput){
         try {
 
-            if (edadInput == null || edadInput.trim().isEmpty()) {
-                throw new IllegalArgumentException("La edad no puede estar vacía.");
+            if (numeroInput == null || numeroInput.trim().isEmpty()) {
+                throw new IllegalArgumentException("Este campo no puede estar vacío.");
             }
 
-            int edad = Integer.parseInt(edadInput);
-            if (edad < 0) {
-                throw new IllegalArgumentException("La edad de la mascota no puede ser negativa.");
+            int numero = Integer.parseInt(numeroInput);
+            if (numero < 0) {
+                throw new IllegalArgumentException("Este campo no puede ser negativo.");
             }
 
         } catch (NumberFormatException e){
@@ -26,15 +26,15 @@ public class Verificar {
         }
     }
     
-    public static void verificarNombre(String nombre){
+    public static void verificarCadena(String nombre){
         try {
    
             if (nombre == null || nombre.trim().isEmpty()){
-                throw new IllegalArgumentException("El nombre no puede estar vacío.");
+                throw new IllegalArgumentException("Este campo no puede estar vacío.");
             }
 
             if (nombre.matches(".*\\d.*")){
-                throw new IllegalArgumentException("El nombre no puede contener números.");
+                throw new IllegalArgumentException("Este campo no puede contener números.");
             }
 
         } catch (IllegalArgumentException e){
