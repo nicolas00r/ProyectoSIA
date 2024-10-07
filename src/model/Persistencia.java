@@ -46,7 +46,7 @@ public class Persistencia {
         String linea;
 
         while ((linea = lectorCsv.readLine()) != null) {
-            String[] datosMascota = linea.split(",");
+            String[] datosMascota = linea.split(", ");
         
             String nombreMascota = datosMascota[0];
             String nombreDueño = datosMascota[1];
