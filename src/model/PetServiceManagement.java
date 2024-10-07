@@ -5,124 +5,210 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
 
-public class PetServiceManagement{
+/**
+ * La clase PetServiceManagement gestiona el sistema de clientes y mascotas para un servicio veterinario.
+ * Proporciona métodos para registrar clientes, agregar mascotas, realizar citas y gestionar las listas de clientes, mascotas y citas.
+ * También incluye funciones para cargar y guardar datos en archivos CSV utilizando la clase {@link Persistencia}.
+ * 
+ * @see Cliente
+ * @see Mascota
+ * @see Cita
+ * @see Persistencia
+ */
+public class PetServiceManagement {
 
-    // Variables de instancia
+    /** Controlador de clientes que gestiona la lista de clientes registrados */
     private static ClientesControl clientes;
+
+    /** Instancia de Persistencia utilizada para cargar y guardar datos */
     private Persistencia persistencia;
+
+    /** Lista de clientes registrada en el sistema */
     private List<Cliente> listaClientes;
+
+    /** Lista de mascotas registrada en el sistema */
     private List<Mascota> listaMascotas;
 
-    // Constructor
-    public PetServiceManagement(){
+    /**
+     * Constructor que inicializa el sistema de gestión de servicios para mascotas.
+     * Crea el controlador de clientes, la instancia de persistencia y carga los datos iniciales desde archivos CSV.
+     */
+    public PetServiceManagement() {
         clientes = new ClientesControl();
         persistencia = new Persistencia(); // Instancia de Persistencia
         listaClientes = new ArrayList<>();
         listaMascotas = new ArrayList<>();
-        cargarDatos(); // <--- Aquí se llama al método cargarDatos        
+        cargarDatos(); // Carga los datos desde archivos CSV
     }
 
-    // Métodos    
-    public void registrarCliente(Cliente c)throws ClienteDuplicadoException{
+    // Métodos de gestión de clientes y mascotas
+
+    /**
+     * Registra un cliente en el sistema.
+     * 
+     * @param c El cliente a registrar
+     * @throws ClienteDuplicadoException Si ya existe un cliente con el mismo RUT en el sistema
+     */
+    public void registrarCliente(Cliente c) throws ClienteDuplicadoException {
         clientes.agregarCliente(c);
     }
-    
-    public Cliente obtenerCliente(String rut){
+
+    /**
+     * Obtiene un cliente por su RUT.
+     * 
+     * @param rut El RUT del cliente
+     * @return El cliente correspondiente al RUT dado, o {@code null} si no se encuentra
+     */
+    public Cliente obtenerCliente(String rut) {
         return clientes.obtenerCliente(rut);
     }
-    
-    public void eliminarCliente(String rut){
+
+    /**
+     * Elimina un cliente del sistema por su RUT.
+     * 
+     * @param rut El RUT del cliente a eliminar
+     */
+    public void eliminarCliente(String rut) {
         clientes.eliminarCliente(rut);
     }
-    
-    public String entregarListadoClientes(){
+
+    /**
+     * Devuelve una lista en formato texto de todos los clientes registrados en el sistema.
+     * 
+     * @return Una cadena con la información de todos los clientes
+     */
+    public String entregarListadoClientes() {
         return clientes.listarClientes();
     }
 
-    public void agregarMascota(Cliente c, Mascota m){
+    /**
+     * Agrega una mascota a un cliente registrado en el sistema.
+     * 
+     * @param c El cliente dueño de la mascota
+     * @param m La mascota a agregar
+     */
+    public void agregarMascota(Cliente c, Mascota m) {
         c.registrarMascota(m);
     }
-    
-    public String entregarListadoMascotasTotal(){
-        String ret;
-        ret = "";
-        
-        for(int i = 0; i < clientes.totalClientes(); i++){
+
+    /**
+     * Devuelve una lista en formato texto de todas las mascotas registradas en el sistema.
+     * 
+     * @return Una cadena con la información de todas las mascotas
+     */
+    public String entregarListadoMascotasTotal() {
+        String ret = "";
+        for (int i = 0; i < clientes.totalClientes(); i++) {
             Cliente c = clientes.obtenerCliente(i);
             ret += c.listarMascotas();
         }
-        
         return ret;
     }
 
-    public Mascota obtenerMascota(Cliente c, int id){
+    /**
+     * Obtiene una mascota por su ID para un cliente específico.
+     * 
+     * @param c El cliente dueño de la mascota
+     * @param id El ID de la mascota
+     * @return La mascota correspondiente al ID dado
+     */
+    public Mascota obtenerMascota(Cliente c, int id) {
         return c.obtenerMascota(id);
     }
-    
-    public void eliminarMascota(Cliente c, Mascota m){
+
+    /**
+     * Elimina una mascota de un cliente específico.
+     * 
+     * @param c El cliente dueño de la mascota
+     * @param m La mascota a eliminar
+     */
+    public void eliminarMascota(Cliente c, Mascota m) {
         c.eliminarMascota(m);
     }
-    
-    public void realizarCita(Mascota m, Cita c){
+
+    /**
+     * Realiza una cita para una mascota específica.
+     * 
+     * @param m La mascota para la cual se realiza la cita
+     * @param c La cita a realizar
+     */
+    public void realizarCita(Mascota m, Cita c) {
         m.realizarCita(c);
     }
-    
-    public void entregarListadoCitasN(Mascota m){
-        m.listarCitas();
-    }
-    
-    public void eliminarCita(Mascota m, Cita d){
+
+    /**
+     * Elimina una cita de una mascota específica.
+     * 
+     * @param m La mascota de la cual se eliminará la cita
+     * @param d La cita a eliminar
+     */
+    public void eliminarCita(Mascota m, Cita d) {
         m.eliminarCita(d);
     }
-    
-    public Cita obtenerCita(Mascota m, String id){
+
+    /**
+     * Obtiene una cita específica asociada a una mascota.
+     * 
+     * @param m La mascota de la cual se obtiene la cita
+     * @param id El ID de la cita
+     * @return La cita correspondiente al ID dado, o {@code null} si no se encuentra
+     */
+    public Cita obtenerCita(Mascota m, String id) {
         return m.obtenerCita(id);
     }
-    
-    public String entregarListadoCitas(){
-        String ret;
-        ret = "";
-        
-        for(int i = 0; i < clientes.totalClientes(); i++){
+
+    /**
+     * Devuelve una lista en formato texto de todas las citas registradas en el sistema.
+     * 
+     * @return Una cadena con la información de todas las citas
+     */
+    public String entregarListadoCitas() {
+        String ret = "";
+        for (int i = 0; i < clientes.totalClientes(); i++) {
             Cliente c = clientes.obtenerCliente(i);
-            for(int j = 0; j < c.totalMascotas(); j++){
+            for (int j = 0; j < c.totalMascotas(); j++) {
                 Mascota m = c.obtenerMascotaPos(j);
                 ret += m.listarCitas();
             }
         }
-        
         return ret;
     }
-    
-    public String entregarListadoCitas(String fecha){
-        String ret;
-        ret = "";
-        
-        for(int i = 0; i < clientes.totalClientes(); i++){
+
+    /**
+     * Devuelve una lista en formato texto de las citas registradas en una fecha específica.
+     * 
+     * @param fecha La fecha en la que se desea buscar citas
+     * @return Una cadena con la información de las citas en la fecha indicada
+     */
+    public String entregarListadoCitas(String fecha) {
+        String ret = "";
+        for (int i = 0; i < clientes.totalClientes(); i++) {
             Cliente c = clientes.obtenerCliente(i);
-            for(int j = 0; j < c.totalMascotas(); j++){
+            for (int j = 0; j < c.totalMascotas(); j++) {
                 Mascota m = c.obtenerMascotaPos(j);
                 ret += m.listarCitas(fecha);
             }
         }
-        
         return ret;
     }
-    
+
+    /**
+     * Carga los datos de clientes y mascotas desde archivos CSV.
+     */
     private void cargarDatos() {
         try {
             persistencia.cargarCsvClientes(listaClientes);
             persistencia.cargarCsvMascotas(this); // Pasamos el sistema para asociar las mascotas
 
             for (Cliente cliente : listaClientes) {
-                try{
+                try {
                     clientes.agregarCliente(cliente);
-                }catch (ClienteDuplicadoException e){
-                    System.err.println("Error el cliente con RUT" + cliente.getRut() + "ya se encuentra registrado");
+                } catch (ClienteDuplicadoException e) {
+                    System.err.println("Error: El cliente con RUT " + cliente.getRut() + " ya se encuentra registrado.");
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
 
@@ -134,10 +220,16 @@ public class PetServiceManagement{
             persistencia.guardarCsvClientes(listaClientes);
             persistencia.guardarCsvMascotas(listaMascotas);
         } catch (IOException e) {
-            e.printStackTrace(); // Para propósitos de depuración
+            e.printStackTrace();
         }
     }
-    // Obtiene el nombre del cliente.
+
+    /**
+     * Obtiene un cliente por su nombre.
+     * 
+     * @param nombreDueño El nombre del cliente a buscar
+     * @return El cliente correspondiente al nombre dado, o {@code null} si no se encuentra
+     */
     public Cliente obtenerClientePorNombre(String nombreDueño) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getNombre().equalsIgnoreCase(nombreDueño)) {
@@ -146,6 +238,13 @@ public class PetServiceManagement{
         }
         return null;
     }
+
+    /**
+     * Exporta la información de los clientes a un archivo de texto.
+     * 
+     * @param clientesData La información de los clientes en formato texto
+     * @param fileName El nombre del archivo donde se guardará la información
+     */
     
     public void exportClientesToFile(String clientesData, String fileName){
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))){

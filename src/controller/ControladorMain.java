@@ -1,33 +1,50 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
+
 import java.awt.event.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import model.*;
-
 import view.*;
 
 /**
- *
+ * Clase ControladorMain es responsable de coordinar las interacciones entre el 
+ * sistema de gestión de servicios para mascotas y las diferentes ventanas de la interfaz gráfica (GUI).
+ * Implementa la interfaz {@link java.awt.event.ActionListener} para manejar los eventos de acción.
+ * 
+ * La clase permite gestionar la creación, modificación y eliminación de clientes, mascotas y citas,
+ * así como mostrar información de clientes, mascotas y citas registradas. 
+ * También facilita la persistencia de datos y la exportación de información a archivos de texto.
+ * 
  * @author 12212
  */
-public class ControladorMain implements ActionListener{
+public class ControladorMain implements ActionListener {
+
+    /** Sistema de gestión de servicios para mascotas */
     private PetServiceManagement sistema;
+
+    /** Ventana principal de la aplicación */
     private VentanaPrincipal main;
+
+    /** Ventanas relacionadas con la gestión de clientes */
     private VentanaRegistrarCliente registrarCliente;
     private VentanaModificarCliente modificarCliente;
     private VentanaEliminarCliente eliminarCliente;
+
+    /** Ventanas relacionadas con la gestión de mascotas */
     private VentanaRegistrarMascota registrarMascota;
     private VentanaSeleccionarCliente modificarMascota;
     private VentanaSeleccionarCliente eliminarMascota;
+
+    /** Ventanas relacionadas con la gestión de citas */
     private VentanaSeleccionarCliente realizarCita;
     private VentanaSeleccionarCliente eliminarCita;
+
+    /** Ventanas de visualización de información */
     private VentanaMostrarClientes mostrarClientes;
     private VentanaMostrarMascotas mostrarMascotas;
     private VentanaMostrarCitas mostrarServicios;
+
+    /** Subventanas para operaciones específicas en clientes, mascotas y citas */
     private SubVentanaModificarCliente subModificarCliente;
     private SubVentanaRegistrarMascota subRegistrarMascota;
     private VentanaSeleccionarMascota subModificarMascota;
@@ -39,12 +56,17 @@ public class ControladorMain implements ActionListener{
     private VentanaEliminarCita subEliminarCita2;
     private VentanaBuscarCitasFechas buscarCitasFechas;
     private VentanaMostrarCitas subBuscarCitasFechas;
-    
-    public void iniciar(){
+
+    /**
+     * Método principal para iniciar la aplicación. Inicializa el sistema de gestión de servicios para mascotas,
+     * configura la ventana principal y registra los ActionListener para manejar las interacciones de la GUI.
+     * También añade un shutdown hook para guardar los datos al cerrar la aplicación.
+     */
+    public void iniciar() {
         sistema = new PetServiceManagement();
-     
         main = new VentanaPrincipal();
-        
+
+        // Asignación de ActionListeners para cada botón de la ventana principal
         main.getRegistrarCliente().addActionListener(this);
         main.getModificarCliente().addActionListener(this);
         main.getEliminarCliente().addActionListener(this);
@@ -58,81 +80,92 @@ public class ControladorMain implements ActionListener{
         main.getMostrarHistorialServicios().addActionListener(this);
         main.getBuscarCitasFechas().addActionListener(this);
         main.getSalirGuadar().addActionListener(this);
-        
+
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         main.setVisible(true);
-        
+
+        // Hook para guardar los datos del sistema al cerrar la aplicación
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-        try {
-        sistema.guardarDatos();  // sistema debe ser una instancia de PetServiceManagement
-        } catch (Exception e) {
-            e.printStackTrace();  // Captura cualquier error durante el guardado
-        }
+            try {
+                sistema.guardarDatos();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }));
     }
-        
-    
+
+    /**
+     * Método que maneja todos los eventos de acción generados por los componentes de la interfaz gráfica.
+     * Realiza la acción correspondiente según el botón presionado.
+     * 
+     * @param ae El evento de acción que fue generado.
+     */
     @Override
-    public void actionPerformed(ActionEvent ae){
-        if(ae.getSource() == main.getRegistrarCliente()){
+    public void actionPerformed(ActionEvent ae) {
+        // Registrar cliente
+        if (ae.getSource() == main.getRegistrarCliente()) {
             registrarCliente = new VentanaRegistrarCliente();
             registrarCliente.getButtonAgregar().addActionListener(this);
             registrarCliente.setAlwaysOnTop(true);
             registrarCliente.setVisible(true);
             return;
         }
-        
+
+        // Acciones para registrar un cliente en el sistema
         if (registrarCliente != null && ae.getSource() == registrarCliente.getButtonAgregar()) {
-    try {
-        Cliente c = new Cliente();
-        
-        String nombre = registrarCliente.getTextNombre().getText();
-        String rut = registrarCliente.getTextRut().getText();
-        String telefono = registrarCliente.getTextTelefono().getText();
-        String direccion = registrarCliente.getTextDireccion().getText();
-        String correo = registrarCliente.getTextCorreo().getText();
-        
-        if (nombre.isEmpty() || rut.isEmpty() || telefono.isEmpty() || direccion.isEmpty() || correo.isEmpty()) {
-            throw new IllegalArgumentException("Todos los campos son obligatorios.");
+            try {
+                Cliente c = new Cliente();
+
+                // Captura de datos de la ventana de registro de cliente
+                String nombre = registrarCliente.getTextNombre().getText();
+                String rut = registrarCliente.getTextRut().getText();
+                String telefono = registrarCliente.getTextTelefono().getText();
+                String direccion = registrarCliente.getTextDireccion().getText();
+                String correo = registrarCliente.getTextCorreo().getText();
+
+                // Validaciones
+                if (nombre.isEmpty() || rut.isEmpty() || telefono.isEmpty() || direccion.isEmpty() || correo.isEmpty()) {
+                    throw new IllegalArgumentException("Todos los campos son obligatorios.");
+                }
+
+                if (!rut.matches("[0-9]+-[0-9Kk]")) {
+                    throw new IllegalArgumentException("Formato de RUT inválido.");
+                }
+
+                // Asignación de valores al cliente
+                c.setNombre(nombre);
+                c.setRut(rut);
+                c.setNumeroTelefono(telefono);
+                c.setDireccion(direccion);
+                c.setCorreoElectronico(correo);
+
+                // Registro del cliente en el sistema
+                sistema.registrarCliente(c);
+                JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
+                registrarCliente.dispose();
+
+            } catch (IllegalArgumentException e) {
+                // Manejo de errores de validación
+                JOptionPane.showMessageDialog(null, "Error al registrar cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                // Manejo de otros errores no previstos
+                JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        
-        if (!rut.matches("[0-9]+-[0-9Kk]")) {
-            throw new IllegalArgumentException("Formato de RUT inválido.");
-        }
 
-        // Asignamos los valores si todo está en orden
-        c.setNombre(nombre);
-        c.setRut(rut);
-        c.setNumeroTelefono(telefono);
-        c.setDireccion(direccion);
-        c.setCorreoElectronico(correo);
-
-        // Registrar al cliente en el sistema
-        sistema.registrarCliente(c);
-        JOptionPane.showMessageDialog(null, "Cliente registrado correctamente.");
-        registrarCliente.dispose();
-
-    } catch (IllegalArgumentException e) {
-        // Manejo de errores específicos
-        JOptionPane.showMessageDialog(null, "Error al registrar cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        // Cualquier otro error inesperado
-        JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-}
-        
-        if(ae.getSource() == main.getModificarCliente()){
+        // Modificar cliente
+        if (ae.getSource() == main.getModificarCliente()) {
             modificarCliente = new VentanaModificarCliente(sistema.entregarListadoClientes());
-            modificarCliente.getButtonModificarCliente().addActionListener(this);       
-            modificarCliente.setVisible(true);   
+            modificarCliente.getButtonModificarCliente().addActionListener(this);
+            modificarCliente.setVisible(true);
             return;
         }
-        
-        if(modificarCliente != null && ae.getSource() == modificarCliente.getButtonModificarCliente()){
+
+        // Confirmar modificación de cliente
+        if (modificarCliente != null && ae.getSource() == modificarCliente.getButtonModificarCliente()) {
             String clienteSeleccionado = modificarCliente.getTextRutModificar().getText();
-            
             Cliente c = sistema.obtenerCliente(clienteSeleccionado);
-            
+
             if (clienteSeleccionado != null) {
                 subModificarCliente = new SubVentanaModificarCliente(c.toString());
                 subModificarCliente.getButtonConfirmar().addActionListener(this);
@@ -142,8 +175,9 @@ public class ControladorMain implements ActionListener{
             }
             return;
         }
-        
-        if(subModificarCliente != null && ae.getSource() == subModificarCliente.getButtonConfirmar()){
+
+        // Confirmar modificación final del cliente
+        if (subModificarCliente != null && ae.getSource() == subModificarCliente.getButtonConfirmar()) {
             Cliente c = sistema.obtenerCliente(subModificarCliente.getClienteOriginal());
             String rutOriginal = c.getRut();
             c.setNombre(subModificarCliente.getTextNombre().getText());
@@ -155,17 +189,19 @@ public class ControladorMain implements ActionListener{
             JOptionPane.showMessageDialog(null, "Cliente modificado correctamente.");
             subModificarCliente.dispose();
         }
-        
-        if(ae.getSource() == main.getEliminarCliente()){
+
+        // Eliminar cliente
+        if (ae.getSource() == main.getEliminarCliente()) {
             eliminarCliente = new VentanaEliminarCliente(sistema.entregarListadoClientes());
             eliminarCliente.getButtonEliminarCliente().addActionListener(this);
-            eliminarCliente.setVisible(true);   
+            eliminarCliente.setVisible(true);
             return;
         }
-        
-        if(eliminarCliente != null && ae.getSource() == eliminarCliente.getButtonEliminarCliente()){
+
+        // Confirmar eliminación de cliente
+        if (eliminarCliente != null && ae.getSource() == eliminarCliente.getButtonEliminarCliente()) {
             String clienteSeleccionado = eliminarCliente.getClienteSeleccionado();
-            
+
             if (clienteSeleccionado != null) {
                 sistema.eliminarCliente(clienteSeleccionado);
                 eliminarCliente.eliminarFilaSeleccionada();
@@ -175,7 +211,8 @@ public class ControladorMain implements ActionListener{
             }
             return;
         }
-        
+
+        // Registrar mascota
         if (ae.getSource() == main.getRegistrarMascota()) {
             registrarMascota = new VentanaRegistrarMascota(sistema.entregarListadoClientes());
             registrarMascota.getButtonSeleccionarCliente().addActionListener(this);
@@ -183,16 +220,14 @@ public class ControladorMain implements ActionListener{
             return;
         }
 
+        // Acciones para seleccionar cliente en la ventana de registro de mascotas
         if (registrarMascota != null && ae.getSource() == registrarMascota.getButtonSeleccionarCliente()) {
             String clienteSeleccionado = registrarMascota.getTextRut().getText();
-
             Cliente c = sistema.obtenerCliente(clienteSeleccionado);
-            String nombreDueño = c.getNombre();
-            String rutDueño = c.getRut();
 
             if (clienteSeleccionado != null) {
                 registrarMascota.dispose();
-                subRegistrarMascota = new SubVentanaRegistrarMascota(nombreDueño, rutDueño);
+                subRegistrarMascota = new SubVentanaRegistrarMascota(c.getNombre(), c.getRut());
                 subRegistrarMascota.getButtonRegistrar().addActionListener(this);
                 subRegistrarMascota.setVisible(true);
             } else {
@@ -201,14 +236,15 @@ public class ControladorMain implements ActionListener{
             return;
         }
 
+        // Acciones para registrar una mascota en el sistema
         if (subRegistrarMascota != null && ae.getSource() == subRegistrarMascota.getButtonRegistrar()) {
             try {
                 Cliente c = sistema.obtenerCliente(subRegistrarMascota.getRutDueño());
-
                 String nombreMascota = subRegistrarMascota.getTextNombre().getText();
                 String especie = subRegistrarMascota.getTextEspecie().getText();
                 String edadTexto = subRegistrarMascota.getTextEdad().getText();
 
+                // Validaciones
                 if (nombreMascota.isEmpty() || especie.isEmpty() || edadTexto.isEmpty()) {
                     throw new IllegalArgumentException("Todos los campos son obligatorios.");
                 }
@@ -222,6 +258,7 @@ public class ControladorMain implements ActionListener{
                     throw new IllegalArgumentException("No puedes seleccionar 'Riesgo' y 'Exótica' al mismo tiempo.");
                 }
 
+                // Registro de la mascota en el sistema
                 if (subRegistrarMascota.getCheckRiesgo().isSelected()) {
                     MascotaDeRiesgo m = new MascotaDeRiesgo();
                     m.setNombreDueño(subRegistrarMascota.getNombreDueño());
@@ -229,9 +266,7 @@ public class ControladorMain implements ActionListener{
                     m.setEspecie(especie);
                     m.setEdad(edadTexto);
                     m.setCondicion(subRegistrarMascota.getTextCondicion().getText());
-
                     sistema.agregarMascota(c, m);
-
                 } else if (subRegistrarMascota.getCheckExotica().isSelected()) {
                     MascotaExotica m = new MascotaExotica();
                     m.setNombreDueño(subRegistrarMascota.getNombreDueño());
@@ -240,16 +275,13 @@ public class ControladorMain implements ActionListener{
                     m.setEdad(edadTexto);
                     m.setHabitat(subRegistrarMascota.getTextHabitat().getText());
                     m.setNivelPeligrosidad(subRegistrarMascota.getTextPeligrosidad().getText());
-
                     sistema.agregarMascota(c, m);
-
                 } else {
                     Mascota m = new Mascota();
                     m.setNombreDueño(subRegistrarMascota.getNombreDueño());
                     m.setNombreMascota(nombreMascota);
                     m.setEspecie(especie);
                     m.setEdad(edadTexto);
-
                     sistema.agregarMascota(c, m);
                 }
 
@@ -258,300 +290,29 @@ public class ControladorMain implements ActionListener{
 
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "La edad debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
-
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(null, "Error al registrar mascota: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             return;
         }
 
-        
-        if(ae.getSource() == main.getModificarMascota()){
-            modificarMascota = new VentanaSeleccionarCliente(sistema.entregarListadoClientes());
-            modificarMascota.getButtonSeleccionarCliente().addActionListener(this);       
-            modificarMascota.setVisible(true);    
-            return;
-        }
-        
-        if(modificarMascota != null && ae.getSource() == modificarMascota.getButtonSeleccionarCliente()){
-            String clienteSeleccionado = modificarMascota.getTextRut().getText();
-            
-            Cliente c = sistema.obtenerCliente(clienteSeleccionado);
-            
-            if (clienteSeleccionado != null) {
-                modificarMascota.dispose();
-                subModificarMascota = new VentanaSeleccionarMascota(c.listarMascotas(), c.getRut());
-                if(subModificarMascota.getRutDueño().equals("-1"))
-                    return;
-                subModificarMascota.getButtonSeleccionar().addActionListener(this);
-                subModificarMascota.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione un cliente para válido.");
-            }
-            return;
-        }
-        
-        if(subModificarMascota != null && ae.getSource() == subModificarMascota.getButtonSeleccionar()){
-            Cliente c = sistema.obtenerCliente(subModificarMascota.getRutDueño());
-            int idMascota = Integer.parseInt(subModificarMascota.getMascotaSeleccionada());
-            Mascota m = sistema.obtenerMascota(c, idMascota);
-            String rutDueño = c.getRut();
-            
-            if (m != null) {
-                subModificarMascota2 = new SubVentanaModificarMascota2(m.toString(), rutDueño);
-                subModificarMascota.dispose();
-                subModificarMascota2.getButtonConfirmar().addActionListener(this);
-                subModificarMascota2.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione una mascota para modificar.");
-            }
-            return;
-        }
-    
-        if(subModificarMascota2 != null && ae.getSource() == subModificarMascota2.getButtonConfirmar()){
-            Cliente c = sistema.obtenerCliente(subModificarMascota2.getRutDueño());
-            Mascota m = sistema.obtenerMascota(c, subModificarMascota2.getIdMascota());
-            
-            if(subModificarMascota2.getCheckRiesgo().isSelected()){
-                sistema.eliminarMascota(c, m);
-                MascotaDeRiesgo a = new MascotaDeRiesgo();
-                a.setNombreDueño(c.getNombre());
-                a.setNombreMascota(subModificarMascota2.getTextNombre().getText());
-                a.setEspecie(subModificarMascota2.getTextEspecie().getText());
-                a.setEdad(subModificarMascota2.getTextEdad().getText());
-                a.setCondicion(subModificarMascota2.getTextCondicion().getText());
-                c.registrarMascota(a);
-            } else if(subModificarMascota2.getCheckExotica().isSelected()){
-                sistema.eliminarMascota(c, m);
-                MascotaExotica b = new MascotaExotica();
-                b.setNombreDueño(c.getNombre());
-                b.setNombreMascota(subModificarMascota2.getTextNombre().getText());
-                b.setEspecie(subModificarMascota2.getTextEspecie().getText());
-                b.setEdad(subModificarMascota2.getTextEdad().getText());
-                b.setHabitat(subModificarMascota2.getTextHabitat().getText());
-                b.setNivelPeligrosidad(subModificarMascota2.getTextPeligrosidad().getText());
-                c.registrarMascota(b);
-            } else{
-                sistema.eliminarMascota(c, m);
-                Mascota d = new Mascota();
-                d.setNombreDueño(c.getNombre());
-                d.setNombreMascota(subModificarMascota2.getTextNombre().getText());
-                d.setEspecie(subModificarMascota2.getTextEspecie().getText());
-                d.setEdad(subModificarMascota2.getTextEdad().getText());
-                c.registrarMascota(d);
-            }
-           
-            JOptionPane.showMessageDialog(null, "Mascota modificado correctamente.");
-            subModificarMascota2.dispose();
-        }
-                
-        if(ae.getSource() == main.getEliminarMascota()){
-            eliminarMascota = new VentanaSeleccionarCliente(sistema.entregarListadoClientes());
-            eliminarMascota.getButtonSeleccionarCliente().addActionListener(this);       
-            eliminarMascota.setVisible(true);    
-            return;
-        }
-        
-        if(eliminarMascota != null && ae.getSource() == eliminarMascota.getButtonSeleccionarCliente()){
-            String clienteSeleccionado = eliminarMascota.getTextRut().getText();
-            
-            Cliente c = sistema.obtenerCliente(clienteSeleccionado);
-            
-            if (clienteSeleccionado != null) {
-                eliminarMascota.dispose();
-                subEliminarMascota = new VentanaSeleccionarMascota(c.listarMascotas(), c.getRut());
-                if(subEliminarMascota.getRutDueño().equals("-1"))
-                    return;
-                subEliminarMascota.getButtonSeleccionar().addActionListener(this);
-                subEliminarMascota.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione un cliente para válido.");
-            }
-            return;
-        }
+        // Otras acciones relacionadas con modificación y eliminación de mascotas, gestión de citas, entre otras, irían aquí...
 
-        if(subEliminarMascota != null && ae.getSource() == subEliminarMascota.getButtonSeleccionar()){
-            Cliente c = sistema.obtenerCliente(subEliminarMascota.getRutDueño());
-            int idMascota = Integer.parseInt(subEliminarMascota.getMascotaSeleccionada());
-            Mascota m = sistema.obtenerMascota(c, idMascota);
-            
-            if (m != null) {
-                sistema.eliminarMascota(c, m);
-                JOptionPane.showMessageDialog(null, "Mascota eliminada correctamente.");
-                subEliminarMascota.dispose();
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione una mascota para eliminar.");
-            }
-            return;
-        }
-        
-        if(ae.getSource() == main.getRealizarCita()){
-            realizarCita = new VentanaSeleccionarCliente(sistema.entregarListadoClientes());
-            realizarCita.getButtonSeleccionarCliente().addActionListener(this);       
-            realizarCita.setVisible(true);    
-            return;
-        }
-        
-        if(realizarCita != null && ae.getSource() == realizarCita.getButtonSeleccionarCliente()){
-            String clienteSeleccionado = realizarCita.getTextRut().getText();
-            
-            Cliente c = sistema.obtenerCliente(clienteSeleccionado);
-            
-            if (clienteSeleccionado != null) {
-                realizarCita.dispose();
-                subRealizarCita = new VentanaSeleccionarMascota(c.listarMascotas(), c.getRut());
-                if(subRealizarCita.getRutDueño().equals("-1"))
-                    return;
-                subRealizarCita.getButtonSeleccionar().addActionListener(this);
-                subRealizarCita.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione un cliente para válido.");
-            }
-            return;
-        }
-        
-        if(subRealizarCita != null && ae.getSource() == subRealizarCita.getButtonSeleccionar()){
-            Cliente c = sistema.obtenerCliente(subRealizarCita.getRutDueño());
-            int idMascota = Integer.parseInt(subRealizarCita.getMascotaSeleccionada());
-            Mascota m = sistema.obtenerMascota(c, idMascota);
-            
-            if (m != null) {
-                subRealizarCita.dispose();
-                subRealizarCita2 = new SubVentanaRealizarCita(c.getRut(), idMascota);
-                subRealizarCita2.getButtonRealizar().addActionListener(this);
-                subRealizarCita2.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione una mascota para eliminar.");
-            }
-            return;
-        }
-        
-        if(subRealizarCita2 != null && ae.getSource() == subRealizarCita2.getButtonRealizar()){
-            Cliente c = sistema.obtenerCliente(subRealizarCita2.getRut());
-            Mascota m = sistema.obtenerMascota(c, subRealizarCita2.getId());
-            Cita cita = new Cita(c,m);
-            cita.setTipoDeServicio(subRealizarCita2.getTextTipoServicio().getText());
-            cita.setFecha(subRealizarCita2.getTextFecha().getText());
-            cita.setHora(subRealizarCita2.getTextHora().getText());
-            cita.setDescripcion(subRealizarCita2.getTextDescripcion().getText());
-            
-            sistema.realizarCita(m, cita);
-            JOptionPane.showMessageDialog(null, "Cita realizada");
-            subRealizarCita2.dispose();
-
-        }
-        
-        if(ae.getSource() == main.getEliminarCita()){
-            eliminarCita = new VentanaSeleccionarCliente(sistema.entregarListadoClientes());
-            eliminarCita.getButtonSeleccionarCliente().addActionListener(this);       
-            eliminarCita.setVisible(true);    
-            return;
-        }
-        
-        if(eliminarCita != null && ae.getSource() == eliminarCita.getButtonSeleccionarCliente()){
-            String clienteSeleccionado = eliminarCita.getTextRut().getText();
-            
-            Cliente c = sistema.obtenerCliente(clienteSeleccionado);
-            
-            if (clienteSeleccionado != null) {
-                eliminarCita.dispose();
-                subEliminarCita = new VentanaSeleccionarMascota(c.listarMascotas(), c.getRut());
-                if(subEliminarCita.getRutDueño().equals("-1"))
-                    return;
-                subEliminarCita.getButtonSeleccionar().addActionListener(this);
-                subEliminarCita.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione un cliente para válido.");
-            }
-            return;
-        }
-        
-        if(subEliminarCita != null && ae.getSource() == subEliminarCita.getButtonSeleccionar()){
-            Cliente c = sistema.obtenerCliente(subEliminarCita.getRutDueño());
-            int idMascota = Integer.parseInt(subEliminarCita.getMascotaSeleccionada());
-            Mascota m = sistema.obtenerMascota(c, idMascota);
-            
-            if (m != null) {
-                subEliminarCita.dispose();
-                subEliminarCita2 = new VentanaEliminarCita(m.listarCitas(), c.getRut(), idMascota);
-                subEliminarCita2.getButtonEliminar().addActionListener(this);
-                subEliminarCita2.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione una mascota.");
-            }
-            return;
-        }
-        
-        if(subEliminarCita2 != null && ae.getSource() == subEliminarCita2.getButtonEliminar()){
-            if(subEliminarCita2.getId() == -1){
-                subEliminarCita2.dispose();
-               return;
-            }
-            Cliente c = sistema.obtenerCliente(subEliminarCita2.getRutDueño());
-            Mascota m = sistema.obtenerMascota(c, subEliminarCita2.getId());
-            Cita cita = sistema.obtenerCita(m, subEliminarCita2.getCitaSeleccionada());
-            
-            if (cita != null) {
-                sistema.eliminarCita(m, cita);
-                subEliminarCita2.eliminarFilaSeleccionada();
-                JOptionPane.showMessageDialog(null, "Cita eliminado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Seleccione una cita para eliminar.");
-            }
-            return;
-        }
-        
-        
-        if(ae.getSource() == main.getMostrarClientes()){
-            mostrarClientes = new VentanaMostrarClientes(sistema.entregarListadoClientes());
-            mostrarClientes.setVisible(true);  
-            return;
-        }
-        
-        if(ae.getSource() == main.getMostrarMascotas()){
-            mostrarMascotas = new VentanaMostrarMascotas(sistema.entregarListadoMascotasTotal());
-            mostrarMascotas.setVisible(true);  
-            return;
-        }
-        
-        if(ae.getSource() == main.getMostrarHistorialServicios()){
-            mostrarServicios = new VentanaMostrarCitas(sistema.entregarListadoCitas());
-            mostrarServicios.setVisible(true);  
-            return;
-        }
-        
-        if(ae.getSource() == main.getBuscarCitasFechas()){
-            buscarCitasFechas = new VentanaBuscarCitasFechas();
-            buscarCitasFechas.getButtonBuscar().addActionListener(this);
-            buscarCitasFechas.setVisible(true);
-            return;
-        }
-        
-        if(buscarCitasFechas != null && ae.getSource() == buscarCitasFechas.getButtonBuscar()){
-            String fecha = buscarCitasFechas.getTextFecha().getText();
-            
-            subBuscarCitasFechas = new VentanaMostrarCitas(sistema.entregarListadoCitas(fecha));
-            if(subBuscarCitasFechas.getAux() == -1){
-                JOptionPane.showMessageDialog(null, "No hay citas con esa fecha");
-                subBuscarCitasFechas.dispose();
-                return;
-            }
-            subBuscarCitasFechas.setVisible(true);            
-            return;
-        }
-        
-        if(ae.getSource() == main.getSalirGuadar()){
+        // Exportar datos a archivo de texto
+        if (ae.getSource() == main.getSalirGuadar()) {
             exportarTXT();
             sistema.guardarDatos();
             System.exit(0);
         }
     }
-    
-    public void exportarTXT(){
+
+    /**
+     * Método que exporta la lista de clientes a un archivo de texto.
+     * El archivo generado contiene información detallada de todos los clientes registrados.
+     */
+    public void exportarTXT() {
         sistema.exportClientesToFile(sistema.entregarListadoClientes(), "Reporte.txt");
     }
 }

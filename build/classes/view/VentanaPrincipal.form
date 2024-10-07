@@ -94,15 +94,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RealizarCitaActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="ModificarCita">
-              <Properties>
-                <Property name="mnemonic" type="int" value="97"/>
-                <Property name="text" type="java.lang.String" value="Modificar Cita"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModificarCitaActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="EliminarCita">
               <Properties>
                 <Property name="mnemonic" type="int" value="99"/>
@@ -110,15 +101,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarCitaActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="ConfirmarCita">
-              <Properties>
-                <Property name="mnemonic" type="int" value="99"/>
-                <Property name="text" type="java.lang.String" value="Confirmar Cita"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConfirmarCitaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -164,13 +146,13 @@
             <Property name="text" type="java.lang.String" value="Funcionalidades"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="Test">
+            <MenuItem class="javax.swing.JMenuItem" name="BuscarCitasFechas">
               <Properties>
                 <Property name="mnemonic" type="int" value="99"/>
-                <Property name="text" type="java.lang.String" value="Test"/>
+                <Property name="text" type="java.lang.String" value="Buscar citas por fecha"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TestActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarCitasFechasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -201,10 +183,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="108" max="32767" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="359" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace pref="162" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel1" min="-2" pref="359" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="buttonSalirGuardar" min="-2" pref="154" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -213,7 +203,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="67" max="-2" attributes="0"/>
-              <EmptySpace pref="164" max="32767" attributes="0"/>
+              <EmptySpace pref="142" max="32767" attributes="0"/>
+              <Component id="buttonSalirGuardar" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -222,6 +213,11 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonSalirGuardar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salir y guardar"/>
       </Properties>
     </Component>
   </SubComponents>
