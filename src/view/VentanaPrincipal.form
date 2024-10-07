@@ -146,13 +146,13 @@
             <Property name="text" type="java.lang.String" value="Funcionalidades"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="BuscarCitasXFecha">
+            <MenuItem class="javax.swing.JMenuItem" name="BuscarCitasFechas">
               <Properties>
                 <Property name="mnemonic" type="int" value="99"/>
                 <Property name="text" type="java.lang.String" value="Buscar citas por fecha"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarCitasXFechaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarCitasFechasActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

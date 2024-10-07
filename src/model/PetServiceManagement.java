@@ -79,15 +79,30 @@ public class PetServiceManagement{
         return m.obtenerCita(id);
     }
     
-    public String listarCitasTotales(){
+    public String entregarListadoCitas(){
         String ret;
         ret = "";
         
         for(int i = 0; i < clientes.totalClientes(); i++){
             Cliente c = clientes.obtenerCliente(i);
             for(int j = 0; j < c.totalMascotas(); j++){
-                Mascota m = c.obtenerMascota(j, true);
+                Mascota m = c.obtenerMascotaPos(j);
                 ret += m.listarCitas();
+            }
+        }
+        
+        return ret;
+    }
+    
+    public String entregarListadoCitas(String fecha){
+        String ret;
+        ret = "";
+        
+        for(int i = 0; i < clientes.totalClientes(); i++){
+            Cliente c = clientes.obtenerCliente(i);
+            for(int j = 0; j < c.totalMascotas(); j++){
+                Mascota m = c.obtenerMascotaPos(j);
+                ret += m.listarCitas(fecha);
             }
         }
         

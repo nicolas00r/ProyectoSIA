@@ -62,7 +62,7 @@ public class Cliente{
     
     public Mascota obtenerMascota(int idMascota){ return mascotas.obtenerMascotaPorId(idMascota);}
     
-    public Mascota obtenerMascota(int j, boolean esPorPosicion){ return mascotas.obtenerMascotaPorUbicacion(j);}
+    public Mascota obtenerMascotaPos(int j){ return mascotas.obtenerMascotaPorUbicacion(j);}
     
     public void eliminarMascota(Mascota m){
         mascotas.eliminarMascota(m);

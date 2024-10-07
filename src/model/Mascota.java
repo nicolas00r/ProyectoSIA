@@ -71,6 +71,19 @@ public class Mascota{
         return ret;
     }
     
+    public String listarCitas(String fecha){
+        String ret;
+        String aux;
+        ret = "";
+        
+        for(int i = 0; i < listaCitas.size(); i++){
+            aux = listaCitas.get(i).getFecha();
+            if(aux.equals(fecha))
+                ret += listaCitas.get(i).toString();
+        }
+        return ret;
+    }
+    
     public Cita obtenerCita(String idCita) {
         int aux = Integer.parseInt(idCita);
         for (int i = 0; i < listaCitas.size(); i++) {

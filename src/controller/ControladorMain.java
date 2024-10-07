@@ -27,7 +27,7 @@ public class ControladorMain implements ActionListener{
     private VentanaSeleccionarCliente eliminarCita;
     private VentanaMostrarClientes mostrarClientes;
     private VentanaMostrarMascotas mostrarMascotas;
-    private VentanaMostrarHistorialServicios mostrarServicios;
+    private VentanaMostrarCitas mostrarServicios;
     private SubVentanaModificarCliente subModificarCliente;
     private SubVentanaRegistrarMascota subRegistrarMascota;
     private VentanaSeleccionarMascota subModificarMascota;
@@ -37,6 +37,8 @@ public class ControladorMain implements ActionListener{
     private SubVentanaRealizarCita subRealizarCita2;
     private VentanaSeleccionarMascota subEliminarCita;
     private VentanaEliminarCita subEliminarCita2;
+    private VentanaBuscarCitasFechas buscarCitasFechas;
+    private VentanaMostrarCitas subBuscarCitasFechas;
     
     public void iniciar(){
         sistema = new PetServiceManagement();
@@ -54,6 +56,7 @@ public class ControladorMain implements ActionListener{
         main.getMostrarClientes().addActionListener(this);
         main.getMostrarMascotas().addActionListener(this);
         main.getMostrarHistorialServicios().addActionListener(this);
+        main.getBuscarCitasFechas().addActionListener(this);
         
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         main.setVisible(true);
@@ -504,7 +507,6 @@ public class ControladorMain implements ActionListener{
         
         if(ae.getSource() == main.getMostrarClientes()){
             mostrarClientes = new VentanaMostrarClientes(sistema.entregarListadoClientes());
-       
             mostrarClientes.setVisible(true);  
             return;
         }
@@ -516,10 +518,29 @@ public class ControladorMain implements ActionListener{
         }
         
         if(ae.getSource() == main.getMostrarHistorialServicios()){
-            mostrarServicios = new VentanaMostrarHistorialServicios(sistema.listarCitasTotales());
+            mostrarServicios = new VentanaMostrarCitas(sistema.entregarListadoCitas());
             mostrarServicios.setVisible(true);  
             return;
         }
         
+        if(ae.getSource() == main.getBuscarCitasFechas()){
+            buscarCitasFechas = new VentanaBuscarCitasFechas();
+            buscarCitasFechas.getButtonBuscar().addActionListener(this);
+            buscarCitasFechas.setVisible(true);
+            return;
+        }
+        
+        if(buscarCitasFechas != null && ae.getSource() == buscarCitasFechas.getButtonBuscar()){
+            String fecha = buscarCitasFechas.getTextFecha().getText();
+            
+            subBuscarCitasFechas = new VentanaMostrarCitas(sistema.entregarListadoCitas(fecha));
+            if(subBuscarCitasFechas.getAux() == -1){
+                JOptionPane.showMessageDialog(null, "No hay citas con esa fecha");
+                subBuscarCitasFechas.dispose();
+                return;
+            }
+            subBuscarCitasFechas.setVisible(true);            
+            return;
+        }
     }
 }

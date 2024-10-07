@@ -12,12 +12,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author 12212
  */
-public class VentanaMostrarHistorialServicios extends javax.swing.JFrame {
+public class VentanaMostrarCitas extends javax.swing.JFrame {
     private String ss;
+    private int aux;
     /**
      * Creates new form NewJFrame
      */
-    public VentanaMostrarHistorialServicios(String s) {
+    public VentanaMostrarCitas(String s) {
         ss = s;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -25,6 +26,7 @@ public class VentanaMostrarHistorialServicios extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tableCitas1.getModel();
         
         if(arr[0].equals("")){
+            aux = -1;
             return;
         }
        
@@ -123,6 +125,10 @@ public class VentanaMostrarHistorialServicios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public int getAux(){
+        return aux;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -140,14 +146,18 @@ public class VentanaMostrarHistorialServicios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaMostrarHistorialServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMostrarCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaMostrarHistorialServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMostrarCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaMostrarHistorialServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMostrarCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaMostrarHistorialServicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMostrarCitas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -156,7 +166,7 @@ public class VentanaMostrarHistorialServicios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaMostrarHistorialServicios("s").setVisible(true);
+                new VentanaMostrarCitas("s").setVisible(true);
             }
         });
     }

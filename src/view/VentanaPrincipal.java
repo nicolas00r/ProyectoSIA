@@ -47,7 +47,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         MostrarMascotas = new javax.swing.JMenuItem();
         MostrarHistorialServicios = new javax.swing.JMenuItem();
         Funcionalidades = new javax.swing.JMenu();
-        BuscarCitasXFecha = new javax.swing.JMenuItem();
+        BuscarCitasFechas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,14 +178,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Funcionalidades.setMnemonic('h');
         Funcionalidades.setText("Funcionalidades");
 
-        BuscarCitasXFecha.setMnemonic('c');
-        BuscarCitasXFecha.setText("Buscar citas por fecha");
-        BuscarCitasXFecha.addActionListener(new java.awt.event.ActionListener() {
+        BuscarCitasFechas.setMnemonic('c');
+        BuscarCitasFechas.setText("Buscar citas por fecha");
+        BuscarCitasFechas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BuscarCitasXFechaActionPerformed(evt);
+                BuscarCitasFechasActionPerformed(evt);
             }
         });
-        Funcionalidades.add(BuscarCitasXFecha);
+        Funcionalidades.add(BuscarCitasFechas);
 
         menuBar.add(Funcionalidades);
 
@@ -255,6 +255,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return MostrarHistorialServicios;
     }
     
+    public JMenuItem getBuscarCitasFechas(){
+        return BuscarCitasFechas;
+    }
+    
     private void RegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RegistrarClienteActionPerformed
@@ -299,9 +303,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MostrarHistorialServiciosActionPerformed
 
-    private void BuscarCitasXFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarCitasXFechaActionPerformed
+    private void BuscarCitasFechasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarCitasFechasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BuscarCitasXFechaActionPerformed
+    }//GEN-LAST:event_BuscarCitasFechasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,7 +343,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem BuscarCitasXFecha;
+    private javax.swing.JMenuItem BuscarCitasFechas;
     private javax.swing.JMenuItem EliminarCita;
     private javax.swing.JMenuItem EliminarCliente;
     private javax.swing.JMenuItem EliminarMascota;
