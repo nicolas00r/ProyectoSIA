@@ -7,12 +7,18 @@ import java.util.List;
 /**
  * La clase Persistencia maneja la carga y almacenamiento de datos desde y hacia archivos CSV.
  * Permite gestionar listas de clientes y mascotas, facilitando su persistencia en archivos externos.
+ * 
+ * Proporciona métodos para cargar datos desde archivos CSV y guardarlos nuevamente, manteniendo la integridad
+ * de los datos del sistema.
+ * 
+ * @see Cliente
+ * @see Mascota
  */
 public class Persistencia {
-   
 
     /**
      * Carga una lista de clientes desde un archivo CSV y los agrega a la lista proporcionada.
+     * Cada línea del archivo CSV se convierte en un objeto {@link Cliente} que se añade a la lista.
      * 
      * @param listaClientes La lista de clientes donde se cargarán los datos.
      * @throws IOException Si ocurre un error de entrada/salida al leer el archivo.
@@ -36,9 +42,10 @@ public class Persistencia {
     }
 
     /**
-     * Carga una lista de mascotas desde un archivo CSV y las agrega a la lista proporcionada.
+     * Carga una lista de mascotas desde un archivo CSV y las asocia a sus respectivos dueños.
+     * Cada línea del archivo CSV se convierte en un objeto {@link Mascota} que se asocia al {@link Cliente} correspondiente.
      * 
-     * @param listaMascotas La lista de mascotas donde se cargarán los datos.
+     * @param sistema El sistema que gestiona los clientes y mascotas, para poder buscar el dueño por su nombre.
      * @throws IOException Si ocurre un error de entrada/salida al leer el archivo.
      */
     public void cargarCsvMascotas(PetServiceManagement sistema) throws IOException {
@@ -64,9 +71,9 @@ public class Persistencia {
         lectorCsv.close();
     }
 
-
     /**
-     * Guarda una lista de clientes en un archivo CSV.
+     * Guarda una lista de clientes en un archivo CSV. Cada cliente se guarda como una línea en el archivo, 
+     * con sus datos separados por comas.
      * 
      * @param listaClientes La lista de clientes que se desea guardar.
      * @throws IOException Si ocurre un error de entrada/salida al escribir en el archivo.
@@ -80,10 +87,10 @@ public class Persistencia {
 
         for (Cliente cliente : listaClientes) {
             String linea = cliente.getNombre() + "," +
-                            cliente.getRut() + "," +
-                            cliente.getDireccion() + "," +
-                            cliente.getNumeroTelefono() + "," +
-                            cliente.getCorreoElectronico();
+                           cliente.getRut() + "," +
+                           cliente.getDireccion() + "," +
+                           cliente.getNumeroTelefono() + "," +
+                           cliente.getCorreoElectronico();
             pw.println(linea);
         }
         pw.close();
@@ -93,7 +100,8 @@ public class Persistencia {
     }
 
     /**
-     * Guarda una lista de mascotas en un archivo CSV.
+     * Guarda una lista de mascotas en un archivo CSV. Cada mascota se guarda como una línea en el archivo,
+     * con sus datos separados por comas.
      * 
      * @param listaMascotas La lista de mascotas que se desea guardar.
      * @throws IOException Si ocurre un error de entrada/salida al escribir en el archivo.
