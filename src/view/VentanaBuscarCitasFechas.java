@@ -5,6 +5,7 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 /**
@@ -18,6 +19,7 @@ public class VentanaBuscarCitasFechas extends javax.swing.JFrame {
      */
     public VentanaBuscarCitasFechas() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
