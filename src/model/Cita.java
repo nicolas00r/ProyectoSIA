@@ -52,6 +52,6 @@ public class Cita{
     
     @Override
     public String toString(){
-        return tipoDeServicio+"¿¿¿"+fecha+"¿¿¿"+hora+"¿¿¿"+descripcion+"¿¿¿"+id;
+        return mascota.getNombreMascota()+"¿¿¿"+mascota.getNombreDueño()+"¿¿¿"+tipoDeServicio+"¿¿¿"+fecha+"¿¿¿"+hora+"¿¿¿"+descripcion+"¿¿¿"+id+"\n";
     }
 }

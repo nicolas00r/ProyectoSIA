@@ -5,19 +5,33 @@
 package view;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author 12212
  */
 public class VentanaMostrarHistorialServicios extends javax.swing.JFrame {
-
+    private String ss;
     /**
      * Creates new form NewJFrame
      */
-    public VentanaMostrarHistorialServicios() {
+    public VentanaMostrarHistorialServicios(String s) {
+        ss = s;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        String [] arr = ss.split("\n");
+        DefaultTableModel model = (DefaultTableModel) tableCitas1.getModel();
+        
+        if(arr[0].equals("")){
+            return;
+        }
+       
+        for(int i = 0; i < arr.length; i++){
+            String[] cc = arr[i].split("¿¿¿");
+            model.addRow(cc);
+        }
     }
 
     /**
@@ -29,27 +43,81 @@ public class VentanaMostrarHistorialServicios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableCitas1 = new javax.swing.JTable();
+        buttonEliminar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        jLabel2.setText("Listado citas");
+
+        tableCitas1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mascota", "Dueño", "Tipo de Servicio", "Fecha", "Hora", "Descripción", "ID Cita"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, true, false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tableCitas1);
+
+        buttonEliminar1.setText("Eliminar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(255, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+            .addGap(0, 728, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 331, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addGap(0, 332, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(14, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(31, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 327, Short.MAX_VALUE)
+                    .addComponent(buttonEliminar1)
+                    .addGap(0, 328, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(241, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(36, 36, 36))
+            .addGap(0, 439, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 211, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addGap(0, 212, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 208, Short.MAX_VALUE)
+                    .addComponent(buttonEliminar1)
+                    .addGap(0, 208, Short.MAX_VALUE)))
         );
 
         pack();
@@ -88,12 +156,15 @@ public class VentanaMostrarHistorialServicios extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaMostrarHistorialServicios().setVisible(true);
+                new VentanaMostrarHistorialServicios("s").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonEliminar1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tableCitas1;
     // End of variables declaration//GEN-END:variables
 }

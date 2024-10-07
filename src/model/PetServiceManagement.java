@@ -56,7 +56,7 @@ public class PetServiceManagement{
     }
 
     public Mascota obtenerMascota(Cliente c, int id){
-        return c.getMascota(id);
+        return c.obtenerMascota(id);
     }
     
     public void eliminarMascota(Cliente c, Mascota m){
@@ -68,7 +68,7 @@ public class PetServiceManagement{
     }
     
     public void entregarListadoCitasN(Mascota m){
-        m.listarCitasN();
+        m.listarCitas();
     }
     
     public void eliminarCita(Mascota m, Cita d){
@@ -77,6 +77,21 @@ public class PetServiceManagement{
     
     public Cita obtenerCita(Mascota m, String id){
         return m.obtenerCita(id);
+    }
+    
+    public String listarCitasTotales(){
+        String ret;
+        ret = "";
+        
+        for(int i = 0; i < clientes.totalClientes(); i++){
+            Cliente c = clientes.obtenerCliente(i);
+            for(int j = 0; j < c.totalMascotas(); j++){
+                Mascota m = c.obtenerMascota(j, true);
+                ret += m.listarCitas();
+            }
+        }
+        
+        return ret;
     }
     
     private void cargarDatos() {

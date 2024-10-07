@@ -33,6 +33,7 @@ public class VentanaEliminarCita extends javax.swing.JFrame {
         
         if(arr[0].equals("")){
             JOptionPane.showMessageDialog(null, "El cliente no posee citas");
+            this.id = -1;
             return;
         }
        
@@ -65,14 +66,14 @@ public class VentanaEliminarCita extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tipo de Servicio", "Fecha", "Hora", "Descripción", "ID Cita"
+                "Mascota", "Dueño", "Tipo de Servicio", "Fecha", "Hora", "Descripción", "ID Cita"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

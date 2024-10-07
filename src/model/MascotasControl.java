@@ -52,6 +52,10 @@ public class MascotasControl {
         return mascota;
     }
     
+    public Mascota obtenerMascotaPorUbicacion(int i){
+        return lista.get(i);
+    }
+    
     public void eliminarMascota(Mascota m){
         String nombre = m.getNombreMascota();
         int id = m.getId();
@@ -59,5 +63,9 @@ public class MascotasControl {
         lista.remove(m);
         mascotasXNombre.remove(nombre);
         mascotasXId.remove(id);
+    }
+    
+    public int totalMascotas(){
+        return lista.size();
     }
 }

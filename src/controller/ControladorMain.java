@@ -473,7 +473,7 @@ public class ControladorMain implements ActionListener{
             
             if (m != null) {
                 subEliminarCita.dispose();
-                subEliminarCita2 = new VentanaEliminarCita(m.listarCitasN(), c.getRut(), idMascota);
+                subEliminarCita2 = new VentanaEliminarCita(m.listarCitas(), c.getRut(), idMascota);
                 subEliminarCita2.getButtonEliminar().addActionListener(this);
                 subEliminarCita2.setVisible(true);
             } else {
@@ -483,6 +483,10 @@ public class ControladorMain implements ActionListener{
         }
         
         if(subEliminarCita2 != null && ae.getSource() == subEliminarCita2.getButtonEliminar()){
+            if(subEliminarCita2.getId() == -1){
+                subEliminarCita2.dispose();
+               return;
+            }
             Cliente c = sistema.obtenerCliente(subEliminarCita2.getRutDueño());
             Mascota m = sistema.obtenerMascota(c, subEliminarCita2.getId());
             Cita cita = sistema.obtenerCita(m, subEliminarCita2.getCitaSeleccionada());
@@ -507,14 +511,12 @@ public class ControladorMain implements ActionListener{
         
         if(ae.getSource() == main.getMostrarMascotas()){
             mostrarMascotas = new VentanaMostrarMascotas(sistema.entregarListadoMascotasTotal());
-       
             mostrarMascotas.setVisible(true);  
             return;
         }
         
         if(ae.getSource() == main.getMostrarHistorialServicios()){
-            mostrarServicios = new VentanaMostrarHistorialServicios();
-       
+            mostrarServicios = new VentanaMostrarHistorialServicios(sistema.listarCitasTotales());
             mostrarServicios.setVisible(true);  
             return;
         }

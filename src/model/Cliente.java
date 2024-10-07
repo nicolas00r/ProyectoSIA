@@ -59,12 +59,16 @@ public class Cliente{
     public String listarMascotas(){
         return mascotas.listarMascotas();
     }
- 
-    public Mascota getMascota(String nombreMascota){ return mascotas.obtenerMascotaPorNombre(nombreMascota.toUpperCase());}
-
-    public Mascota getMascota(int idMascota){ return mascotas.obtenerMascotaPorId(idMascota);}
+    
+    public Mascota obtenerMascota(int idMascota){ return mascotas.obtenerMascotaPorId(idMascota);}
+    
+    public Mascota obtenerMascota(int j, boolean esPorPosicion){ return mascotas.obtenerMascotaPorUbicacion(j);}
     
     public void eliminarMascota(Mascota m){
         mascotas.eliminarMascota(m);
+    }
+    
+    public int totalMascotas(){
+        return mascotas.totalMascotas();
     }
 }

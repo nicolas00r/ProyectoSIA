@@ -47,7 +47,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         MostrarMascotas = new javax.swing.JMenuItem();
         MostrarHistorialServicios = new javax.swing.JMenuItem();
         Funcionalidades = new javax.swing.JMenu();
-        Test = new javax.swing.JMenuItem();
+        BuscarCitasXFecha = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,14 +178,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Funcionalidades.setMnemonic('h');
         Funcionalidades.setText("Funcionalidades");
 
-        Test.setMnemonic('c');
-        Test.setText("Test");
-        Test.addActionListener(new java.awt.event.ActionListener() {
+        BuscarCitasXFecha.setMnemonic('c');
+        BuscarCitasXFecha.setText("Buscar citas por fecha");
+        BuscarCitasXFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TestActionPerformed(evt);
+                BuscarCitasXFechaActionPerformed(evt);
             }
         });
-        Funcionalidades.add(Test);
+        Funcionalidades.add(BuscarCitasXFecha);
 
         menuBar.add(Funcionalidades);
 
@@ -205,7 +205,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         pack();
@@ -299,9 +299,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_MostrarHistorialServiciosActionPerformed
 
-    private void TestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TestActionPerformed
+    private void BuscarCitasXFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarCitasXFechaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TestActionPerformed
+    }//GEN-LAST:event_BuscarCitasXFechaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,6 +339,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem BuscarCitasXFecha;
     private javax.swing.JMenuItem EliminarCita;
     private javax.swing.JMenuItem EliminarCliente;
     private javax.swing.JMenuItem EliminarMascota;
@@ -354,7 +355,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem RealizarCita;
     private javax.swing.JMenuItem RegistrarCliente;
     private javax.swing.JMenuItem RegistrarMascota;
-    private javax.swing.JMenuItem Test;
     private javax.swing.JMenu VistaDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar menuBar;

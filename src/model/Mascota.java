@@ -13,14 +13,12 @@ public class Mascota{
     protected int id;
     protected static int contadorId = 0;
  
-    protected static ArrayList<Cita> listaCitas;
-    protected ArrayList<Cita> listaHistorialCitas;
+    protected ArrayList<Cita> listaCitas;
 
     // Constructor
     public Mascota(String nombreMascota, String nombreDueño, String especie, String edad){
         id = ++contadorId;
         listaCitas = new ArrayList<>();
-        listaHistorialCitas = new ArrayList<>();
         setNombreMascota(nombreMascota);
         setNombreDueño(nombreDueño);
         setEspecie(especie);
@@ -30,7 +28,6 @@ public class Mascota{
     public Mascota(){
         id = ++contadorId;
         listaCitas = new ArrayList<>();
-        listaHistorialCitas = new ArrayList<>();
     }
 
     // Setters y Getters
@@ -64,7 +61,7 @@ public class Mascota{
         listaCitas.add(c);
     }
     
-    public String listarCitasN(){
+    public String listarCitas(){
         String ret;
         ret = "";
         
