@@ -52,10 +52,7 @@ public class Mascota{
 
     public int getId(){return id;}
     
-    public ArrayList<Cita> getListaCitas(){ return listaCitas;}
-
     public void setEdad(String edad) {
-        Verificar.verificarNumero(edad);
         this.edad = Integer.parseInt(edad);
     }
 
@@ -65,23 +62,6 @@ public class Mascota{
     @Override
     public String toString(){
         return nombreMascota+", "+especie+", "+edad+", "+nombreDueño+", "+id+"\n";
-    }
-    
-    public void agregarCita(Cita cita, int idCita){
-        mapaCitas.put(idCita, cita);
-        listaCitas.add(cita);
-    }
-
-    public boolean eliminarCita(int idCita){
-        if(!mapaCitas.containsKey(idCita)){
-            System.out.println("Cita no existe");
-            return false;
-        }
-
-        Cita cita = mapaCitas.get(idCita);
-        listaCitas.remove(cita);
-        mapaCitas.remove(idCita);
-        return true;
     }
 
     public Cita obtenerCita(int idCita){ return mapaCitas.get(idCita);}
@@ -95,50 +75,8 @@ public class Mascota{
         }
         return null;
     }
-
-    public boolean citasEstaVacio(){ return listaCitas.isEmpty();}
-
-    public void mostrarListaCitas() {
-    try {
-        if (listaCitas.isEmpty()) {
-            throw new NoSuchElementException("No hay citas registradas.");
-        }
-        for (Cita cita : listaCitas) {
-            cita.mostrarCita();
-        }
-    } catch (NoSuchElementException e) {
-        System.out.println(e.getMessage());
-    }
-}
-
+    
+    public ArrayList<Cita> getListaCitas(){ return listaCitas;}
 
     public void agregarServicio(Servicio servicio){ listaServicios.add(servicio);}
-
-    public void mostrarDatosMascota(){
-        System.out.println("------------------------");
-        System.out.println("Datos de la mascota:");
-        System.out.println("Nombre de la mascota: " + nombreMascota);
-        System.out.println("ID de la mascota: " + id);
-        System.out.println("Especie: " + especie);
-        System.out.println("Edad: " + edad);
-        System.out.println("------------------------");
-    }
-
-    public void mostrarHistorialServicios(){
-        if(listaServicios.size() == 0){
-            System.out.println("No existen servicios registrados en esta mascota");
-            return;
-        }
-
-        System.out.println("Lista de servicios realizados a " + nombreMascota + ":");
-        for(int i = 0; i < listaServicios.size(); i++){
-            Servicio servicio = listaServicios.get(i);
-            System.out.println("------------------------");
-            System.out.println("Servicio número " + (i + 1));
-            System.out.println("Tipo de servicio: " + servicio.getTipo());
-            System.out.println("Fecha del procedimiento: " + servicio.getFecha());
-            System.out.println("Descripción: " + servicio.getDescripcion());
-            System.out.println("------------------------");
-        }
-    }
 } 

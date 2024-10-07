@@ -25,10 +25,4 @@ public class Servicio{
     public String getDescripcion(){ return descripcion;}
 
     public void setDescripcion(String descripcion){this.descripcion = descripcion;}
-
-    // Métodos
-    public void mostrarServicio(){
-        System.out.println("Tipo servicio: " + tipo);
-        System.out.println("Descripcion :" + descripcion);
-    }
 }

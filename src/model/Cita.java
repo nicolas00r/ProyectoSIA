@@ -51,14 +51,4 @@ public class Cita{
     public ArrayList<Servicio> getServicios(){
         return listaServicios;
     }
-    
-    
-
-    // Métodos
-    public void mostrarCita(){
-        servicio.mostrarServicio();
-        System.out.println("Fecha: " + fecha);
-        System.out.println("Hora: " + hora);
-        System.out.println("Id de la cita: " + idCita);
-    }
 }

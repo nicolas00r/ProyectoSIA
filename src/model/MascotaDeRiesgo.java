@@ -20,7 +20,6 @@ public class MascotaDeRiesgo extends Mascota{
    public String getCondicion(){return condicion;}
    
    public void setCuidadosEspeciales(String cuidadosEspeciales){
-        Verificar.verificarCadena(cuidadosEspeciales);
         this.cuidadosEspeciales = cuidadosEspeciales;
     }
     

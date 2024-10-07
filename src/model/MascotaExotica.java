@@ -24,14 +24,12 @@ public class MascotaExotica extends Mascota{
     }
     
     public void setHabitat(String habitat){
-        Verificar.verificarCadena(habitat);
         this.habitat = habitat;
     }
     
     public String getHabitat(){return habitat;}
     
     public void setNivelPeligrosidad(String nivelPeligrosidad){
-        Verificar.verificarCadena(nivelPeligrosidad);
         this.nivelPeligrosidad = nivelPeligrosidad;
     }
     
