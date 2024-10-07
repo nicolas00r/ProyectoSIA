@@ -13,17 +13,14 @@ public class Mascota{
     protected int id;
     protected static int contadorId = 0;
  
-    protected static HashMap<Integer,Cita> mapaCitas;
     protected static ArrayList<Cita> listaCitas;
-
-    protected ArrayList<Servicio> listaServicios;
+    protected ArrayList<Cita> listaHistorialCitas;
 
     // Constructor
     public Mascota(String nombreMascota, String nombreDueño, String especie, String edad){
         id = ++contadorId;
-        listaServicios = new ArrayList<>();
-        mapaCitas = new HashMap<>();
         listaCitas = new ArrayList<>();
+        listaHistorialCitas = new ArrayList<>();
         setNombreMascota(nombreMascota);
         setNombreDueño(nombreDueño);
         setEspecie(especie);
@@ -32,9 +29,8 @@ public class Mascota{
     
     public Mascota(){
         id = ++contadorId;
-        listaServicios = new ArrayList<>();
-        mapaCitas = new HashMap<>();
         listaCitas = new ArrayList<>();
+        listaHistorialCitas = new ArrayList<>();
     }
 
     // Setters y Getters
@@ -64,11 +60,13 @@ public class Mascota{
         return nombreMascota+", "+especie+", "+edad+", "+nombreDueño+", "+id+"\n";
     }
 
-    public Cita obtenerCita(int idCita){ return mapaCitas.get(idCita);}
-
+    public void realizarCita(Cita c){
+        listaCitas.add(c);
+    }
+    
     public Cita obtenerCita(String fecha, String hora) {
-        for (int i = 0; i < listaCitas.size(); i++) {
-            Cita cita = listaCitas.get(i);
+        for (int i = 0; i < listaHistorialCitas.size(); i++) {
+            Cita cita = listaHistorialCitas.get(i);
             if (cita.getFecha().equals(fecha) && cita.getHora().equals(hora)) {
                 return cita;
             }
@@ -77,6 +75,4 @@ public class Mascota{
     }
     
     public ArrayList<Cita> getListaCitas(){ return listaCitas;}
-
-    public void agregarServicio(Servicio servicio){ listaServicios.add(servicio);}
 } 

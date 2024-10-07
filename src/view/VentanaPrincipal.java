@@ -41,7 +41,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         EliminarMascota = new javax.swing.JMenuItem();
         GestionCitas = new javax.swing.JMenu();
         RealizarCita = new javax.swing.JMenuItem();
-        ModificarCita = new javax.swing.JMenuItem();
         EliminarCita = new javax.swing.JMenuItem();
         ConfirmarCita = new javax.swing.JMenuItem();
         VistaDatos = new javax.swing.JMenu();
@@ -133,15 +132,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         GestionCitas.add(RealizarCita);
-
-        ModificarCita.setMnemonic('a');
-        ModificarCita.setText("Modificar Cita");
-        ModificarCita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarCitaActionPerformed(evt);
-            }
-        });
-        GestionCitas.add(ModificarCita);
 
         EliminarCita.setMnemonic('c');
         EliminarCita.setText("Eliminar Cita");
@@ -259,10 +249,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return RealizarCita;
     }
     
-    public JMenuItem getModificarCita(){
-        return ModificarCita;
-    }
-    
     public JMenuItem getEliminarCita(){
         return EliminarCita;
     }
@@ -310,10 +296,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void RealizarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RealizarCitaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RealizarCitaActionPerformed
-
-    private void ModificarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarCitaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ModificarCitaActionPerformed
 
     private void EliminarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCitaActionPerformed
         // TODO add your handling code here:
@@ -383,7 +365,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu GestionCitas;
     private javax.swing.JMenu GestionClientes;
     private javax.swing.JMenu GestionMascotas;
-    private javax.swing.JMenuItem ModificarCita;
     private javax.swing.JMenuItem ModificarCliente;
     private javax.swing.JMenuItem ModificarMascota;
     private javax.swing.JMenuItem MostrarClientes;

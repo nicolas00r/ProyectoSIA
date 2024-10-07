@@ -41,24 +41,6 @@ public class Persistencia {
         }
         lectorCsv.close();
     }
-
-    
-    public void cargarCsvServicios(List<Servicio> listaServicios) throws IOException {
-        BufferedReader lectorCsv = new BufferedReader(new InputStreamReader(new FileInputStream("src/datos/servicios.csv"), "UTF-8"));
-        String linea;
-
-        while ((linea = lectorCsv.readLine()) != null) {
-            String[] datosServicio = linea.split(",");
-            String tipo = datosServicio[0];
-            String fecha = datosServicio[1];
-            String descripcion = datosServicio[2];
-
-            Servicio servicio = new Servicio(tipo, fecha, descripcion);
-            listaServicios.add(servicio);
-        }
-        lectorCsv.close();
-    }
-
     
     public void guardarCsvClientes(List<Cliente> listaClientes) throws IOException {
         File file = new File("src/datos/clientes2.csv");
@@ -96,26 +78,6 @@ public class Persistencia {
                            mascota.getEspecie() + "," +
                            mascota.getEdad() + "," +
                            mascota.getId();
-            pw.println(linea);
-        }
-        pw.close();
-        bw.close();
-        osw.close();
-        fos.close();
-    }
-
-    
-    public void guardarCsvServicios(List<Servicio> listaServicios) throws IOException {
-        File file = new File("src/datos/servicios2.csv");
-        FileOutputStream fos = new FileOutputStream(file, false);
-        OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
-        BufferedWriter bw = new BufferedWriter(osw);
-        PrintWriter pw = new PrintWriter(bw);
-
-        for (Servicio servicio : listaServicios) {
-            String linea = servicio.getTipo() + "," +
-                           servicio.getFecha() + "," +
-                           servicio.getDescripcion();
             pw.println(linea);
         }
         pw.close();
