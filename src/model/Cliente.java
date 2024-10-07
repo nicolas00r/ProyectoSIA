@@ -1,8 +1,6 @@
 package model;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Cliente{
     // Variables de instancia
@@ -12,10 +10,7 @@ public class Cliente{
     private String numeroTelefono;
     private String correoElectronico;
     private MascotasControl mascotas;
-    
-    private ArrayList<Mascota> listaMascotas;
-    private HashMap<String,Mascota> mascotasXNombre;
-    private HashMap<Integer, Mascota> mascotasXId;
+
 
     // Constructor
     public Cliente(String nombre, String rut, String direccion, String numeroTelefono, String correoElectronico){
@@ -25,15 +20,10 @@ public class Cliente{
         this.direccion = direccion;
         this.correoElectronico = correoElectronico;
         mascotas = new MascotasControl();
-        listaMascotas = new ArrayList<>();
-        mascotasXNombre = new HashMap<>();
-        mascotasXId = new HashMap<>();
     }
     
     public Cliente(){
-        listaMascotas = new ArrayList<>();
-        mascotasXNombre = new HashMap<>();
-        mascotasXId = new HashMap<>();
+        mascotas = new MascotasControl();
     }
 
     // Setters y Getters
@@ -69,71 +59,12 @@ public class Cliente{
     public String listarMascotas(){
         return mascotas.listarMascotas();
     }
-    
-    public boolean listaEstaVacia(){ return listaMascotas.isEmpty();}
+ 
+    public Mascota getMascota(String nombreMascota){ return mascotas.obtenerMascotaPorNombre(nombreMascota.toUpperCase());}
 
-    public boolean existeMascota(String nombreMascota){ return mascotasXNombre.containsKey(nombreMascota.toUpperCase());}
-
-    public Mascota getMascota(String nombreMascota){ return mascotasXNombre.get(nombreMascota.toUpperCase());}
-
-    public Mascota getMascota(int idMascota){ return mascotasXId.get(idMascota);}
+    public Mascota getMascota(int idMascota){ return mascotas.obtenerMascotaPorId(idMascota);}
     
-    public void modificarMascota() throws IOException {
-    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-    
-    System.out.println("Bienvenido a la modificación de mascotas");
-    System.out.print("Ingrese el id de su mascota: ");
-    int idMascota = Integer.parseInt(lector.readLine());
-    
-    Mascota mascotaMod = getMascota(idMascota);
-    if (mascotaMod == null) {
-        System.out.println("No se encontró una mascota con ese ID.");
-        return; // Salir si no se encuentra la mascota
+    public void eliminarMascota(Mascota m){
+        mascotas.eliminarMascota(m);
     }
-    
-    System.out.println("Ingrese el nombre de su mascota: ");
-    mascotaMod.setNombreMascota(lector.readLine());
-    
-    System.out.println("Ingrese la edad de su mascota:");
-    mascotaMod.setEdad(lector.readLine());
-    
-    System.out.println("Ingrese la especie de su mascota");
-    mascotaMod.setEspecie(lector.readLine());
-    
-    System.out.println("Los datos de la mascota se han modificado con éxito");
-}
-    
-    public void eliminarMascota() throws IOException {
-    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-    
-    System.out.println("Bienvenido a la eliminación de mascotas");
-    System.out.print("Ingrese el nombre de su mascota: ");
-    String nombreMascota = lector.readLine();
-    
-    String nombreMascotaUpper = nombreMascota.toUpperCase();
-    if (!existeMascota(nombreMascotaUpper)) {
-        System.out.println("No se encontró una mascota con ese nombre.");
-        return;
-    }
-
-    Mascota mascotaAEliminar = getMascota(nombreMascotaUpper);
-    
-    listaMascotas.remove(mascotaAEliminar);
-    mascotasXNombre.remove(nombreMascotaUpper);
-    mascotasXId.remove(mascotaAEliminar.getId());
-
-    System.out.println("Se ha eliminado a " + mascotaAEliminar.getNombreMascota() + " del registro correctamente.");
-}
-
-
-
-    public void mostrarMascotas(){
-        if(listaMascotas.size() == 0){System.out.println("No existen mascotas registradas para el usuario");}
-        else
-            for(int i = 0; i <listaMascotas.size(); i++){
-                Mascota mascota = listaMascotas.get(i);
-                mascota.mostrarDatosMascota();
-            }
-    }
-   
 }

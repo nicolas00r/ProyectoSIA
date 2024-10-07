@@ -147,7 +147,7 @@ public class VentanaModificarCliente extends javax.swing.JFrame {
 
         if (selectedRow != -1){
             for(int i = 0; i < 5; i++){
-                String[] cc = s.split(", ");
+                String[] cc = s.split("¿¿¿");
 
                 model.setValueAt(cc[i], selectedRow, i);
             }

@@ -27,7 +27,7 @@ public class PetServiceManagement{
         listaMascotas = new ArrayList<>();
         listaServicios = new ArrayList<>();
         cargarDatos(); // <--- Aquí se llama al método cargarDatos
-        llenadoDatos(); // FUNCIÓN TEMPORAL PARA RELLENAR DATOS
+        //llenadoDatos(); // FUNCIÓN TEMPORAL PARA RELLENAR DATOS
         
     }
 
@@ -64,50 +64,14 @@ public class PetServiceManagement{
         return ret;
     }
 
-    public void detallesMascotas()throws IOException, ClienteNoEncontradoException{
-        Helper.limpiarPantalla();
-        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Ingrese su RUT:");
-        String rutCLiente = lector.readLine();
-
-        if(!clientes.eliminarCliente(rutCLiente)){
-            System.out.println("El usuario no se encuentra registrado en el sistema, por favor registrese a través de la opción número 1");
-            return;
-
-        }
-        Cliente cliente = clientes.obtenerCliente(rutCLiente);
-
-        if(cliente.listaEstaVacia()){
-            System.out.println("El cliente no posee mascotas registradas a su nombre");
-            return;
-        }
-
-        System.out.println("Mostrando detalle de mascotas");
-        cliente.mostrarMascotas();
-
-        System.out.println("¿Desea ver el historial de servicios de una de las mascotas? Si/No");
-        String respuesta = lector.readLine();
-        if(respuesta.toUpperCase().equals("SI")){
-            Mascota mascota = Helper.identificarMascota(cliente);
-
-            mascota.mostrarHistorialServicios();
-        }
+    public Mascota obtenerMascota(Cliente c, int id){
+        return c.getMascota(id);
     }
-
-    public void gestionarCitas() throws IOException, ClienteNoEncontradoException{
-        Helper.limpiarPantalla();
-        BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(("Ingrese su RUT:"));
-        String rutCLiente = lector.readLine();
-
-        if(!clientes.existeCliente(rutCLiente)){
-            System.out.println("El usuario no se encuentra registrado en el sistema, por favor registrese a través de la opción número 1");
-            return;
-        }
-        Cliente cliente = clientes.obtenerCliente(rutCLiente);
-
-        gestorCitas.menu(cliente);
+    
+    public void eliminarMascota(Cliente c, Mascota m){
+        c.eliminarMascota(m);
     }
+    
     private void cargarDatos() {
         try {
             persistencia.cargarCsvClientes(listaClientes);

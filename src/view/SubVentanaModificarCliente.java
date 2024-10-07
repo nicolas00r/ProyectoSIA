@@ -24,7 +24,7 @@ public class SubVentanaModificarCliente extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         for(int i = 0; i < 5; i++){
-            String[] cc = ss.split(", ");
+            String[] cc = ss.split("¿¿¿");
             
             switch(i){
                 case 0 -> textNombre.setText(cc[0]);

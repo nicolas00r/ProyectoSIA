@@ -3,17 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller;
-import java.io.IOException;
 import java.awt.event.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.util.ArrayList;
-import java.util.List;
 import model.*;
-import model.Persistencia;
 
 import view.*;
-
 
 /**
  *
@@ -26,8 +21,8 @@ public class ControladorMain implements ActionListener{
     private VentanaModificarCliente modificarCliente;
     private VentanaEliminarCliente eliminarCliente;
     private VentanaRegistrarMascota registrarMascota;
-    private VentanaModificarMascota modificarMascota;
-    private VentanaEliminarMascota eliminarMascota;
+    private VentanaSeleccionarCliente modificarMascota;
+    private VentanaSeleccionarCliente eliminarMascota;
     private VentanaRealizarCita realizarCita;
     private VentanaModificarCita modificarCita;
     private VentanaEliminarCita eliminarCita;
@@ -37,13 +32,14 @@ public class ControladorMain implements ActionListener{
     private VentanaMostrarHistorialServicios mostrarServicios;
     private SubVentanaModificarCliente subModificarCliente;
     private SubVentanaRegistrarMascota subRegistrarMascota;
-    
+    private VentanaSeleccionarMascota subModificarMascota;
+    private SubVentanaModificarMascota2 subModificarMascota2;
+    private VentanaSeleccionarMascota subEliminarMascota;
     
     
     public void iniciar(){
         sistema = new PetServiceManagement();
-       
-        
+     
         main = new VentanaPrincipal();
         
         main.getRegistrarCliente().addActionListener(this);
@@ -271,16 +267,122 @@ if (subRegistrarMascota != null && ae.getSource() == subRegistrarMascota.getButt
 
         
         if(ae.getSource() == main.getModificarMascota()){
-            modificarMascota = new VentanaModificarMascota(sistema.entregarListadoClientes());
-       
+            modificarMascota = new VentanaSeleccionarCliente(sistema.entregarListadoClientes());
+            modificarMascota.getButtonSeleccionarCliente().addActionListener(this);       
             modificarMascota.setVisible(true);    
             return;
         }
         
+        if(modificarMascota != null && ae.getSource() == modificarMascota.getButtonSeleccionarCliente()){
+            String clienteSeleccionado = modificarMascota.getTextRut().getText();
+            
+            Cliente c = sistema.obtenerCliente(clienteSeleccionado);
+            
+            if (clienteSeleccionado != null) {
+                modificarMascota.dispose();
+                subModificarMascota = new VentanaSeleccionarMascota(c.listarMascotas(), c.getRut());
+                if(subModificarMascota.getRutDueño().equals("-1"))
+                    return;
+                subModificarMascota.getButtonSeleccionar().addActionListener(this);
+                subModificarMascota.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un cliente para válido.");
+            }
+            return;
+        }
+        
+        if(subModificarMascota != null && ae.getSource() == subModificarMascota.getButtonSeleccionar()){
+            Cliente c = sistema.obtenerCliente(subModificarMascota.getRutDueño());
+            int idMascota = Integer.parseInt(subModificarMascota.getMascotaSeleccionada());
+            Mascota m = sistema.obtenerMascota(c, idMascota);
+            String rutDueño = c.getRut();
+            
+            if (m != null) {
+                subModificarMascota2 = new SubVentanaModificarMascota2(m.toString(), rutDueño);
+                subModificarMascota.dispose();
+                subModificarMascota2.getButtonConfirmar().addActionListener(this);
+                subModificarMascota2.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione una mascota para modificar.");
+            }
+            return;
+        }
+    
+        if(subModificarMascota2 != null && ae.getSource() == subModificarMascota2.getButtonConfirmar()){
+            Cliente c = sistema.obtenerCliente(subModificarMascota2.getRutDueño());
+            Mascota m = sistema.obtenerMascota(c, subModificarMascota2.getIdMascota());
+            
+            if(subModificarMascota2.getCheckRiesgo().isSelected()){
+                sistema.eliminarMascota(c, m);
+                MascotaDeRiesgo a = new MascotaDeRiesgo();
+                a.setNombreDueño(c.getNombre());
+                a.setNombreMascota(subModificarMascota2.getTextNombre().getText());
+                a.setEspecie(subModificarMascota2.getTextEspecie().getText());
+                a.setEdad(subModificarMascota2.getTextEdad().getText());
+                a.setCondicion(subModificarMascota2.getTextCondicion().getText());
+                c.registrarMascota(a);
+            } else if(subModificarMascota2.getCheckExotica().isSelected()){
+                sistema.eliminarMascota(c, m);
+                MascotaExotica b = new MascotaExotica();
+                b.setNombreDueño(c.getNombre());
+                b.setNombreMascota(subModificarMascota2.getTextNombre().getText());
+                b.setEspecie(subModificarMascota2.getTextEspecie().getText());
+                b.setEdad(subModificarMascota2.getTextEdad().getText());
+                b.setHabitat(subModificarMascota2.getTextHabitat().getText());
+                b.setNivelPeligrosidad(subModificarMascota2.getTextPeligrosidad().getText());
+                c.registrarMascota(b);
+            } else{
+                sistema.eliminarMascota(c, m);
+                Mascota d = new Mascota();
+                d.setNombreDueño(c.getNombre());
+                d.setNombreMascota(subModificarMascota2.getTextNombre().getText());
+                d.setEspecie(subModificarMascota2.getTextEspecie().getText());
+                d.setEdad(subModificarMascota2.getTextEdad().getText());
+                c.registrarMascota(d);
+            }
+           
+            JOptionPane.showMessageDialog(null, "Mascota modificado correctamente.");
+            subModificarMascota2.dispose();
+        }
+                
         if(ae.getSource() == main.getEliminarMascota()){
-            eliminarMascota = new VentanaEliminarMascota();
-       
-            eliminarMascota.setVisible(true);  
+            eliminarMascota = new VentanaSeleccionarCliente(sistema.entregarListadoClientes());
+            eliminarMascota.getButtonSeleccionarCliente().addActionListener(this);       
+            eliminarMascota.setVisible(true);    
+            return;
+        }
+        
+        if(eliminarMascota != null && ae.getSource() == eliminarMascota.getButtonSeleccionarCliente()){
+            String clienteSeleccionado = eliminarMascota.getTextRut().getText();
+            
+            Cliente c = sistema.obtenerCliente(clienteSeleccionado);
+            
+            if (clienteSeleccionado != null) {
+                eliminarMascota.dispose();
+                subEliminarMascota = new VentanaSeleccionarMascota(c.listarMascotas(), c.getRut());
+                if(subEliminarMascota.getRutDueño().equals("-1"))
+                    return;
+                subEliminarMascota.getButtonSeleccionar().addActionListener(this);
+                subEliminarMascota.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un cliente para válido.");
+            }
+            return;
+        }
+
+        if(subEliminarMascota != null && ae.getSource() == subEliminarMascota.getButtonSeleccionar()){
+            Cliente c = sistema.obtenerCliente(subEliminarMascota.getRutDueño());
+            int idMascota = Integer.parseInt(subEliminarMascota.getMascotaSeleccionada());
+            Mascota m = sistema.obtenerMascota(c, idMascota);
+            
+            if (m != null) {
+                sistema.eliminarMascota(c, m);
+                JOptionPane.showMessageDialog(null, "Mascota eliminada correctamente.");
+                subEliminarMascota.dispose();
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione una mascota para eliminar.");
+            }
             return;
         }
         

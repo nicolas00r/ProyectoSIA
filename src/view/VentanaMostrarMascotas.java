@@ -26,7 +26,9 @@ public class VentanaMostrarMascotas extends javax.swing.JFrame {
         DefaultTableModel modelMR = (DefaultTableModel) tableMRiesgo.getModel();
         DefaultTableModel modelME = (DefaultTableModel) tableMExoticas.getModel();
 
-       
+       if(arr[0].equals("")){
+            return;
+        }
         for(int i = 0; i < arr.length; i++){
             String[] cc = arr[i].split(", ");
             

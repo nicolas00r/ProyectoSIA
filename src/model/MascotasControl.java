@@ -51,4 +51,13 @@ public class MascotasControl {
         Mascota mascota = mascotasXId.get(id);
         return mascota;
     }
+    
+    public void eliminarMascota(Mascota m){
+        String nombre = m.getNombreMascota();
+        int id = m.getId();
+        
+        lista.remove(m);
+        mascotasXNombre.remove(nombre);
+        mascotasXId.remove(id);
+    }
 }
