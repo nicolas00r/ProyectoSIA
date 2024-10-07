@@ -57,6 +57,7 @@ public class ControladorMain implements ActionListener{
         main.getMostrarMascotas().addActionListener(this);
         main.getMostrarHistorialServicios().addActionListener(this);
         main.getBuscarCitasFechas().addActionListener(this);
+        main.getSalirGuadar().addActionListener(this);
         
         main.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         main.setVisible(true);
@@ -542,5 +543,15 @@ public class ControladorMain implements ActionListener{
             subBuscarCitasFechas.setVisible(true);            
             return;
         }
+        
+        if(ae.getSource() == main.getSalirGuadar()){
+            exportarTXT();
+            sistema.guardarDatos();
+            System.exit(0);
+        }
+    }
+    
+    public void exportarTXT(){
+        sistema.exportClientesToFile(sistema.entregarListadoClientes(), "Reporte.txt");
     }
 }

@@ -4,6 +4,7 @@
  */
 package view;
 
+import javax.swing.JButton;
 import javax.swing.JMenuItem;
 
 /**
@@ -30,6 +31,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        buttonSalirGuardar = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         GestionClientes = new javax.swing.JMenu();
         RegistrarCliente = new javax.swing.JMenuItem();
@@ -52,6 +54,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setEnabled(false);
+
+        buttonSalirGuardar.setText("Salir y guardar");
 
         GestionClientes.setMnemonic('f');
         GestionClientes.setText("Gestionar Clientes");
@@ -195,17 +199,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(162, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(buttonSalirGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addComponent(buttonSalirGuardar))
         );
 
         pack();
@@ -257,6 +267,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public JMenuItem getBuscarCitasFechas(){
         return BuscarCitasFechas;
+    }
+    
+    public JButton getSalirGuadar(){
+        return buttonSalirGuardar;
     }
     
     private void RegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarClienteActionPerformed
@@ -360,6 +374,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem RegistrarCliente;
     private javax.swing.JMenuItem RegistrarMascota;
     private javax.swing.JMenu VistaDatos;
+    private javax.swing.JButton buttonSalirGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

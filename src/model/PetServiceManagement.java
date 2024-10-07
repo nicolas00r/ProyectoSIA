@@ -3,7 +3,7 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.*;
 
 public class PetServiceManagement{
 
@@ -23,7 +23,7 @@ public class PetServiceManagement{
     }
 
     // Métodos    
-    public void registrarCliente(Cliente c){
+    public void registrarCliente(Cliente c)throws ClienteDuplicadoException{
         clientes.agregarCliente(c);
     }
     
@@ -112,25 +112,59 @@ public class PetServiceManagement{
     private void cargarDatos() {
         try {
             persistencia.cargarCsvClientes(listaClientes);
-            persistencia.cargarCsvMascotas(listaMascotas);
+            persistencia.cargarCsvMascotas(this); // Pasamos el sistema para asociar las mascotas
 
-            // Procesar los clientes cargados y registrarlos en el sistema
             for (Cliente cliente : listaClientes) {
-                clientes.agregarCliente(cliente);
+                try{
+                    clientes.agregarCliente(cliente);
+                }catch (ClienteDuplicadoException e){
+                    System.err.println("Error el cliente con RUT" + cliente.getRut() + "ya se encuentra registrado");
+                }
             }
         } catch (IOException e) {
-            // Manejar el error de carga sin mostrar mensajes, según tu preferencia
-            e.printStackTrace(); // Para propósitos de depuración
+            e.printStackTrace(); 
         }
     }
-    
+
+    /**
+     * Guarda los datos de clientes y mascotas en archivos CSV.
+     */
     public void guardarDatos() {
         try {
             persistencia.guardarCsvClientes(listaClientes);
             persistencia.guardarCsvMascotas(listaMascotas);
         } catch (IOException e) {
-            // Manejar el error de guardado sin mostrar mensajes, según tu preferencia
             e.printStackTrace(); // Para propósitos de depuración
+        }
+    }
+    // Obtiene el nombre del cliente.
+    public Cliente obtenerClientePorNombre(String nombreDueño) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getNombre().equalsIgnoreCase(nombreDueño)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+    
+    public void exportClientesToFile(String clientesData, String fileName){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))){
+            //Separar los clientes por "\n"
+            String[] clientes = clientesData.split("\n");
+            
+            for(String cliente : clientes){
+                String[] datosCliente = cliente.split("¿¿¿");
+                
+                for(String dato : datosCliente){
+                    writer.write(dato);
+                    writer.newLine();
+                }
+                
+                // Separar cada cliente con una linea en blanco
+                writer.newLine();
+            }
+        } catch(IOException e){
+            e.printStackTrace(); // Para propósitos de depuración            
         }
     }
     

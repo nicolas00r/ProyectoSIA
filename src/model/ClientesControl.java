@@ -20,7 +20,10 @@ public class ClientesControl {
        clientesXRut = new HashMap();
     }
     
-    public boolean agregarCliente(Cliente c){
+    public boolean agregarCliente(Cliente c)throws ClienteDuplicadoException {
+        if(clientesXRut.containsKey(c.getRut())){
+            throw new ClienteDuplicadoException("El cliente con RUT " + c.getRut() + " ya esta registrado.");
+        }
         clientesXRut.put(c.getRut(), c);
         return lista.add(c);
     }
@@ -37,11 +40,14 @@ public class ClientesControl {
     }
     
     public Cliente obtenerCliente(String rut){
-        Cliente c = clientesXRut.get(rut);
+       Cliente c = clientesXRut.get(rut);
         return c;
     }
     
     public Cliente obtenerCliente(int i){
+        if(i < 0 || i >= lista.size()){
+            throw new IndexOutOfBoundsException("Indice figura fuera de rango" + i);
+        }
         return lista.get(i);
     }
     

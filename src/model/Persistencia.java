@@ -4,8 +4,19 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+/**
+ * La clase Persistencia maneja la carga y almacenamiento de datos desde y hacia archivos CSV.
+ * Permite gestionar listas de clientes y mascotas, facilitando su persistencia en archivos externos.
+ */
 public class Persistencia {
+   
 
+    /**
+     * Carga una lista de clientes desde un archivo CSV y los agrega a la lista proporcionada.
+     * 
+     * @param listaClientes La lista de clientes donde se cargarán los datos.
+     * @throws IOException Si ocurre un error de entrada/salida al leer el archivo.
+     */
     public void cargarCsvClientes(List<Cliente> listaClientes) throws IOException {
         BufferedReader lectorCsv = new BufferedReader(new InputStreamReader(new FileInputStream("src/datos/clientes.csv"), "UTF-8"));
         String linea;
@@ -24,31 +35,49 @@ public class Persistencia {
         lectorCsv.close();
     }
 
-   
-    public void cargarCsvMascotas(List<Mascota> listaMascotas) throws IOException {
+    /**
+     * Carga una lista de mascotas desde un archivo CSV y las agrega a la lista proporcionada.
+     * 
+     * @param listaMascotas La lista de mascotas donde se cargarán los datos.
+     * @throws IOException Si ocurre un error de entrada/salida al leer el archivo.
+     */
+    public void cargarCsvMascotas(PetServiceManagement sistema) throws IOException {
         BufferedReader lectorCsv = new BufferedReader(new InputStreamReader(new FileInputStream("src/datos/mascotas.csv"), "UTF-8"));
         String linea;
 
         while ((linea = lectorCsv.readLine()) != null) {
             String[] datosMascota = linea.split(",");
+        
             String nombreMascota = datosMascota[0];
             String nombreDueño = datosMascota[1];
             String especie = datosMascota[2];
             String edad = datosMascota[3].trim();
 
             Mascota mascota = new Mascota(nombreMascota, nombreDueño, especie, edad);
-            listaMascotas.add(mascota);
+        
+            Cliente cliente = sistema.obtenerClientePorNombre(nombreDueño);
+        
+            if (cliente != null) {
+                cliente.registrarMascota(mascota);
+            }
         }
         lectorCsv.close();
     }
-    
+
+
+    /**
+     * Guarda una lista de clientes en un archivo CSV.
+     * 
+     * @param listaClientes La lista de clientes que se desea guardar.
+     * @throws IOException Si ocurre un error de entrada/salida al escribir en el archivo.
+     */
     public void guardarCsvClientes(List<Cliente> listaClientes) throws IOException {
         File file = new File("src/datos/clientes2.csv");
         FileOutputStream fos = new FileOutputStream(file, false);
         OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
         BufferedWriter bw = new BufferedWriter(osw);
         PrintWriter pw = new PrintWriter(bw);
-        
+
         for (Cliente cliente : listaClientes) {
             String linea = cliente.getNombre() + "," +
                             cliente.getRut() + "," +
@@ -63,8 +92,12 @@ public class Persistencia {
         fos.close();
     }
 
-  
-     
+    /**
+     * Guarda una lista de mascotas en un archivo CSV.
+     * 
+     * @param listaMascotas La lista de mascotas que se desea guardar.
+     * @throws IOException Si ocurre un error de entrada/salida al escribir en el archivo.
+     */
     public void guardarCsvMascotas(List<Mascota> listaMascotas) throws IOException {
         File file = new File("src/datos/mascotas2.csv");
         FileOutputStream fos = new FileOutputStream(file, false);
