@@ -42,7 +42,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         GestionCitas = new javax.swing.JMenu();
         RealizarCita = new javax.swing.JMenuItem();
         EliminarCita = new javax.swing.JMenuItem();
-        ConfirmarCita = new javax.swing.JMenuItem();
         VistaDatos = new javax.swing.JMenu();
         MostrarClientes = new javax.swing.JMenuItem();
         MostrarMascotas = new javax.swing.JMenuItem();
@@ -141,15 +140,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         GestionCitas.add(EliminarCita);
-
-        ConfirmarCita.setMnemonic('c');
-        ConfirmarCita.setText("Confirmar Cita");
-        ConfirmarCita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmarCitaActionPerformed(evt);
-            }
-        });
-        GestionCitas.add(ConfirmarCita);
 
         menuBar.add(GestionCitas);
 
@@ -253,10 +243,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         return EliminarCita;
     }
     
-    public JMenuItem getConfirmarCita(){
-        return ConfirmarCita;
-    }
-    
     public JMenuItem getMostrarClientes(){
         return MostrarClientes;
     }
@@ -300,10 +286,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void EliminarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarCitaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EliminarCitaActionPerformed
-
-    private void ConfirmarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCitaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ConfirmarCitaActionPerformed
 
     private void MostrarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarClientesActionPerformed
         // TODO add your handling code here:
@@ -357,7 +339,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem ConfirmarCita;
     private javax.swing.JMenuItem EliminarCita;
     private javax.swing.JMenuItem EliminarCliente;
     private javax.swing.JMenuItem EliminarMascota;

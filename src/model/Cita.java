@@ -11,9 +11,12 @@ public class Cita{
     private String fecha;
     private String hora;
     private String descripcion;
+    private int id;
+    private static int contadorIdC = 0;
 
     // Constructor 
     public Cita(Cliente dueñoMascota, Mascota mascota){
+        id = ++contadorIdC;
         cliente = dueñoMascota;
         this.mascota = mascota;
     }
@@ -42,4 +45,13 @@ public class Cita{
     public String getDescripcion(){ return descripcion;}
     
     public void setDescripcion(String d){ descripcion = d;}
+    
+    public int getId(){
+        return id;
+    }
+    
+    @Override
+    public String toString(){
+        return tipoDeServicio+"¿¿¿"+fecha+"¿¿¿"+hora+"¿¿¿"+descripcion+"¿¿¿"+id;
+    }
 }

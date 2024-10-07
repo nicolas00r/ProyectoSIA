@@ -64,14 +64,30 @@ public class Mascota{
         listaCitas.add(c);
     }
     
-    public Cita obtenerCita(String fecha, String hora) {
-        for (int i = 0; i < listaHistorialCitas.size(); i++) {
-            Cita cita = listaHistorialCitas.get(i);
-            if (cita.getFecha().equals(fecha) && cita.getHora().equals(hora)) {
+    public String listarCitasN(){
+        String ret;
+        ret = "";
+        
+        for(int i = 0; i < listaCitas.size(); i++){
+            ret += listaCitas.get(i).toString();
+        }
+        return ret;
+    }
+    
+    public Cita obtenerCita(String idCita) {
+        int aux = Integer.parseInt(idCita);
+        for (int i = 0; i < listaCitas.size(); i++) {
+            Cita cita = listaCitas.get(i);
+            int idC = cita.getId();
+            if (aux == idC) {
                 return cita;
             }
         }
         return null;
+    }
+    
+    public void eliminarCita(Cita d){
+        listaCitas.remove(d);
     }
     
     public ArrayList<Cita> getListaCitas(){ return listaCitas;}

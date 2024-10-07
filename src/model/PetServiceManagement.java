@@ -67,6 +67,18 @@ public class PetServiceManagement{
         m.realizarCita(c);
     }
     
+    public void entregarListadoCitasN(Mascota m){
+        m.listarCitasN();
+    }
+    
+    public void eliminarCita(Mascota m, Cita d){
+        m.eliminarCita(d);
+    }
+    
+    public Cita obtenerCita(Mascota m, String id){
+        return m.obtenerCita(id);
+    }
+    
     private void cargarDatos() {
         try {
             persistencia.cargarCsvClientes(listaClientes);

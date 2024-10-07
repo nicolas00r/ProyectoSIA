@@ -24,8 +24,7 @@ public class ControladorMain implements ActionListener{
     private VentanaSeleccionarCliente modificarMascota;
     private VentanaSeleccionarCliente eliminarMascota;
     private VentanaSeleccionarCliente realizarCita;
-    private VentanaEliminarCita eliminarCita;
-    private VentanaConfirmarCita confirmarCita;
+    private VentanaSeleccionarCliente eliminarCita;
     private VentanaMostrarClientes mostrarClientes;
     private VentanaMostrarMascotas mostrarMascotas;
     private VentanaMostrarHistorialServicios mostrarServicios;
@@ -36,7 +35,8 @@ public class ControladorMain implements ActionListener{
     private VentanaSeleccionarMascota subEliminarMascota;
     private VentanaSeleccionarMascota subRealizarCita;
     private SubVentanaRealizarCita subRealizarCita2;
-    
+    private VentanaSeleccionarMascota subEliminarCita;
+    private VentanaEliminarCita subEliminarCita2;
     
     public void iniciar(){
         sistema = new PetServiceManagement();
@@ -51,7 +51,6 @@ public class ControladorMain implements ActionListener{
         main.getEliminarMascota().addActionListener(this);
         main.getRealizarCita().addActionListener(this);
         main.getEliminarCita().addActionListener(this);
-        main.getConfirmarCita().addActionListener(this);
         main.getMostrarClientes().addActionListener(this);
         main.getMostrarMascotas().addActionListener(this);
         main.getMostrarHistorialServicios().addActionListener(this);
@@ -431,6 +430,10 @@ public class ControladorMain implements ActionListener{
             Cliente c = sistema.obtenerCliente(subRealizarCita2.getRut());
             Mascota m = sistema.obtenerMascota(c, subRealizarCita2.getId());
             Cita cita = new Cita(c,m);
+            cita.setTipoDeServicio(subRealizarCita2.getTextTipoServicio().getText());
+            cita.setFecha(subRealizarCita2.getTextFecha().getText());
+            cita.setHora(subRealizarCita2.getTextHora().getText());
+            cita.setDescripcion(subRealizarCita2.getTextDescripcion().getText());
             
             sistema.realizarCita(m, cita);
             JOptionPane.showMessageDialog(null, "Cita realizada");
@@ -439,18 +442,61 @@ public class ControladorMain implements ActionListener{
         }
         
         if(ae.getSource() == main.getEliminarCita()){
-            eliminarCita = new VentanaEliminarCita();
-       
-            eliminarCita.setVisible(true);  
+            eliminarCita = new VentanaSeleccionarCliente(sistema.entregarListadoClientes());
+            eliminarCita.getButtonSeleccionarCliente().addActionListener(this);       
+            eliminarCita.setVisible(true);    
             return;
         }
         
-        if(ae.getSource() == main.getConfirmarCita()){
-            confirmarCita = new VentanaConfirmarCita();
-       
-            confirmarCita.setVisible(true);  
+        if(eliminarCita != null && ae.getSource() == eliminarCita.getButtonSeleccionarCliente()){
+            String clienteSeleccionado = eliminarCita.getTextRut().getText();
+            
+            Cliente c = sistema.obtenerCliente(clienteSeleccionado);
+            
+            if (clienteSeleccionado != null) {
+                eliminarCita.dispose();
+                subEliminarCita = new VentanaSeleccionarMascota(c.listarMascotas(), c.getRut());
+                if(subEliminarCita.getRutDueño().equals("-1"))
+                    return;
+                subEliminarCita.getButtonSeleccionar().addActionListener(this);
+                subEliminarCita.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione un cliente para válido.");
+            }
             return;
         }
+        
+        if(subEliminarCita != null && ae.getSource() == subEliminarCita.getButtonSeleccionar()){
+            Cliente c = sistema.obtenerCliente(subEliminarCita.getRutDueño());
+            int idMascota = Integer.parseInt(subEliminarCita.getMascotaSeleccionada());
+            Mascota m = sistema.obtenerMascota(c, idMascota);
+            
+            if (m != null) {
+                subEliminarCita.dispose();
+                subEliminarCita2 = new VentanaEliminarCita(m.listarCitasN(), c.getRut(), idMascota);
+                subEliminarCita2.getButtonEliminar().addActionListener(this);
+                subEliminarCita2.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione una mascota.");
+            }
+            return;
+        }
+        
+        if(subEliminarCita2 != null && ae.getSource() == subEliminarCita2.getButtonEliminar()){
+            Cliente c = sistema.obtenerCliente(subEliminarCita2.getRutDueño());
+            Mascota m = sistema.obtenerMascota(c, subEliminarCita2.getId());
+            Cita cita = sistema.obtenerCita(m, subEliminarCita2.getCitaSeleccionada());
+            
+            if (cita != null) {
+                sistema.eliminarCita(m, cita);
+                subEliminarCita2.eliminarFilaSeleccionada();
+                JOptionPane.showMessageDialog(null, "Cita eliminado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione una cita para eliminar.");
+            }
+            return;
+        }
+        
         
         if(ae.getSource() == main.getMostrarClientes()){
             mostrarClientes = new VentanaMostrarClientes(sistema.entregarListadoClientes());
